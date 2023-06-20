@@ -8,7 +8,7 @@ function VideoPlayer() {
   useEffect(() => {
     const fetchVideo = async () => {
       try {
-        const response = await axios.get(`https://video-app-g2dr.onrender.com/video/648e9404937b98892d8fd0b4`, {
+        const response = await axios.get(`https://video-app-g2dr.onrender.com/video/${videoId}`, {
           headers: { 'Range':'bytes=0-261120'},
         });
         console.log(response);
