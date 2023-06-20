@@ -20,11 +20,9 @@ const UploadVideo = () => {
           method: 'POST',
           body: formData,
         });
-
+        console.log(response);
         if (response.ok) {
-          const data = await response.json();
           console.log('Video uploaded successfully');
-          console.log('File ID:', data.fileId);
           // Handle successful upload
         } else {
           console.log('Error uploading video:', response.statusText);

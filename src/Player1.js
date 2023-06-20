@@ -1,45 +1,49 @@
-import React, { useRef, useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios'
 function VideoPlayer() {
-  const videoRef = useRef(null);
-  const [currentTime, setCurrentTime] = useState(0);
+  const [videoURL, setVideoURL] = useState('');
+  const { id:videoId } = useParams();
 
-  const handleSeek = () => {
-    const timeInSeconds = parseInt(videoRef.current.currentTime, 10);
-    setCurrentTime(timeInSeconds);
-  };
-
-  const handlePlay = () => {
-    videoRef.current.play();
-  };
-
-  const handlePause = () => {
-    videoRef.current.pause();
-  };
-
-  const handleSeekToTime = () => {
-    videoRef.current.currentTime = currentTime;
-  };
+  useEffect(() => {
+    const fetchVideo = async () => {
+      try {
+        const response = await axios.get(`https://video-app-g2dr.onrender.com/video/648e9404937b98892d8fd0b4`, {
+          headers: { 'Range':'bytes=0-261120'},
+        });
+        console.log(response);
+        if (response.ok) {
+          // const contentRange = response.headers.get('Content-Range');
+          // const contentLength = contentRange ? contentRange.split('/')[1] : '';
+          const videoBlob = await response.blob();
+          console.log(videoBlob);
+          const videoURL = URL.createObjectURL(videoBlob);
+          setVideoURL(videoURL);
+        } else {
+          console.error('Error fetching video:', response.status);
+        }
+      } catch (error) {
+        console.error('Error fetching video:', error);
+      }
+    };
+    fetchVideo();
+    return () => {
+      if (videoURL) {
+        URL.revokeObjectURL(videoURL);
+      }
+    };
+  }, [videoId,videoURL]);
 
   return (
     <div>
-      <video
-        ref={videoRef}
-        src="path/to/video.mp4"
-        onTimeUpdate={handleSeek}
-      />
-      <div>
-        <button onClick={handlePlay}>Play</button>
-        <button onClick={handlePause}>Pause</button>
-      </div>
-      <div>
-        <input
-          type="number"
-          value={currentTime}
-          onChange={(e) => setCurrentTime(e.target.value)}
-        />
-        <button onClick={handleSeekToTime}>Seek</button>
-      </div>
+      {videoURL ? (
+        <video controls>
+          <source src={videoURL} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      ) : (
+        <p>Loading video...</p>
+      )}
     </div>
   );
 }

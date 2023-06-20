@@ -1,53 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-function VideoPlayer() {
-  const [videoURL, setVideoURL] = useState('');
-  const { id:videoId } = useParams();
+const Player = (props) => {
+  const { id } = useParams();
+    const [videoId, setVideoId] = useState(id);
+    const [videoData, setVideoData] = useState({});
 
-  useEffect(() => {
-    const fetchVideo = async () => {
-      try {
-        const response = await fetch(`http://localhost:4000/video/${videoId}`, {
-          headers: { Range: 'bytes=0-261120' },
-        });
-        let res =  response
-        console.log(res);
-        if (response.ok) {
-          const contentRange = response.headers.get('Content-Range');
-          const contentLength = contentRange? contentRange.split('/')[1]:'';
-          const videoBlob = await response.blob();
-          const videoURL = URL.createObjectURL(videoBlob);
-          setVideoURL(videoURL);
-        } else {
-          console.error('Error fetching video:', response.status);
-        }
-      } catch (error) {
-        console.error('Error fetching video:', error);
-      }
-    };
+    useEffect(() => {
+        const fetchVideoData = async () => {
+            try {
+                const res = await fetch(`https://video-app-g2dr.onrender.com/video/${videoId}`,{headers:{'Range':'bytes=0-261120'}});
+                const data = await res.json();
+                setVideoData(data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
 
-    fetchVideo();
+        fetchVideoData();
+    }, [videoId]);
 
-    return () => {
-      if (videoURL) {
-        URL.revokeObjectURL(videoURL);
-      }
-    };
-  }, [videoId]);
+    return (
+        <div className="App">
+            <header className="App-header">
+                <video controls muted autoPlay>
+                    <source src={`https://video-app-g2dr.onrender.com/video/${videoId}`} type="video/mp4"></source>
+                </video>
+                <h1>{videoData.name}</h1>
+            </header>
+        </div>
+    );
+};
 
-  return (
-    <div>
-      {videoURL ? (
-        <video controls>
-          <source src={videoURL} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      ) : (
-        <p>Loading video...</p>
-      )}
-    </div>
-  );
-}
-
-export default VideoPlayer;
+export default Player;
