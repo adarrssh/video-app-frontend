@@ -1,32 +1,38 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { useParams  } from 'react-router-dom';
+import io from 'socket.io-client';
+const socket = io('http://localhost:4000');
 
 const Player = (props) => {
   const { id } = useParams();
-    const [videoId, setVideoId] = useState(id);
-    const [videoData, setVideoData] = useState({});
+  const videoRef = useRef(null);
+  const [videoId, setVideoId] = useState(id);
 
-    useEffect(() => {
-        const fetchVideoData = async () => {
-            try {
-                const res = await fetch(`https://video-app-g2dr.onrender.com/video/${videoId}`,{headers:{'Range':'bytes=0-261120'}});
-                const data = await res.json();
-                setVideoData(data);
-            } catch (error) {
-                console.log(error);
-            }
-        };
+    useEffect(()=>{
+        socket.on('sync',()=>{
+        Forward()
+        })
+    },[])
+    const handleForward = () => {
+      if (videoRef.current) {
+        videoRef.current.currentTime += 10; // Forward by 10 seconds
+        socket.emit('sync',{time:10})
+      }
+    };
+    
+    const Forward = () => {
+          videoRef.current.currentTime += 10; // Forward by 10 seconds
+      };
 
-        fetchVideoData();
-    }, [videoId]);
 
     return (
         <div className="App">
             <header className="App-header">
-                <video controls muted autoPlay>
+                <video controls muted autoPlay ref={videoRef}>
                     <source src={`https://video-app-g2dr.onrender.com/video/${videoId}`} type="video/mp4"></source>
                 </video>
-                <h1>{videoData.name}</h1>
+                <button onClick={handleForward}>Forward 10 seconds</button>
+
             </header>
         </div>
     );
