@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams  } from 'react-router-dom';
 import io from 'socket.io-client';
-const socket = io('https://video-app-g2dr.onrender.com');
+const socket = io('https://video-app-g2dr.onrender.com/');
 
 const Player = (props) => {
   const { id } = useParams();
