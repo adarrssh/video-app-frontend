@@ -16,7 +16,7 @@ const UploadVideotoStorage = () => {
         formData.append('video', videoFile);
   
         try {
-          const response = await fetch('http://localhost:4000/upload-to-localstorage', {
+          const response = await fetch('https://video-app-g2dr.onrender.com/upload-to-localstorage', {
             method: 'POST',
             body: formData,
           });
