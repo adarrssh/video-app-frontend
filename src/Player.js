@@ -5,7 +5,7 @@ const Player = () => {
   const { id:videoId } = useParams();
   const videoRef = useRef(null);
 
-  const socket = io('http://localhost:4000'); // Replace with your server URL
+  // const socket = io('http://localhost:4000'); // Replace with your server URL
   useEffect(() => {
     const socket = io('https://video-app-g2dr.onrender.com'); // Replace with your server URL
 

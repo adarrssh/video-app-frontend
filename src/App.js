@@ -25,10 +25,10 @@ function App() {
                         <Link to="/upload-to-localstorage">Upload Video</Link>
                     </li>
                     <li>
-                        <Link to="/player/panchayat.mp4" target='_blank'>Video 1</Link>
+                        <Link to="/player/64984f12d320e100654ae778" target='_blank'>Video 1</Link>
                     </li>
                     <li>
-                        <Link to="/player/panchayat.mp4" target='_blank'>Video 2</Link>
+                        <Link to="/player/6499bb067ee1e113c4ec3261" target='_blank'>Video 2</Link>
                     </li>
                 </ul>
             </nav>
