@@ -9,6 +9,7 @@ import Home from './Home';
 import Player from './Player';
 import UploadVideo from './Upload';
 import UploadVideotoStorage from './uploadtoStorage';
+import Stream from './stream';
 
 function App() {
     return (
@@ -28,7 +29,7 @@ function App() {
                         <Link to="/player/64984f12d320e100654ae778" target='_blank'>Video 1</Link>
                     </li>
                     <li>
-                        <Link to="/player/6499bb067ee1e113c4ec3261" target='_blank'>Video 2</Link>
+                        <Link to="/stream/Memes Of Panchayat Ft. Sachiv Ji, Prahlad, Vikas, Vinod, Bhushan, Pradhan Ji _ Prime Video India.mp4" target='_blank'>Video 2</Link>
                     </li>
                 </ul>
             </nav>
@@ -37,6 +38,7 @@ function App() {
                 <Route exact path="/upload" element={<UploadVideo />} />
                 <Route exact path="/upload-to-localstorage" element={<UploadVideotoStorage />} />
                 <Route path="/player/:id" element={<Player />} />
+                <Route path="/stream/:id" element={<Stream />} />
             </Routes>
         </Router>
     );
