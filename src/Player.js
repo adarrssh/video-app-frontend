@@ -6,28 +6,28 @@ const Player = () => {
   const videoRef = useRef(null);
 
   // const socket = io('http://localhost:4000'); // Replace with your server URL
-  useEffect(() => {
-    const socket = io('https://video-app-g2dr.onrender.com'); // Replace with your server URL
+  // useEffect(() => {
+    // const socket = io('https://video-app-g2dr.onrender.com'); // Replace with your server URL
 
-    // Socket event listeners
-    socket.on('connect', () => {
-      console.log('Connected to server');
-    });
+  //   // Socket event listeners
+  //   socket.on('connect', () => {
+  //     console.log('Connected to server');
+  //   });
 
-    socket.on('videoTimeChanged',(data)=>{
-      console.log('time changed'+data);
-      videoRef.current.currentTime = data
-    })
+  //   socket.on('videoTimeChanged',(data)=>{
+  //     console.log('time changed'+data);
+  //     videoRef.current.currentTime = data
+  //   })
     
-    socket.on('disconnect', () => {
-      console.log('Disconnected from server');
-    });
+  //   socket.on('disconnect', () => {
+  //     console.log('Disconnected from server');
+  //   });
 
-    // Clean up the socket connection
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
+  //   // Clean up the socket connection
+  //   return () => {
+  //     socket.disconnect();
+  //   };
+  // }, []);
 
   const handleForward = () => {
     if (videoRef.current) {
