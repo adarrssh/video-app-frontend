@@ -5,6 +5,7 @@ const Player = () => {
   const { id:videoId } = useParams();
   const videoRef = useRef(null);
 
+  const socket = io('http://localhost:4000'); // Replace with your server URL
   useEffect(() => {
     const socket = io('https://video-app-g2dr.onrender.com'); // Replace with your server URL
 
@@ -48,7 +49,7 @@ const Player = () => {
                 <video controls muted autoPlay ref={videoRef} 
                 // onSeeked={handleSeeked}
                  style={{ width: '70%', height: '60%' }}>
-                    <source src={`https://video-app-g2dr.onrender.com/stream/${videoId}`} type="video/mp4"></source>
+                    <source src={`http://localhost:4000/video/${videoId}`} type="video/mp4"></source>
                 </video>
                 <button onClick={handleForward}>forward</button>
             </header>
