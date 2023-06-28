@@ -24,6 +24,33 @@ function LocalPlayer() {
       videoRef.current.currentTime = data
 
     })
+
+    socket.on('pauseVideo',()=>{
+      videoRef.current.pause();
+    })
+
+    socket.on('playVideo',()=>{
+      videoRef.current.play()
+    })
+    const handlePause = () => {
+      console.log('Video paused');
+      socket.emit('videoPaused')
+      // Emit a socket event or perform any other actions
+    };
+
+    const handlePlay = () => {
+      console.log('Video resumed');
+      socket.emit('videoResumed')
+      // Emit a socket event or perform any other actions
+    };
+
+
+    // Add event listener for 'pause' event
+    videoRef.current.addEventListener('pause', handlePause);
+
+    // Add event listener for 'play' event
+    videoRef.current.addEventListener('play', handlePlay)
+
     socket.on('disconnect', () => {
       console.log('Disconnected from server');
     });
@@ -45,6 +72,7 @@ function LocalPlayer() {
   };
 
   const handleSeeked = () => {
+    console.log(videoRef.current.currentTime, timeChanged);
     if(videoRef.current.currentTime !== timeChanged){
       console.log('User clicked on the video timeline ' + videoRef.current.currentTime);
       setTimeChanged(videoRef.current.currentTime)
