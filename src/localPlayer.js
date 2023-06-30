@@ -19,6 +19,13 @@ function LocalPlayer() {
       console.log('Connected to server');
     });
 
+    socket.on('playBroadcast',()=>{
+      console.log('playBroadcast');
+      if (videoRef.current && videoRef.current.paused) {
+        videoRef.current.play();
+      }
+    })
+
     socket.on('pauseBroadcast',()=>{
       console.log('pauseBroadcast');
       if (videoRef.current && !videoRef.current.paused) {
@@ -26,15 +33,36 @@ function LocalPlayer() {
       }
     })
 
+    socket.on('broadcastTime',(time)=>{
+      let difference = Math.abs(videoRef.current.currentTime - time)
+      console.log(difference);
+      if (videoRef.current &&  difference > 1 ) {
+        console.log('broadcastTime',time);
+        videoRef.current.currentTime = time;
+      }
+    })
+    socket.on('disconnect', () => {
+      console.log('Disconnected from server');
+    });
+
     // Clean up the socket connection
     return () => {
       socket.disconnect();
     };
   },[])
 
-  // useEffect(()=>{
-  //   socket.emit('timeChanged',time)
-  // },[time])
+  const handleSeeked = () => {
+    if(videoRef.current){
+        // videoRef.current.pause()
+        console.log('handleSeeked',videoRef.current.currentTime);
+        socket.emit('timeChanged',videoRef.current.currentTime)
+        
+    }
+  };
+  const handlePlay = () => {
+    console.log('handlePlay');
+    socket.emit('play')
+  }
 
   const handlePause = () => {
     console.log('handlePause');
@@ -43,14 +71,21 @@ function LocalPlayer() {
     
   }
 
+  const handleMouseEnter = () => {
+    if(videoRef.current){
+      videoRef.current.pause()
+    }
+  }
+
 
   return (
-    <div>
+    <div onMouseEnter={handleMouseEnter}>
       <input type="file" accept="video/*" onChange={handleFileChange} />
       <video ref={videoRef} controls 
       style={{height:'60%',width:'80%'}}
-      //  onSeeked={handleSeeked} 
-      //  onPlay={handlePlay}
+
+       onSeeked={handleSeeked} 
+       onPlay={handlePlay}
       onPause={handlePause}
       />
     </div>
@@ -101,11 +136,6 @@ export default LocalPlayer;
     // });
 
     
-  // const handlePlay = () => {
-  //   // console.log('handlePlay');
-  //   socket.emit('play')
-  // }
-
   
   // const handleSeeked = () => {
   //   if(videoRef.current){
