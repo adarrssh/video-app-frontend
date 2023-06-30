@@ -2,8 +2,8 @@ import React, { useRef, useEffect, useState } from 'react';
 import {io} from 'socket.io-client'
 function LocalPlayer() {
   const videoRef = useRef(null);
-  // const socket  = io('https://video-app-g2dr.onrender.com')
-  const socket  = io('http://localhost:4000/')
+  const socket  = io('https://video-app-g2dr.onrender.com')
+  // const socket  = io('http://localhost:4000/')
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
