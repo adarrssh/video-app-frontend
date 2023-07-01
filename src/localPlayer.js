@@ -1,150 +1,106 @@
-import React, { useRef, useEffect, useState } from 'react';
-import {io} from 'socket.io-client'
+import React, { useRef, useEffect } from 'react';
+import { io } from 'socket.io-client';
+
+const socket = io('https://video-app-g2dr.onrender.com');
+// const socket = io('http://localhost:4000/');
+
 function LocalPlayer() {
   const videoRef = useRef(null);
-  const socket  = io('https://video-app-g2dr.onrender.com')
-  // const socket  = io('http://localhost:4000/')
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     const videoURL = URL.createObjectURL(file);
-    // console.log(videoURL);
     videoRef.current.src = videoURL;
   };
-  
 
-  useEffect(()=>{
+  useEffect(() => {
     // Socket event listeners
-    socket.on('connect', () => {
+    const handleConnect = () => {
       console.log('Connected to server');
-    });
+    };
 
-    socket.on('playBroadcast',()=>{
+    const handlePlayBroadcast = () => {
       console.log('playBroadcast');
       if (videoRef.current && videoRef.current.paused) {
         videoRef.current.play();
       }
-    })
+    };
 
-    socket.on('pauseBroadcast',()=>{
+    const handlePauseBroadcast = () => {
       console.log('pauseBroadcast');
       if (videoRef.current && !videoRef.current.paused) {
-        videoRef.current.pause()
+        videoRef.current.pause();
       }
-    })
+    };
 
-    socket.on('broadcastTime',(time)=>{
-      let difference = Math.abs(videoRef.current.currentTime - time)
+    const handleBroadcastTime = (time) => {
+      const difference = Math.abs(videoRef.current.currentTime - time);
       console.log(difference);
-      if (videoRef.current &&  difference > 1 ) {
-        console.log('broadcastTime',time);
+      if (videoRef.current && difference > 1) {
+        console.log('broadcastTime', time);
         videoRef.current.currentTime = time;
       }
-    })
-    socket.on('disconnect', () => {
+    };
+
+    const handleDisconnect = () => {
       console.log('Disconnected from server');
-    });
+    };
+
+    socket.on('connect', handleConnect);
+    socket.on('playBroadcast', handlePlayBroadcast);
+    socket.on('pauseBroadcast', handlePauseBroadcast);
+    socket.on('broadcastTime', handleBroadcastTime);
+    socket.on('disconnect', handleDisconnect);
 
     // Clean up the socket connection
     return () => {
+      socket.off('connect', handleConnect);
+      socket.off('playBroadcast', handlePlayBroadcast);
+      socket.off('pauseBroadcast', handlePauseBroadcast);
+      socket.off('broadcastTime', handleBroadcastTime);
+      socket.off('disconnect', handleDisconnect);
       socket.disconnect();
     };
-  },[])
+  }, []);
 
   const handleSeeked = () => {
-    if(videoRef.current){
-        // videoRef.current.pause()
-        console.log('handleSeeked',videoRef.current.currentTime);
-        socket.emit('timeChanged',videoRef.current.currentTime)
-        
+    if (videoRef.current) {
+      console.log('handleSeeked', videoRef.current.currentTime);
+      socket.emit('timeChanged', videoRef.current.currentTime);
     }
   };
+
   const handlePlay = () => {
     console.log('handlePlay');
-    socket.emit('play')
-  }
+    socket.emit('play');
+  };
 
   const handlePause = () => {
     console.log('handlePause');
-    // if pauseSocketEvent is not true
-    socket.emit('pause')
-    
-  }
+    socket.emit('pause');
+  };
 
   const handleMouseEnter = () => {
-    if(videoRef.current){
-      videoRef.current.pause()
+    if (videoRef.current) {
+      videoRef.current.pause();
     }
-  }
-
+  };
 
   return (
-    <div onMouseEnter={handleMouseEnter}>
+    <>
       <input type="file" accept="video/*" onChange={handleFileChange} />
-      <video ref={videoRef} controls 
-      style={{height:'60%',width:'80%'}}
-
-       onSeeked={handleSeeked} 
-       onPlay={handlePlay}
-      onPause={handlePause}
-      />
-    </div>
+      <div onMouseEnter={handleMouseEnter}>
+        <video
+          ref={videoRef}
+          controls
+          style={{ height: '60%', width: '80%' }}
+          onSeeked={handleSeeked}
+          onPlay={handlePlay}
+          onPause={handlePause}
+        />
+      </div>
+    </>
   );
 }
 
 export default LocalPlayer;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // socket.on('playBroadcast',()=>{
-    //   // console.log('playBroadcast');
-    //   if (videoRef.current) {
-    //     videoRef.current.play();
-    //   }
-    // })
-
-    // socket.on('broadcastTime',(time)=>{
-    //   if (videoRef.current && (Math.abs(videoRef.current.currentTime-time)>1)) {
-    //     // console.log('broadcastTime',time);
-    //     setTimeChanged(true)
-    //     videoRef.current.currentTime = time;
-    //   }
-    // })
-    // socket.on('disconnect', () => {
-    //   console.log('Disconnected from server');
-    // });
-
-    
-  
-  // const handleSeeked = () => {
-  //   if(videoRef.current){
-  //     // videoRef.current.pause()
-  //     // console.log('handleSeeked',videoRef.current.currentTime);
-  //     if(!timeChanged){
-  //       socket.emit('timeChanged',videoRef.current.currentTime)
-  //       // setTime(videoRef.current.currentTime)
-  //     }
-  //     setTimeChanged(false)
-  //   }
-  // };
