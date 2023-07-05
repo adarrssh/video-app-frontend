@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 
-// const socket = io('https://video-app-g2dr.onrender.com');
-const socket = io('http://localhost:4000/');
+const socket = io('https://video-app-g2dr.onrender.com');
+// const socket = io('http://localhost:4000/');
 
 function LocalPlayer() {
   const videoRef = useRef(null);
