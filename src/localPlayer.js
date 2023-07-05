@@ -1,13 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 
-const socket = io('https://video-app-g2dr.onrender.com');
-// const socket = io('http://localhost:4000/');
+const socket = io(process.env.REACT_APP_SOCKET);
 
 function LocalPlayer() {
   const videoRef = useRef(null);
   const [roomId, setRoomId] = useState('');
-
+  console.log(process.env.REACT_APP_SOCKET);
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     const videoURL = URL.createObjectURL(file);
