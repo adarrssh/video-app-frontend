@@ -27,45 +27,17 @@ function LocalPlayer() {
     socket.on('userJoined',(id)=>{
       console.log(id, ' joined the room');
     })
-    // const handlePlayBroadcast = () => {
-    //   console.log('playBroadcast');
-    //   if (videoRef.current && videoRef.current.paused) {
-    //     videoRef.current.play();
-    //   }
-    // };
-
-    // const handlePauseBroadcast = () => {
-    //   console.log('pauseBroadcast');
-    //   if (videoRef.current && !videoRef.current.paused) {
-    //     videoRef.current.pause();
-    //   }
-    // };
-
-    // const handleBroadcastTime = (time) => {
-    //   const difference = Math.abs(videoRef.current.currentTime - time);
-    //   console.log(difference);
-    //   if (videoRef.current && difference > 1) {
-    //     console.log('broadcastTime', time);
-    //     videoRef.current.currentTime = time;
-    //   }
-    // };
 
     const handleDisconnect = () => {
       console.log('Disconnected from server');
     };
 
     socket.on('connect', handleConnect);
-    // socket.on('playBroadcast', handlePlayBroadcast);
-    // socket.on('pauseBroadcast', handlePauseBroadcast);
-    // socket.on('broadcastTime', handleBroadcastTime);
     socket.on('disconnect', handleDisconnect);
 
     // Clean up the socket connection
     return () => {
       socket.off('connect', handleConnect);
-      // socket.off('playBroadcast', handlePlayBroadcast);
-      // socket.off('pauseBroadcast', handlePauseBroadcast);
-      // socket.off('broadcastTime', handleBroadcastTime);
       socket.off('disconnect', handleDisconnect);
       socket.disconnect();
     };
