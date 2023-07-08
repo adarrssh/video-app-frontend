@@ -80,24 +80,29 @@ function Stream() {
       </div>
       <button onClick={handleCreateRoom}>Create Room</button> */}
 
-      <main className='stream-main-comp'>
-        <div className='stream-left'>
-          <div className='stream-video-div'>
-            {/* video */}
-          </div>
-          <div className='stream-end-div'>
-            <button className='leave-btn'>Leave lounge</button>
-          </div>
-        </div>
-        <div className='stream-right'>
-          
-          <div className='stream-chat-box'>
-            
-          </div>
-        </div>
-      </main>
+
+<main className='stream-main-comp'>
+<div className='stream-left'>
+  <div className='stream-video-div'>
+    {/* video */}
+  </div>
+  <div className='stream-end-div'>
+    <button className='leave-btn'>Leave lounge</button>
+  </div>
+</div>
+<div className='stream-right'>
+  
+  <div className='stream-chat-box'>
+    
+  </div>
+</div>
+</main>
+
+
+      
     </>
   );
 }
 
 export default Stream;
+
