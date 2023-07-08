@@ -1,0 +1,28 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  background-color: #0f0f0f;
+
+}
+
+/* .app-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #0f0f0f;
+  max-width: 1300px;
+} */
+
+.nav-div {
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  /* max-width: 1300px; */
+}
+
+.body-div {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+}

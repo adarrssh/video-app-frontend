@@ -2,36 +2,32 @@ import React from 'react';
 import {
     Route,
     BrowserRouter as Router,
-    Routes,
-    Link,
+    Routes
 } from "react-router-dom";
-import Home from './Home';
-import LocalPlayer from './localPlayer';
-import UserB from './JoinRoom';
-
+import Home from './view/Home/Home';
+import Stream from './view/Stream/Stream';
+import UserB from './view/JoinRoom';
+import Navbar from './components/navbar';
+import Login from './view/login/Login';
+import "./App.css"
 function App() {
     return (
-        <Router>
-            <nav>
-                <ul>
-                    <li>
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li>
-                        <Link to="/play">go to player</Link>
-                    </li>
-                    <li>
-                        <Link to="/join">join room</Link>
-                    </li> 
-                </ul>
-            </nav>
-            <Routes>
+      <Router>
+            <div className="nav-div">
+              <Navbar />
+            </div>
+            <div className="body-div">
+              <Routes>
                 <Route path="/" element={<Home />} />
-                <Route exact path="/play" element={<LocalPlayer />} />
+                <Route exact path="/stream" element={<Stream />} />
                 <Route exact path="/join" element={<UserB />} />
-            </Routes>
-        </Router>
+                <Route exact path="/login" element={<Login />} />
+              </Routes>
+            </div>
+      </Router>
     );
-}
+  }
+  
+  
 
 export default App;

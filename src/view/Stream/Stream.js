@@ -1,9 +1,10 @@
 import React, { useRef, useEffect, useState } from 'react';
+import "./Stream.css"
 import { io } from 'socket.io-client';
 
 const socket = io(process.env.REACT_APP_SOCKET);
 
-function LocalPlayer() {
+function Stream() {
   const videoRef = useRef(null);
   const [roomId, setRoomId] = useState('');
   console.log(process.env.REACT_APP_SOCKET);
@@ -66,7 +67,7 @@ function LocalPlayer() {
 
   return (
     <>
-      <input type="file" accept="video/*" onChange={handleFileChange} />
+      {/* <input type="file" accept="video/*" onChange={handleFileChange} />
       <div style={{background:'grey'}}>
         <video
           ref={videoRef}
@@ -77,9 +78,26 @@ function LocalPlayer() {
           onPause={handlePause}
         />
       </div>
-      <button onClick={handleCreateRoom}>Create Room</button>
+      <button onClick={handleCreateRoom}>Create Room</button> */}
+
+      <main className='stream-main-comp'>
+        <div className='stream-left'>
+          <div className='stream-video-div'>
+            {/* video */}
+          </div>
+          <div className='stream-end-div'>
+            <button className='leave-btn'>Leave lounge</button>
+          </div>
+        </div>
+        <div className='stream-right'>
+          
+          <div className='stream-chat-box'>
+            
+          </div>
+        </div>
+      </main>
     </>
   );
 }
 
-export default LocalPlayer;
+export default Stream;

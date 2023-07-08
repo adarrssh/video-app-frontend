@@ -1,0 +1,65 @@
+.home-main-comp{
+    height: 90vh;
+    display: flex;
+    flex-direction: row;
+    color: white;
+    width: 100%;
+    max-width: 1300px;
+}
+
+.home-left{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items:flex-start;
+    text-align: left;
+    padding-left: 60px;
+}
+
+.home-left .heading{
+    font-size: 1.8rem;
+    padding-top: 5.5rem;
+    font-weight: bold;
+    font-style: Montserrat;
+    
+}
+
+.home-left .mid-para{
+  font-size: 0.9rem;
+  font-style: Montserrat;
+
+}
+
+.home-left .host-btn{
+    background: linear-gradient(to right, #0E27AA, #039EE1);
+    border : none;
+    width: 12rem;
+    height: 2.8rem;
+    border-radius: 4rem;
+    color: white;
+    margin-top: 10px;
+    font-style: Montserrat;
+
+}
+.home-right{
+    flex: 1;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+
+.home-right-img-div{
+    width: 100%;
+    height: 100%;
+}
+
+.home-right-img-div img{
+    width: 600px;
+    padding-top: 50px;
+}
+
+/* .home-img{
+    width: 100%;
+    height: 100%;
+} */

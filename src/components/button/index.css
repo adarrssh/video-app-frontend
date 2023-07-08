@@ -1,0 +1,10 @@
+.btn{
+    display: flex;
+    padding: 0.5rem 1rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 0.625rem;
+    height: 30px;
+    font-size: 13px;
+}
