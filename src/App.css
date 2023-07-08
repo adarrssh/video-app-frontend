@@ -22,7 +22,13 @@ html, body {
 }
 
 .body-div {
-  height: 90vh;
+  margin-top: 2vh;
+  height: 88vh;
   display: flex;
   justify-content: center;
+  /* background-image: url(./img/bg-movie-poster.jpg);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat; */
+  
 }
