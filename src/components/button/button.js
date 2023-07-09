@@ -1,5 +1,5 @@
 import React from 'react'
-import "./index.css"
+import "./button.css"
 const Button = ({text,className}) => {
   console.log(className);
   return (

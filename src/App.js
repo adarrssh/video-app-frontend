@@ -7,7 +7,7 @@ import {
 import Home from './view/Home/Home';
 import Stream from './view/Stream/Stream';
 import UserB from './view/JoinRoom';
-import Navbar from './components/navbar';
+import Navbar from './components/navbar/navbar';
 import Login from './view/login/Login';
 import "./App.css"
 function App() {

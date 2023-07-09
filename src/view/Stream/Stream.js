@@ -130,9 +130,33 @@ function Stream() {
                   hey hey cuties
                 </div>
               </div>
+              <div className='chat-msg-right'>
+                <div className='profile-pic'>
+                  <img src={logo} alt="profile-pic" />
+                </div>
+                <div className='chat-msg'>
+                  hey hey cuties
+                </div>
+              </div>
+              <div className='chat-msg-right'>
+                <div className='profile-pic'>
+                  <img src={logo} alt="profile-pic" />
+                </div>
+                <div className='chat-msg'>
+                  hey hey cuties
+                </div>
+              </div>
+              <div className='chat-msg-right'>
+                <div className='profile-pic'>
+                  <img src={logo} alt="profile-pic" />
+                </div>
+                <div className='chat-msg'>
+                  hey hey cuties
+                </div>
+              </div>
             </div>
             <div className="chatbox-msg">
-              Chat here...
+              <input type="text"  defaultValue={"Chat here..."}/>
             </div>
           </div>
         </div>

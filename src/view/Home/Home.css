@@ -34,12 +34,18 @@
 .home-left .host-btn{
     background: linear-gradient(to right, #0E27AA, #039EE1);
     border : none;
-    width: 12rem;
+    width: 220px;
     height: 2.8rem;
-    border-radius: 4rem;
+    border-radius: 1.5rem;
+    padding: 0.625rem 2.4375rem;
     color: white;
     margin-top: 10px;
     font-style: Montserrat;
+    /* font-family: Montserrat; */
+    /* font-size: 1.375rem; */
+    font-style: normal;
+    font-weight: 600;
+
 
 }
 .home-right{

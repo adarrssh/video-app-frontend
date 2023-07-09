@@ -3,7 +3,7 @@
   height: 60px;
   display: flex;
   background: #0F0F0F;
-box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.62);
+  box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.62);
   width: 100%;
   max-width: 1300px;
 }
@@ -19,7 +19,7 @@ box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.62);
 
 .left-nav .logo-text {
   font-family: laqu;
-  font-family: Lacquer;
+  font-family: 'Lacquer', cursive;
   color: #fff;
 }
 .left-nav .logo {
