@@ -41,13 +41,12 @@
     color: white;
     margin-top: 10px;
     font-style: Montserrat;
-    /* font-family: Montserrat; */
-    /* font-size: 1.375rem; */
     font-style: normal;
     font-weight: 600;
 
 
 }
+
 .home-right{
     flex: 1;
     display: flex;
@@ -64,8 +63,3 @@
     width: 600px;
     padding-top: 50px;
 }
-
-/* .home-img{
-    width: 100%;
-    height: 100%;
-} */

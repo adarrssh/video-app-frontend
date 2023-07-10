@@ -1,18 +1,23 @@
 import React, { useRef, useEffect, useState } from 'react';
 import "./Stream.css"
+import ChatBox from './ChatBox';
+import Button from '../../components/button/button';
 import { io } from 'socket.io-client';
-import ProfilePic from '../../components/Profile/ProfilePic';
-import logo from '../../img/logo.png'
 const socket = io(process.env.REACT_APP_SOCKET);
 
 function Stream() {
+  const fileInputRef = useRef(null);
   const videoRef = useRef(null);
   const [roomId, setRoomId] = useState('');
-  console.log(process.env.REACT_APP_SOCKET);
+  const [selectedVideo, setSelectedVideo] = useState(null);
+
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    const videoURL = URL.createObjectURL(file);
-    videoRef.current.src = videoURL;
+    setSelectedVideo(URL.createObjectURL(file));
+  };
+
+  const handleButtonClick = () => {
+    fileInputRef.current.click();
   };
 
   useEffect(() => {
@@ -84,82 +89,31 @@ function Stream() {
 
       <main className='stream-main-comp'>
         <div className='stream-left'>
-          <div className='stream-video-div'>
-            {/* video */}
-          </div>
-          <div className='stream-end-div'>
-            <button className='leave-btn'>Leave lounge</button>
-          </div>
-        </div>
-        <div className='stream-right'>
 
-          <div className='stream-chat-box'>
-            <div className='chatbox-header'>
-              In lounge: no cuties
-            </div>
-            <div className="chatbox-body">
-              <div className="chat-msg-left">
-                <div className='profile-pic'>
-                  <img src={logo} alt="profile-pic" />
-                </div>
-                <div className='chat-msg'>
-                  hey hey cuties
-                </div>
-              </div>
-              <div className='chat-msg-right'>
-                <div className='profile-pic'>
-                  <img src={logo} alt="profile-pic" />
-                </div>
-                <div className='chat-msg'>
-                  hey hey cuties
-                </div>
-              </div>
-              <div className="chat-msg-left">
-                <div className='profile-pic'>
-                  <img src={logo} alt="profile-pic" />
-                </div>
-                <div className='chat-msg'>
-                  hey hey cuties
-                </div>
-              </div>
-              <div className='chat-msg-right'>
-                <div className='profile-pic'>
-                  <img src={logo} alt="profile-pic" />
-                </div>
-                <div className='chat-msg'>
-                  hey hey cuties
-                </div>
-              </div>
-              <div className='chat-msg-right'>
-                <div className='profile-pic'>
-                  <img src={logo} alt="profile-pic" />
-                </div>
-                <div className='chat-msg'>
-                  hey hey cuties
-                </div>
-              </div>
-              <div className='chat-msg-right'>
-                <div className='profile-pic'>
-                  <img src={logo} alt="profile-pic" />
-                </div>
-                <div className='chat-msg'>
-                  hey hey cuties
-                </div>
-              </div>
-              <div className='chat-msg-right'>
-                <div className='profile-pic'>
-                  <img src={logo} alt="profile-pic" />
-                </div>
-                <div className='chat-msg'>
-                  hey hey cuties
-                </div>
+          {!selectedVideo ? <div className="stream-video-div">
+            <input type="file"
+              style={{ display: 'none' }}
+              ref={fileInputRef}
+              onChange={handleFileChange}
+              accept="video/*" />
+            <Button className="choose-btn" onClick={handleButtonClick} text={"Choose your video"} />
+          </div> :
+            <div className='video-div'>
+              <video controls
+              ref={videoRef}
+                onSeeked={handleSeeked}
+                onPlay={handlePlay}
+                onPause={handlePause}>
+                <source src={selectedVideo} type="video/mp4" />
+              </video>
+              <div className='stream-end-div'>
+                <Button text={"Leave lounge"} className="leave-btn" />
               </div>
             </div>
-            <div className="chatbox-msg">
-              <input type="text"  defaultValue={"Chat here..."}/>
-            </div>
-          </div>
+
+          }
         </div>
+        <ChatBox />
       </main>
 
 
@@ -169,4 +123,6 @@ function Stream() {
 }
 
 export default Stream;
+
+
 
