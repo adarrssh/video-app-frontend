@@ -5,8 +5,8 @@ import { io } from 'socket.io-client';
 const socket = io(process.env.REACT_APP_SOCKET);
 
 
-
 function UserB() {
+  console.log('join room');
   const videoRef = useRef(null);
   const [roomId, setRoomId] = useState('');
   const [isValidRoomId, setIsValidRoomId] = useState(true);

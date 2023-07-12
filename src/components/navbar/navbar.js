@@ -15,8 +15,8 @@ const Navbar = () => {
       </div>
       <div className="right-nav">
         {navbarData.map((el, key) => 
-        <Link to={el.to}>
-        <div className='right-nav-el' key={key}>{el.title}</div>
+        <Link to={el.to} key={key}>
+        <div className='right-nav-el'>{el.title}</div>
         </Link>
         )}
         <Link to={"/login"}>

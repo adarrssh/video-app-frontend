@@ -5,8 +5,9 @@ import {
     Routes
 } from "react-router-dom";
 import Home from './view/Home/Home';
-import Stream from './view/Stream/Stream';
-import UserB from './view/JoinRoom';
+// import Stream from './view/Stream/Stream';
+import Stream from './view/Stream/Index';
+import UserB from './view/JoinRoom/JoinRoom';
 import Navbar from './components/navbar/navbar';
 import Login from './view/login/Login';
 import "./App.css"
@@ -20,7 +21,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route exact path="/stream" element={<Stream />} />
-                <Route exact path="/join" element={<UserB />} />
+                <Route exact path="/room" element={<UserB />} />
                 <Route exact path="/login" element={<Login />} />
               </Routes>
             </div>
