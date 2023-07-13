@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
-import "./index.css"
-import Stream from './Stream'
+// import "./index.css"
+// import Stream from './Stream'
+import JoinRoom from './JoinRoom'
 import Button from '../../components/button/button'
 import { io } from 'socket.io-client';
 
@@ -18,14 +19,14 @@ const Index = () => {
 
         socket.current = io(process.env.REACT_APP_SOCKET);
 
-        socket.current.on('roomCreated', (roomId) => {
-            setRoomId(roomId);
-            console.log('created room id', roomId);
-        });
+        // socket.current.on('roomCreated', (roomId) => {
+        //     setRoomId(roomId);
+        //     console.log('created room id', roomId);
+        // });
 
-        socket.current.on('userJoined', (id) => {
-            console.log(id, ' joined the room');
-        });
+        // socket.current.on('userJoined', (id) => {
+        //     console.log(id, ' joined the room');
+        // });
 
         const handleDisconnect = () => {
             console.log('Disconnected from server');
@@ -42,17 +43,29 @@ const Index = () => {
         };
     }, []);
 
-    const handleCreateRoom = () => {
-        setRoom(true)
-        socket.current.emit('createRoom');
+    
+      const handleJoinRoom = () => {
+        setRoom(roomId)
+        socket.current.emit('joinRoom', roomId);
       };
     
     return (
         <>
             {
-                !room ? <Button className="create-room-btn" onClick={handleCreateRoom} text={"Create Room"} />
+                !room ?
+                <>
+                <input
+                type="text"
+                value={roomId}
+                onChange={(e) => {
+                  setRoomId(e.target.value);
+                }}
+                placeholder="Enter Room ID"
+              />
+                <Button className="create-room-btn" onClick={handleJoinRoom} text={"Enter Room Id"} />
+                </>
 
-                    : <Stream socket={socket} roomId={roomId} />
+                    : <JoinRoom socket={socket} roomId={roomId} />
             }
         </>
     )

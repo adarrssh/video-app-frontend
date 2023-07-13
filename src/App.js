@@ -7,7 +7,7 @@ import {
 import Home from './view/Home/Home';
 // import Stream from './view/Stream/Stream';
 import Stream from './view/Stream/Index';
-import UserB from './view/JoinRoom/JoinRoom';
+import UserB from './view/JoinRoom/index';
 import Navbar from './components/navbar/navbar';
 import Login from './view/login/Login';
 import "./App.css"

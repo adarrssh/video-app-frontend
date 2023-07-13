@@ -106,7 +106,7 @@ function Stream({socket,roomId}) {
             </div>
           )}
         </div>
-        <ChatBox />
+        <ChatBox socket={socket} roomId={roomId}/>
       </main>
     </>
   );
