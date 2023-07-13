@@ -1,0 +1,98 @@
+.stream-right .stream-chat-box {
+    background-color: #333333;
+    height: 80vh;
+    margin-top: 30px;
+    width: 350px;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .stream-right .chatbox-header {
+    height: 10vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 10px;
+    font-size: 0.75rem;
+    color: #fff;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    background-color: #232949;
+  }
+  .chatbox-body::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .stream-chat-box .chatbox-body {
+    padding: 0.5rem;
+    height: 80vh;
+    background-color: #333333;
+    overflow-y: auto;
+  }
+  
+  
+  .stream-chat-box .chatbox-msg {
+    height: 10vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 10px;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    color: black;
+    background-color: #fff;
+  }
+  
+  .stream-chat-box .chatbox-msg input{
+    height: 90%;
+    width: 100%;
+    padding: 0.4375rem 0.5625rem 0.4375rem 0.4375rem;
+    border: none;
+    outline: none;
+  }
+  
+  .chatbox-body .chat-msg-left{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      /* background-color: #aa0e0e; */
+  }
+  
+  .chatbox-body .chat-msg-left .chat-msg{
+    margin-top: 1.2rem;
+    color: #fff;
+    font-size: 0.8rem;
+    background-color: #222;
+    width: 35%;
+    padding: 0.5rem 1rem;
+    border-radius: 0rem 0.625rem 0.625rem 0.625rem;
+  }
+  
+  .chatbox-body .profile-pic img{
+      border-radius: 50%;
+      width: 1.8rem;
+      height: 1.8rem;
+  }
+  
+  .chatbox-body .chat-msg-right .chat-msg{
+      margin-top: 1.2rem;
+      color: #fff;
+      font-size: 0.8rem;
+      background-color: #222;
+      width: 35%;
+      padding: 0.5rem 1rem;
+      border-radius: 0.625rem 0rem 0.625rem 0.625rem;
+    }
+  
+  .chatbox-body .chat-msg-right{
+      margin-top: 5px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
+  }
+  
+  .chat-msg-right .profile-pic{
+      margin-right: 0.5rem;
+  }

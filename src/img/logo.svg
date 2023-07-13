@@ -1,0 +1,24 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="logo">
+<rect width="100" height="100" fill="#0F0F0F"/>
+<g id="Group 16">
+<circle id="Ellipse 12" cx="49.9464" cy="58.2381" r="30.5397" fill="white"/>
+<circle id="Ellipse 13" cx="49.9465" cy="58.2381" r="34.2381" stroke="#0E27AA" stroke-width="2"/>
+<g id="Group 15">
+<g id="Group 13">
+<circle id="Ellipse 4" opacity="0.88" cx="41.1369" cy="57.6508" r="7.63492" fill="black"/>
+<circle id="Ellipse 6" opacity="0.88" cx="44.6608" cy="57.6508" r="4.11111" fill="white"/>
+<circle id="Ellipse 8" opacity="0.88" cx="47.01" cy="57.6508" r="1.76191" fill="black"/>
+</g>
+<g id="Group 14">
+<circle id="Ellipse 9" opacity="0.88" cx="58.756" cy="57.6508" r="7.63492" fill="black"/>
+<circle id="Ellipse 10" opacity="0.88" cx="62.2798" cy="57.6508" r="4.11111" fill="white"/>
+<circle id="Ellipse 11" opacity="0.88" cx="64.629" cy="57.6508" r="1.76191" fill="black"/>
+</g>
+</g>
+<rect id="Rectangle 2" x="13.5338" y="71.1587" width="75.1746" height="25.8413" fill="#0F0F0F"/>
+<path id="Rectangle 3" d="M8.30887 59.4014C7.91286 57.5094 9.12559 55.6546 11.0176 55.2586L14.8625 54.4538L18.2438 70.6082L14.3988 71.413C12.5068 71.809 10.652 70.5962 10.256 68.7042L8.30887 59.4014Z" fill="#0E27AA" stroke="#0E27AA"/>
+<path id="Rectangle 4" d="M91.8995 59.4014C92.2955 57.5094 91.0827 55.6546 89.1907 55.2586L85.3458 54.4538L81.9646 70.6082L85.8095 71.413C87.7015 71.809 89.5563 70.5962 89.9523 68.7042L91.8995 59.4014Z" fill="#0E27AA" stroke="#0E27AA"/>
+</g>
+</g>
+</svg>
