@@ -4,7 +4,9 @@ import './MiddleSection.css'
 const MiddleSection = () => {
   return (
     <div className='middle-main-section'>
+      <div>
       <MacBookSvg/>
+      </div>
     </div>
   )
 }
