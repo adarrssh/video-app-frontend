@@ -1,12 +1,14 @@
 import React from 'react'
-import MacBookSvg from '../../svg/MacBookSvg'
+import MacBookLargeSvg from '../../svg/MacBook/MacBookLargeSvg'
 import './MiddleSection.css'
+import MacBookMediumSvg from '../../svg/MacBook/MacBookMediumSvg'
+import MacBookSmallSvg from '../../svg/MacBook/MacBookSmallSvg'
 const MiddleSection = () => {
   return (
     <div className='middle-main-section'>
-      <div>
-      <MacBookSvg/>
-      </div>
+      <MacBookLargeSvg/>
+      <MacBookMediumSvg/>
+      <MacBookSmallSvg/>
     </div>
   )
 }
