@@ -1,0 +1,68 @@
+.top-main-comp {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 250px;
+  margin-top: 40px;
+}
+
+.top-main-comp .heading-text {
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  /* font-family: "Nunito", sans-serif; */
+  font-size: 1.875rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.top-main-comp .descp {
+  margin-top: 2rem;
+  color: #fff;
+  text-align: center;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.top-main-comp .host-invite-btn-comp {
+    margin-top: 40px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center ;
+  height: 50px;
+}
+
+.host-invite-btn-comp .host-btn {
+  color: #fff;
+  padding: 0.5rem 1.5rem;
+  height: 2.3rem;
+  width: 17.5rem;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  background: var(
+    --gradient,
+    linear-gradient(166deg, #0e27aa 0%, #039ee1 100%)
+  );
+  margin: 0 10px;
+}
+
+.host-invite-btn-comp .invite-link-btn {
+  color: rgba(0, 0, 0, 0.7);
+  width: 17.5rem;
+  padding: 0.5rem 1.5rem;
+  height: 2.3rem;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  background: #fff;
+  margin: 0 10px;
+
+}
