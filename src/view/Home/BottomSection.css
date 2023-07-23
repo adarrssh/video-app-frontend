@@ -1,0 +1,25 @@
+.bottom-main-section{
+    color: white;
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.bottom-main-section .bottom-heading{
+color: #FFF;
+text-align: center;
+font-size: 2rem;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+}
+
+.bottom-main-section .features{
+    margin-top: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+    width: 90%;
+}

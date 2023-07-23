@@ -1,14 +1,25 @@
-import React from 'react'
-import MacBookLargeSvg from '../../svg/MacBook/MacBookLargeSvg'
+import React,{useEffect,useState} from 'react'
 import './MiddleSection.css'
-import MacBookMediumSvg from '../../svg/MacBook/MacBookMediumSvg'
-import MacBookSmallSvg from '../../svg/MacBook/MacBookSmallSvg'
+import MacBookSvg from '../../svg/MacBookSvg'
 const MiddleSection = () => {
+  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setViewportWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+
   return (
     <div className='middle-main-section'>
-      <MacBookLargeSvg/>
-      <MacBookMediumSvg/>
-      <MacBookSmallSvg/>
+      <MacBookSvg width={viewportWidth}/>
     </div>
   )
 }

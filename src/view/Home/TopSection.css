@@ -11,7 +11,6 @@
   width: 100%;
   text-align: center;
   color: #fff;
-  /* font-family: "Nunito", sans-serif; */
   font-size: 1.875rem;
   font-style: normal;
   font-weight: 700;
@@ -50,7 +49,7 @@
     --gradient,
     linear-gradient(166deg, #0e27aa 0%, #039ee1 100%)
   );
-  margin: 0 10px;
+  margin: 0 1.5rem;
 }
 
 .host-invite-btn-comp .invite-link-btn {
@@ -63,6 +62,6 @@
   font-weight: 500;
   line-height: normal;
   background: #fff;
-  margin: 0 10px;
+  margin: 0 1.5rem;
 
 }

@@ -1,0 +1,32 @@
+.box {
+  width: 317px;
+  height: 222px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.box-text {
+  /* display: flex; */
+  text-align: center;
+  padding-top: 20px;
+}
+
+.box-text-heading {
+  color: #fff;
+  text-align: center;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-transform: capitalize;
+}
+
+.box-text-descp {
+  color: #fff;
+  text-align: center;
+  font-size: 0.85rem;
+  font-style: normal;
+  line-height: normal;
+}
