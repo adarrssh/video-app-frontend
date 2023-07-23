@@ -3,6 +3,7 @@ import "./index.css"
 import Stream from './Stream'
 import Button from '../../components/button/button'
 import { io } from 'socket.io-client';
+import Modal from './Modal';
 
 const Index = () => {
     const [room, setRoom] = useState(false)
@@ -45,15 +46,16 @@ const Index = () => {
     const handleCreateRoom = () => {
         setRoom(true)
         socket.current.emit('createRoom');
-      };
-    
+    };
+
     return (
         <>
-            {
+            {/* {
                 !room ? <Button className="create-room-btn" onClick={handleCreateRoom} text={"Create Room"} />
 
                     : <Stream socket={socket} roomId={roomId} />
-            }
+            } */}
+            <Modal/>
         </>
     )
 }

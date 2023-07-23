@@ -1,7 +1,6 @@
 .btn{
     display: flex;
     padding: 0.5rem 1.5rem;
-    /* font-family: Montserrat; */
     font-weight: 600;
     justify-content: center;
     align-items: center;
@@ -10,4 +9,8 @@
     height: 30px;
     font-size: 13px;
     color: #333333;
+}
+
+.svg-icon{
+padding-right: 8px;
 }

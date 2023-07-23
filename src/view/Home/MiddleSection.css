@@ -1,0 +1,13 @@
+.middle-main-section{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* width: 80%; */
+}
+
+/* .svg-div{
+    background-color: aqua;
+    width: 50%;
+} */

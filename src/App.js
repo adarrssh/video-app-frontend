@@ -4,7 +4,7 @@ import {
     BrowserRouter as Router,
     Routes
 } from "react-router-dom";
-import Home from './view/Home/Home';
+import Home from './view/Home'
 // import Stream from './view/Stream/Stream';
 import Stream from './view/Stream/Index';
 import UserB from './view/JoinRoom/index';
