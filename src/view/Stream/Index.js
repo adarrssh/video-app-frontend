@@ -50,12 +50,13 @@ const Index = () => {
 
     return (
         <>
-            {/* {
-                !room ? <Button className="create-room-btn" onClick={handleCreateRoom} text={"Create Room"} />
+            {
+                !room ?
+                <Modal handleCreateRoom={handleCreateRoom}/>
+                //  <Button className="create-room-btn" onClick={handleCreateRoom} text={"Create Room"} />
 
                     : <Stream socket={socket} roomId={roomId} />
-            } */}
-            <Modal/>
+            }
         </>
     )
 }

@@ -57,35 +57,89 @@
   line-height: normal;
 }
 
-.partition{
-    margin-top: -20px;
-    /* background-color: #039ee1; */
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+.partition {
+  margin-top: -20px;
+  /* background-color: #039ee1; */
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.partition .or-text{
-    background-color: #000000;
-    color: #ffffff;
-    width: 20px;
-    text-align: center;
+.partition .or-text {
+  background-color: #000000;
+  color: #ffffff;
+  width: 20px;
+  text-align: center;
 }
 
-
-.stream-invite-link-btn {
-  color: rgba(0, 0, 0, 0.7);
+.stream-invite-link {
+  display: flex;
+  flex-direction: row;
   width: 17.5rem;
-  padding: 0.5rem 1.5rem;
-  height: 2.3rem;
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  background: #fff;
   margin: 0 1.5rem;
+  color: rgba(0, 0, 0, 0.7);
+}
+.stream-input-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border-radius: 0.625rem;
+  height: 2.3rem;
+  background: #ffff;
+  width: 100%;
+}
+
+.center-element {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hide-btn {
+  display: none;
+}
+
+.w-20 {
+  width: 20%;
+}
+
+.w-60 {
+  width: 60%;
+}
+
+.w-80 {
+  width: 80%;
+}
+.w-40 {
+  width: 40%;
+}
+
+.stream-input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  border-radius: 0.625rem;
+}
+
+.stream-input:focus {
+  border: none;
+}
+
+.join-room-btn {
+  color: white;
+  background: var(
+    --gradient,
+    linear-gradient(166deg, #0e27aa 0%, #039ee1 100%)
+  );
+  width: 100%;
+  height: 100%;
 }
 
 .descp2 {
@@ -96,5 +150,3 @@
   /* font-weight: 600; */
   line-height: normal;
 }
-
-

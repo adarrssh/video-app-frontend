@@ -11,10 +11,6 @@ export const navbarData =
         title: 'Stream'
     },
     {
-        to: '/room',
-        title: 'Join room'
-    },
-    {
         to: '/tutorial',
         title: 'How it works?'
     }
