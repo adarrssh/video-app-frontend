@@ -6,6 +6,8 @@ const Box1 = () => {
             <rect x="0.5" width="83" height="60" rx="6" fill="#87E2FF" />
         </svg>
 
+
+
     )
 }
 

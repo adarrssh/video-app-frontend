@@ -12,7 +12,7 @@ const HorizontalDivider = () => {
     );
   };
 
-const Modal = () => {
+const Modal = ({handleCreateRoom}) => {
     return (
         <div className='stram-modal-parent'>
             <div className="stream-modal-content">
@@ -20,7 +20,7 @@ const Modal = () => {
                     <h3>Start Streaming</h3>
                 </div>
                 <div>
-                    <Button svgIcon={<HostBtnSvg />} className='stream-host-btn' text={'Host a movie night'} />
+                    <Button onClick={handleCreateRoom} svgIcon={<HostBtnSvg />} className='stream-host-btn' text={'Host a movie night'} />
                 </div>
                 <div className='descp1'>
                     <p>Create a new room and invite your friends</p>
