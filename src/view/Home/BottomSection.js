@@ -1,7 +1,7 @@
 import React from 'react'
 import './BottomSection.css'
 import Box from '../../components/Box/Box'
-import { boxData } from '../../data/box'
+import { boxData } from '../../utils/data/box'
 const BottomSection = () => {
   return (
     <main className='bottom-main-section'>

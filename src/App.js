@@ -10,6 +10,7 @@ import Stream from './view/Stream/Index';
 import UserB from './view/JoinRoom/index';
 import Navbar from './components/navbar/navbar';
 import Login from './view/login/Login';
+import Tutorial from './view/Tutorial'
 import "./App.css"
 function App() {
     return (
@@ -23,6 +24,7 @@ function App() {
                 <Route exact path="/stream" element={<Stream />} />
                 <Route exact path="/room" element={<UserB />} />
                 <Route exact path="/login" element={<Login />} />
+                <Route exact path="/tutorial" element={< Tutorial/>} />
               </Routes>
             </div>
       </Router>

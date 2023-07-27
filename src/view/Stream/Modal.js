@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import './Modal.css'
 import Button from '../../components/button/button'
-import HostBtnSvg from '../../svg/HostBtnSvg'
-import KeyboadSvg from '../../svg/KeyboadSvg'
+import HostBtnSvg from '../../utils/svg/HostBtnSvg'
+import KeyboadSvg from '../../utils/svg/KeyboadSvg'
 
 const HorizontalDivider = () => {
 
@@ -59,7 +59,7 @@ const Modal = ({ handleCreateRoom }) => {
                             />
                         </div>
                     </div>
-                    <div className={showButton ? 'w-40' : 'hide-btn'}>
+                    <div className={showButton ? 'w-40 center-element' : 'hide-btn'}>
                         {showButton && <Button className={'join-room-btn'} text={'Join'}/>}
                     </div>
                 </div>
