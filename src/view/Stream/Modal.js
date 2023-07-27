@@ -59,7 +59,7 @@ const Modal = ({ handleCreateRoom }) => {
                             />
                         </div>
                     </div>
-                    <div className={showButton ? 'w-40' : 'hide-btn'}>
+                    <div className={showButton ? 'w-40 center-element' : 'hide-btn'}>
                         {showButton && <Button className={'join-room-btn'} text={'Join'}/>}
                     </div>
                 </div>
