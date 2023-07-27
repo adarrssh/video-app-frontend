@@ -1,8 +1,8 @@
 import React from 'react'
 import './TopSection.css'
 import Button from '../../components/button/button'
-import HostBtnSvg from '../../svg/HostBtnSvg'
-import KeyboadSvg from '../../svg/KeyboadSvg'
+import HostBtnSvg from '../../utils/svg/HostBtnSvg'
+import KeyboadSvg from '../../utils/svg/KeyboadSvg'
 
 const TopSection = () => {
   return (

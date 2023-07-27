@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import './Modal.css'
 import Button from '../../components/button/button'
-import HostBtnSvg from '../../svg/HostBtnSvg'
-import KeyboadSvg from '../../svg/KeyboadSvg'
+import HostBtnSvg from '../../utils/svg/HostBtnSvg'
+import KeyboadSvg from '../../utils/svg/KeyboadSvg'
 
 const HorizontalDivider = () => {
 

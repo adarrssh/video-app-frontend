@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import logo from '../../img/logo.png'
+import logo from '../../utils/img/logo.png'
 import './ChatBox.css'
 const ChatBox = ({ socket, roomId }) => {
   const [message, setMessage] = useState("")

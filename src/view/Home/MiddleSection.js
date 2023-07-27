@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import './MiddleSection.css'
-import MacBookSvg from '../../svg/MacBookSvg'
+import MacBookSvg from '../../utils/svg/MacBookSvg'
 const MiddleSection = () => {
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
 

@@ -1,8 +1,8 @@
 import React from 'react'
 import Button from '../button/button'
-import { navbarData } from '../../data/navbar'
+import { navbarData } from '../../utils/data/navbar'
 import './navbar.css'
-import { ReactComponent as MySVG } from '../../img/logo.svg';
+import { ReactComponent as MySVG } from '../../utils/img/logo.svg';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
