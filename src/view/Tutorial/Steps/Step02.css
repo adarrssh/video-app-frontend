@@ -1,0 +1,45 @@
+.step-02 {
+  margin-top: 40px;
+  display: flex;
+  width: 100%;
+  color: white;
+  position: relative;
+}
+
+.step-02 .left-02 {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.step-02 .step-02-svg-div {
+  position: relative;
+}
+
+.step-02 .step-02-svg {
+  position: absolute;
+  left: 65%;
+  top: 20%;
+}
+
+.step-02 .right-02 {
+  display: flex;
+  justify-content: center;
+}
+
+.right-02 .right-02-text {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  justify-content: center;
+  /* background-color: aqua; */
+}
+
+.right-02-text h4 {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 3rem;
+}
+
+.right-02-text p{
+    margin-top: 20px;
+}

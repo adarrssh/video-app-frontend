@@ -1,0 +1,53 @@
+.video-tut-comp {
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #0f0f0f;
+  width: 100%;
+}
+
+.video-tut-heading {
+  text-align: center;
+  color: #fff;
+  font-family: Nunito;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.video-div {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.video-div video {
+  background: #000000;
+  border-radius: 0.9375rem;
+  width: 49.5625rem;
+  height: 30.125rem;
+  flex-shrink: 0;
+}
+
+.streaming-btn-div {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.streaming-btn-div .start-streaming {
+  border-radius: 0.625rem;
+  background: var(
+    --gradient,
+    linear-gradient(166deg, #0e27aa 0%, #039ee1 100%)
+  );
+  color: #fff;
+  font-size: 1rem;
+  padding: 0.5rem 1.5rem;
+ 
+  height: 2.2rem;
+}

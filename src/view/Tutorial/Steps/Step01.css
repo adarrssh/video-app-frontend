@@ -1,0 +1,48 @@
+.step-01 {
+    margin-top: 40px;
+  display: flex;
+  width: 100%;
+  color: white;
+  position: relative;
+  
+}
+
+.step-01 .left-01 {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.left-01 .left-01-text{
+    width: 100%;
+    text-align: left;
+}
+
+.left-01 .left-01-text h4{
+    color: rgba(255, 255, 255, 0.70);
+    font-size: 3rem;
+
+}
+
+.left-01 .left-01-text p{
+    margin-top: 40px;
+}
+
+
+.step-01 .right-01 {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.step-01 .right-01 .w-80{
+  width: 80%;
+}
+
+.arrow{
+  position: absolute;
+  bottom: 10%;
+  left: 35%;
+}
