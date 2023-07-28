@@ -9,6 +9,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  height:fit-content;
 }
 
 .tutorial-main-comp h3 {

@@ -1,5 +1,5 @@
 import React from 'react'
-import './Step.css'
+import './Step01.css'
 import Step01svg from '../../../utils/svg/Tutorial/Step01svg'
 import Arrow from '../../../utils/svg/Tutorial/Arrowsvg'
 const Step01 = () => {

@@ -1,0 +1,47 @@
+.step-03 {
+  margin-top: 150px;
+  display: flex;
+  width: 100%;
+  color: white;
+  position: relative;
+}
+
+.step-03 .left-03 {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.left-03 .left-03-text{
+    width: 100%;
+    text-align: left;
+}
+
+.left-03 .left-03-text h4{
+    color: rgba(255, 255, 255, 0.70);
+    font-size: 3rem;
+
+}
+
+.left-03 .left-03-text p{
+    margin-top: 40px;
+}
+
+
+.step-03 .right-03 {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.step-03 .right-03 .w-80{
+  width: 80%;
+}
+
+.arrow{
+  position: absolute;
+  bottom: 10%;
+  left: 35%;
+}
