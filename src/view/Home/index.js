@@ -3,6 +3,7 @@ import "./index.css"
 import TopSection from './TopSection'
 import MiddleSection from './MiddleSection'
 import BottomSection from './BottomSection'
+import VideoTutorial from '../Tutorial/index'
 
 const index = () => {
   return (
@@ -10,6 +11,7 @@ const index = () => {
         <TopSection/>
         <MiddleSection/>
         <BottomSection/>
+        <VideoTutorial/>
     </main>
   )
 }
