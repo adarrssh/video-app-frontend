@@ -22,4 +22,5 @@ line-height: normal;
     flex-direction: row;
     justify-content:space-evenly;
     width: 90%;
+    margin-bottom: 50px;
 }
