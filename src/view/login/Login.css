@@ -1,3 +1,249 @@
-.login{
-  background-color: rgb(58, 11, 11);
+.login-modal-parent {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-modal-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  border-radius: 1rem;
+  background: #000;
+  display: flex;
+  width: 28rem;
+  height: auto;
+  padding: 2.125rem 3.5rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  flex-shrink: 0;
+}
+
+.login-modal-heading {
+  color: #fff;
+  text-align: center;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: -20px;
+}
+
+.input-email-div {
+  position: relative;
+  /* background-color: #039ee1; */
+}
+
+.inp-email-placeholder {
+  text-align: center;
+  position: absolute;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: Nunito;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  background-color: #000;
+  padding-left: 10px;
+  padding-right: 10px;
+  top: -10px;
+  left: 10px;
+
+}
+
+
+.input-pwd-div {
+  position: relative;
+  /* background-color: #039ee1; */
+}
+
+
+.inp-pwd-placeholder{
+  position: absolute;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: Nunito;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  top: -20px;
+  left: 12px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #000;
+}
+
+.input-el {
+  display: flex;
+  width: 22.4375rem;
+  height: 3rem;
+  padding: 1rem 1.5rem;
+  align-items: flex-end;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  border-radius: 0.5rem;
+  border: 1px solid #fff;
+  background: #000;
+  color: #fff;
+}
+
+.pwd-inp-margin {
+  margin-top: -10px;
+}
+.input-el:focus {
+  outline: none;
+}
+.login-div-btn {
+  margin-top: -40px;
+  color: #fff;
+  padding: 0.5rem 1.5rem;
+  height: 2.3rem;
+  width: 22rem;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  background: var(
+    --gradient,
+    linear-gradient(166deg, #0e27aa 0%, #039ee1 100%)
+  );
+}
+
+.fg-pwd {
+  margin-top: -30px;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  font-size: 0.875rem;
+  font-style: normal;
+  /* font-weight: 600; */
+  line-height: normal;
+}
+
+.btn-partition {
+  margin-top: -30px;
+  /* background-color: #039ee1; */
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-partition .or-text {
+  background-color: #000000;
+  color: #ffffff;
+  width: 20px;
+  text-align: center;
+}
+
+.google-btn {
+  margin-top: -20px;
+  display: flex;
+  width: 22rem;
+  height: 2.5rem;
+  padding: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  flex-shrink: 0;
+  border-radius: 0.5rem;
+  border: 1px solid #fff;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.stream-invite-link {
+  display: flex;
+  flex-direction: row;
+  width: 17.5rem;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin: 0 1.5rem;
+  color: rgba(0, 0, 0, 0.7);
+}
+.stream-input-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border-radius: 0.625rem;
+  height: 2.3rem;
+  background: #ffff;
+  width: 100%;
+}
+
+.sign-up-text h3 {
+  color: rgba(255, 255, 255, 0.8);
+  font-family: Nunito;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: -20px;
+}
+
+.center-element {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hide-btn {
+  display: none;
+}
+
+.w-20 {
+  width: 20%;
+}
+
+.w-60 {
+  width: 60%;
+}
+
+.w-80 {
+  width: 80%;
+}
+.w-40 {
+  width: 40%;
+}
+
+.stream-input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  border-radius: 0.625rem;
+}
+
+.stream-input:focus {
+  border: none;
+}
+
+.join-room-btn {
+  color: white;
+  background: var(
+    --gradient,
+    linear-gradient(166deg, #0e27aa 0%, #039ee1 100%)
+  );
+  width: 95%;
+  height: 100%;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  font-size: 0.87rem;
+}
+
+.descp2 {
+  margin-top: -30px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.875rem;
+  /* font-weight: 600; */
+  line-height: normal;
 }

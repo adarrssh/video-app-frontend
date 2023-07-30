@@ -5,8 +5,6 @@ import HostBtnSvg from '../../utils/svg/HostBtnSvg'
 import KeyboadSvg from '../../utils/svg/KeyboadSvg'
 
 const HorizontalDivider = () => {
-
-
     return (
         <svg width="125" height="2" viewBox="0 0 271 2" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M1 1H270" stroke="white" strokeOpacity="0.2" strokeLinecap="round" />
