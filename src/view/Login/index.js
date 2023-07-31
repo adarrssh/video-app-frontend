@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './Login.css'
+import './index.css'
 import Button from '../../components/button/button'
 import HostBtnSvg from '../../utils/svg/HostBtnSvg'
 import KeyboadSvg from '../../utils/svg/KeyboadSvg'
@@ -7,14 +7,14 @@ import GoogleIconSvg from '../../utils/svg/GoogleIconSvg'
 
 const HorizontalDivider = () => {
   return (
-      <svg width="125" height="2" viewBox="0 0 271 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1 1H270" stroke="white" strokeOpacity="0.2" strokeLinecap="round" />
-      </svg>
+    <svg width="125" height="2" viewBox="0 0 271 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1 1H270" stroke="white" strokeOpacity="0.2" strokeLinecap="round" />
+    </svg>
   );
 };
 
 
-const Modal = ({ handleCreateRoom }) => {
+const Login = ({ handleCreateRoom }) => {
 
 
   return (
@@ -43,7 +43,7 @@ const Modal = ({ handleCreateRoom }) => {
           <HorizontalDivider />
         </div>
         <div>
-          <Button className={'google-btn'} text={'Continue with google'} svgIcon={<GoogleIconSvg/>}/>
+          <Button className={'google-btn'} text={'Continue with google'} svgIcon={<GoogleIconSvg />} />
         </div>
         <div className='sign-up-text'>
           <h3>Don’t have an account? Sign up!</h3>
@@ -53,4 +53,4 @@ const Modal = ({ handleCreateRoom }) => {
   )
 }
 
-export default Modal
+export default Login
