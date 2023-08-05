@@ -4,13 +4,13 @@ import { navbarData } from '../../utils/data/navbar'
 import './navbar.css'
 import { ReactComponent as MySVG } from '../../utils/img/logo.svg';
 import { Link } from 'react-router-dom';
+import NavLogoSvg from '../../utils/svg/NavLogoSvg';
 
 const Navbar = () => {
   return (
     <nav className='nav'>
       <div className="left-nav">
-        {/* <img src={logo} alt="logo" className='logo'/> */}
-        <MySVG className='logo' />
+        <NavLogoSvg className='logo'/>
         <div className='logo-text'>BINGE CLUB</div>
       </div>
       <div className="right-nav">
