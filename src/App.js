@@ -13,6 +13,7 @@ import Login from './view/Login';
 import Signup from './view/Signup';
 import Tutorial from './view/Tutorial'
 import "./App.css"
+import Profile from './view/Profile/Profile';
 function App() {
     return (
       <Router>
@@ -27,6 +28,7 @@ function App() {
                 <Route exact path="/tutorial" element={< Tutorial/>} />
                 <Route exact path="/login" element={<Login/>} />
                 <Route exact path="/signup" element={< Signup/>} />
+                <Route exact path="/profile" element={< Profile/>} />
               </Routes>
             </div>
       </Router>

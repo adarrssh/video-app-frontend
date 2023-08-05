@@ -62,7 +62,9 @@ const Modal = ({ handleCreateRoom }) => {
                     </div>
                 </div>
                 <div className='descp2'>
+                    <p>
                     Enter the invite link to your friend’s room.
+                    </p>
                 </div>
             </div>
         </div>

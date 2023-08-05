@@ -2,7 +2,7 @@
   background-color: #0f0f0f;
   height: 60px;
   display: flex;
-  background: #0F0F0F;
+  background: #0f0f0f;
   box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.62);
   width: 100%;
   max-width: 1300px;
@@ -18,13 +18,16 @@
 }
 
 .left-nav .logo-text {
-  /* font-family: laqu; */
-  /* font-family: 'Lacquer', cursive; */
+  font-family: Lacquer;
   color: #fff;
+  margin-left: 10px;
 }
 .left-nav .logo {
   height: 100%;
-  /* width: 5rem; */
+}
+
+.left-nav:hover{
+  cursor: pointer;
 }
 
 .right-nav {
@@ -42,7 +45,7 @@
   color: white;
 }
 
-.right-nav .right-nav-el:hover{
+.right-nav .right-nav-el:hover {
   text-decoration: underline;
   color: #ffffff;
 }
@@ -50,21 +53,27 @@
 .right-nav .login-btn {
   color: #333333;
   background-color: #fff;
-  margin-right: 30px;
+  margin-right: 20px;
 }
 
 .right-nav .login-btn:hover {
-  background-color: #36373a;
+  border: 1px solid #fff;
+  background-color: #0f0f0f;
   color: #fff;
 }
 
 .right-nav .signup-btn {
-  background-color: #0e27aa;
   color: #fff;
   margin-right: 30px;
+  border-radius: 10px;
+  background: var(
+    --gradient,
+    linear-gradient(166deg, #0e27aa 0%, #039ee1 100%)
+  );
 }
 
 .right-nav .signup-btn:hover {
-  background-color: #36373a;
+  background: #0f0f0f;
+  border: 1px solid #0e27aa;
   color: #fff;
 }

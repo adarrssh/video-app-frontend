@@ -11,6 +11,10 @@
     color: #333333;
 }
 
+.btn:hover{
+    text-decoration: none;
+}
+
 .svg-icon{
 padding-right: 8px;
 }

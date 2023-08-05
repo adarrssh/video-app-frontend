@@ -1,0 +1,105 @@
+.profile-main {
+  width: 900px;
+}
+
+.profile-content {
+  position: relative;
+  margin-top: 50px;
+  height: 400px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.left-profile {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.right-profile {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-details {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+}
+
+.m-t-5 {
+  margin-top: 5px;
+}
+.m-t-10 {
+  margin-top: 10px;
+}
+
+.m-t-20 {
+  margin-top: 30px;
+}
+
+.m-t-30 {
+  margin-top: 30px;
+}
+
+.m-t-40 {
+  margin-top: 40px;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.w-80 {
+  width: 80%;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.input-css {
+  background: none;
+  border: none;
+  border-bottom: 1px solid #fff;
+  color: #fff;
+  font-family: Nunito;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.input-css:focus {
+  outline: none;
+}
+
+.input-heading {
+  color: rgba(255, 255, 255, 0.5);
+  font-family: Nunito;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.profile-heading {
+  color: #fff;
+  font-family: Nunito;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.profile-pic{
+    position: absolute;
+    top: 150px;
+    left: 350px;
+}
