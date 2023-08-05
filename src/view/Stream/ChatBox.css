@@ -61,6 +61,7 @@
   
   .chatbox-body .chat-msg-left .chat-msg{
     margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
     color: #fff;
     font-size: 0.8rem;
     background-color: #222;
@@ -69,7 +70,7 @@
     border-radius: 0rem 0.625rem 0.625rem 0.625rem;
   }
   
-  .chatbox-body .profile-pic img{
+  .chatbox-body .chat-profile-pic img{
       border-radius: 50%;
       width: 1.8rem;
       height: 1.8rem;
@@ -86,7 +87,6 @@
     }
   
   .chatbox-body .chat-msg-right{
-      margin-top: 5px;
       display: flex;
       flex-direction: column;
       align-items: flex-end;

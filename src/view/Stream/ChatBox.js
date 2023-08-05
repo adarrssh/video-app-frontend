@@ -37,7 +37,7 @@ const ChatBox = ({ socket, roomId }) => {
 
       return (
         <div className='chat-msg-right'>
-          <div className='profile-pic'>
+          <div className='chat-profile-pic'>
             <img src={logo} alt="profile-pic" />
           </div>
           <div className='chat-msg'>
@@ -47,7 +47,7 @@ const ChatBox = ({ socket, roomId }) => {
       )
     } else {
       return (<div className="chat-msg-left">
-        <div className='profile-pic'>
+        <div className='chat-profile-pic'>
           <img src={logo} alt="profile-pic" />
         </div>
         <div className='chat-msg'>

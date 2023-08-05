@@ -20,10 +20,10 @@ const Navbar = () => {
           </Link>
         )}
         <Link to={"/login"}>
-          <Button text="Login" className='login-btn' to="/login" />
+          <Button text={"Login"} className='login-btn' to="/login" />
         </Link>
         <Link to="/signup">
-          <Button text="Sign-up" className="signup-btn" />
+          <Button text={"Sign-up"}className="signup-btn" />
         </Link>
       </div>
     </nav>
