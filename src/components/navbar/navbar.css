@@ -37,23 +37,35 @@
   align-items: center;
   justify-content: flex-end;
   color: #ffffff;
+  gap: 20px;
 }
 
 .right-nav .right-nav-el {
+  padding: 8px;
   cursor: pointer;
-  margin-right: 1.8rem;
+  gap: 1rem;
   color: white;
 }
 
-.right-nav .right-nav-el:hover {
-  text-decoration: underline;
-  color: #ffffff;
+.right-nav .right-nav-el:hover{
+  border-radius: 8px;
+  background: #fff;
+  color: #000;
+}
+
+.nav-link-text:hover{
+  text-decoration: none;
+}
+
+
+.right-nav .right-nav-el:link{
+  text-decoration: none;
 }
 
 .right-nav .login-btn {
   color: #333333;
   background-color: #fff;
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .right-nav .login-btn:hover {

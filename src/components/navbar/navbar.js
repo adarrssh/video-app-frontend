@@ -15,14 +15,14 @@ const Navbar = () => {
       </div>
       <div className="right-nav">
         {navbarData.map((el, key) =>
-          <Link to={el.to} key={key}>
+          <Link to={el.to} key={key} className='nav-link-text'>
             <div className='right-nav-el'>{el.title}</div>
           </Link>
         )}
-        <Link to={"/login"}>
+        <Link to={"/login"} className='nav-link-text'>
           <Button text={"Login"} className='login-btn' to="/login" />
         </Link>
-        <Link to="/signup">
+        <Link to="/signup" className='nav-link-text'>
           <Button text={"Sign-up"}className="signup-btn" />
         </Link>
       </div>
