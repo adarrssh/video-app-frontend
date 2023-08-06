@@ -34,7 +34,16 @@ const ChatBox = ({ socket, roomId }) => {
 
     if (item.messgeRecieved) {
 
+      return (<div className="chat-msg-left">
+        <div className='chat-profile-pic'>
+          <img src={logo} alt="profile-pic" />
+        </div>
+        <div className='chat-msg'>
+          {item.message}
+        </div>
+      </div>)
 
+    } else {
       return (
         <div className='chat-msg-right'>
           <div className='chat-profile-pic'>
@@ -45,15 +54,6 @@ const ChatBox = ({ socket, roomId }) => {
           </div>
         </div>
       )
-    } else {
-      return (<div className="chat-msg-left">
-        <div className='chat-profile-pic'>
-          <img src={logo} alt="profile-pic" />
-        </div>
-        <div className='chat-msg'>
-          {item.message}
-        </div>
-      </div>)
 
     }
   }

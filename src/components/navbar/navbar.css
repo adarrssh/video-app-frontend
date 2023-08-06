@@ -37,7 +37,7 @@
   align-items: center;
   justify-content: flex-end;
   color: #ffffff;
-  gap: 20px;
+  gap: 10px;
 }
 
 .right-nav .right-nav-el {
@@ -55,6 +55,7 @@
 
 .nav-link-text:hover{
   text-decoration: none;
+
 }
 
 
@@ -85,7 +86,8 @@
 }
 
 .right-nav .signup-btn:hover {
+  outline: none;
   background: #0f0f0f;
   border: 1px solid #0e27aa;
-  color: #fff;
+  color: #fff;  
 }

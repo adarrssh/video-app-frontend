@@ -2,6 +2,7 @@ import React from 'react'
 import './VideoTutorial.css'
 import Button from '../../components/button/button'
 import HostBtnSvg from '../../utils/svg/HostBtnSvg'
+import { Link } from 'react-router-dom'
 
 const VideoTutorial = () => {
   return (
@@ -14,7 +15,9 @@ const VideoTutorial = () => {
         </div>
 
         <div className='streaming-btn-div'>
+          <Link to={'/stream'}>
             <Button svgIcon={<HostBtnSvg/>} text={'Start Streaming'} className={'start-streaming'}/>
+          </Link>
         </div>
     </main>
   )
