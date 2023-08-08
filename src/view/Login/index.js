@@ -14,7 +14,7 @@ const HorizontalDivider = () => {
 };
 
 
-const Login = ({ handleCreateRoom }) => {
+const Login = () => {
 
 
   return (
@@ -31,11 +31,13 @@ const Login = ({ handleCreateRoom }) => {
           <input type="text" className='input-el pwd-inp-margin' />
           <div className='inp-pwd-placeholder'>Password</div>
         </div>
-        <div className='fg-pwd'>
-          <p>Forgot password?</p>
+        <div className='fg-pwd-div'>
+          <p>
+           Forgot password?
+          </p>
         </div>
-        <div>
-          <Button text={"Log In"} className={'login-div-btn'} />
+        <div className='login-div'>
+          <Button text={"Log In"} className='login-div-btn' />
         </div>
         <div className="btn-partition">
           <HorizontalDivider />
@@ -46,7 +48,7 @@ const Login = ({ handleCreateRoom }) => {
           <Button className={'google-btn'} text={'Continue with google'} svgIcon={<GoogleIconSvg />} />
         </div>
         <div className='sign-up-text'>
-          <h3>Don’t have an account? Sign up!</h3>
+          <h3>Don’t have an account?<span className='signup-span-el'> Sign up!</span></h3>
         </div>
       </div>
     </div>

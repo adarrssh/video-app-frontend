@@ -35,9 +35,6 @@ const Signup = ({ handleCreateRoom }) => {
           <input type="text" className='input-el pwd-inp-margin' />
           <div className='inp-pwd-placeholder'>Password</div>
         </div>
-        <div className='fg-pwd'>
-          <p>Forgot password?</p>
-        </div>
         <div>
           <Button text={"Create an account"} className={'signup-div-btn'} />
         </div>
@@ -50,7 +47,7 @@ const Signup = ({ handleCreateRoom }) => {
           <Button className={'google-btn'} text={'Continue with google'} svgIcon={<GoogleIconSvg />} />
         </div>
         <div className='sign-up-text'>
-          <h3>Already have an account? Log In!</h3>
+          <h3>Already have an account? <span className='login-span-el'>Log In!</span></h3>
         </div>
       </div>
     </div>
