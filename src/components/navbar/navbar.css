@@ -1,3 +1,7 @@
+.remove-hover-text-underline:hover {
+  text-decoration: none;
+}
+
 .nav {
   background-color: #0f0f0f;
   height: 60px;
@@ -8,7 +12,7 @@
   max-width: 1300px;
 }
 
-.left-nav {
+.nav .left-nav {
   height: 100%;
   flex: 1;
   display: flex;
@@ -17,20 +21,20 @@
   margin-left: 40px;
 }
 
-.left-nav .logo-text {
+.nav .left-nav .logo-text {
   font-family: Lacquer;
   color: #fff;
   margin-left: 10px;
 }
-.left-nav .logo {
+.nav .left-nav .logo {
   height: 100%;
 }
 
-.left-nav:hover{
+.nav .left-nav:hover {
   cursor: pointer;
 }
 
-.right-nav {
+.nav .right-nav {
   flex: 2;
   height: 100%;
   display: flex;
@@ -40,26 +44,25 @@
   gap: 10px;
 }
 
-.right-nav .right-nav-el {
+.nav .right-nav .right-nav-el {
   padding: 8px;
   cursor: pointer;
   gap: 1rem;
   color: white;
 }
 
-.right-nav .right-nav-el:hover{
+.nav .right-nav .right-nav-el:hover {
   border-radius: 8px;
-  background: #fff;
+  background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(0, 0, 0, 0.2) 100%
+    ),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), #fff;
   color: #000;
 }
 
-.nav-link-text:hover{
-  text-decoration: none;
-
-}
-
-
-.right-nav .right-nav-el:link{
+.right-nav .right-nav-el:link {
   text-decoration: none;
 }
 
@@ -70,9 +73,12 @@
 }
 
 .right-nav .login-btn:hover {
-  border: 1px solid #fff;
-  background-color: #0f0f0f;
-  color: #fff;
+  background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(0, 0, 0, 0.2) 100%
+    ),
+    #fff;
 }
 
 .right-nav .signup-btn {
@@ -87,7 +93,12 @@
 
 .right-nav .signup-btn:hover {
   outline: none;
-  background: #0f0f0f;
-  border: 1px solid #0e27aa;
-  color: #fff;  
+  border-radius: 8px;
+  background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(0, 0, 0, 0.2) 100%
+    ),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+    linear-gradient(166deg, #0e27aa 0%, #039ee1 100%);
 }

@@ -37,6 +37,8 @@
 }
 
 .step-03 .right-03 .w-80{
+  display: flex;
+  justify-content: flex-end;
   width: 80%;
 }
 

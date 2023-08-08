@@ -9,23 +9,23 @@ import NavLogoSvg from '../../utils/svg/NavLogoSvg';
 const Navbar = () => {
   return (
     <nav className='nav'>
-      <Link to={"/"}>
+      <Link to={"/"} className='remove-hover-text-underline'>
         <div className="left-nav">
           <NavLogoSvg className='logo' />
-          <div className='logo-text'>BINGE CLUB</div>
+          <div className='logo-text'>Binge Club</div>
         </div>
       </Link>
       <div className="right-nav">
         {navbarData.map((el, key) =>
-          <Link to={el.to} key={key} className='nav-link-text'>
+          <Link to={el.to} key={key} className='remove-hover-text-underline'>
             <div className='right-nav-el'>{el.title}</div>
           </Link>
         )}
-        <Link to={"/login"} className='nav-link-text'>
-          <Button text={"Login"} className='login-btn' />
+        <Link to={"/login"} className='remove-hover-text-underline'>
+          <Button text={"Login"} className={'login-btn'} />
         </Link>
-        <Link to="/signup" className='nav-link-text'>
-          <Button text={"Sign-up"} className="signup-btn" />
+        <Link to="/signup" className='remove-hover-text-underline'>
+          <Button text={"Sign-up"} className={"signup-btn"} />
         </Link>
       </div>
     </nav>

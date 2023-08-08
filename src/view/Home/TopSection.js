@@ -12,10 +12,10 @@ const TopSection = () => {
             <p className='descp'>Binge Club is a free service which enables you to upload any video of <br/> your choice from your computer and watch socially in perfect sync.</p>
         </div>
         <div className='host-invite-btn-comp'>
-          <Link to={'/stream'}>
+          <Link to={'/stream'} className='remove-outline'>
             <Button svgIcon={<HostBtnSvg/>} className='host-btn' text={'Host a movie night'}/>
           </Link>
-          <Link to={'/stream'}>
+          <Link to={'/stream'} className='remove-outline'>
             <Button svgIcon={<KeyboadSvg/>} className='invite-link-btn' text={'Enter invite link or code'}/>
           </Link>
         </div>

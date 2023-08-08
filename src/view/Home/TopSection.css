@@ -1,4 +1,9 @@
-.top-main-comp {
+.remove-outline:hover{
+  outline: none;
+  text-decoration: none;
+}
+
+.top-main-comp.top-main-comp {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -53,6 +58,10 @@
   margin-right: 10px;
 }
 
+.host-invite-btn-comp .host-btn:hover{
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), linear-gradient(166deg, #0E27AA 0%, #039EE1 100%);
+}
+
 .host-invite-btn-comp .invite-link-btn {
   color: rgba(0, 0, 0, 0.7);
   width: 17.5rem;
@@ -66,4 +75,8 @@
   /* margin: 0 1.5rem; */
   margin-left: 10px;
 
+}
+
+.host-invite-btn-comp .invite-link-btn:hover{
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), #FFF;
 }
