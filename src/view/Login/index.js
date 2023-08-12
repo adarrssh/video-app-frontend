@@ -48,6 +48,7 @@ const Login = () => {
       console.log(body);
       if (response.ok) {
         // Handle success, e.g., show a success message
+        localStorage.setItem('token',body.token)
         alert(body.message);
         navigate('/')
       } else {

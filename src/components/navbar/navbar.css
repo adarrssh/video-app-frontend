@@ -12,6 +12,17 @@
   max-width: 1300px;
 }
 
+.profile-info{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-info .nav-profile-img{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
 .nav .left-nav {
   height: 100%;
   flex: 1;
