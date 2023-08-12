@@ -42,7 +42,7 @@
 }
 
 .m-t-20 {
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .m-t-30 {
@@ -102,4 +102,29 @@
     position: absolute;
     top: 150px;
     left: 350px;
+}
+
+.log-out-div{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.log-out{
+  border-radius: 8px;
+background: #AA0E0E;
+color: #fff;
+display: inline-flex;
+padding: 16px;
+justify-content: center;
+align-items: center;
+gap: 8px;
+}
+
+.log-out:hover{
+  color: #fff;
+  cursor: pointer;
+}
+
+.log-out:focus{
+  outline: none;
 }

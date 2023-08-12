@@ -67,15 +67,15 @@ const Signup = () => {
           <h3>Sign Up</h3>
         </div>
         <div className='input-name-div'>
-          <input type="text" className='input-el' name="username" value={formData.username} onChange={handleChange} />
+          <input type="text" className='input-el' name="username" value={formData.username} onChange={handleChange} autoComplete='off' />
           <div className='inp-name-placeholder'>Full Name</div>
         </div>
         <div className='input-email-div'>
-          <input type="text" className='input-el' name="email" value={formData.email} onChange={handleChange} />
+          <input type="text" className='input-el' name="email" value={formData.email} onChange={handleChange} autoComplete='off'/>
           <div className='inp-email-placeholder'>Email address</div>
         </div>
         <div className='input-pwd-div'>
-          <input type="text" className='input-el pwd-inp-margin' name="password" value={formData.password} onChange={handleChange} />
+          <input type="text" className='input-el pwd-inp-margin' name="password" value={formData.password} onChange={handleChange} autoComplete='off'/>
           <div className='inp-pwd-placeholder'>Password</div>
         </div>
         <div>

@@ -2,14 +2,11 @@ import React, { useEffect, useState } from 'react'
 import Button from '../button/button'
 import { navbarData } from '../../utils/data/navbar'
 import './navbar.css'
-import { ReactComponent as MySVG } from '../../utils/img/logo.svg';
 import { Link, useNavigate } from 'react-router-dom';
 import NavLogoSvg from '../../utils/svg/NavLogoSvg';
-import axios from 'axios';
 
-const Navbar = () => {
+const Navbar = ({imageSrc}) => {
   const navigate = useNavigate()
-  const [imageSrc, setImageSrc] = useState(null)
   const fetchUserDetails = async () => {
     if (localStorage.token) {
       try {
@@ -23,51 +20,17 @@ const Navbar = () => {
         let body = await response.json()
         console.log(response);
         console.log(body);
-        // if (response.ok) {
-        //   // Handle success, e.g., show a success message
-        //   alert(body.message);
-        // } else {
-        //   // Handle error, e.g., show an error message
-        //   alert(body.error);
-        // }
+
       } catch (error) {
         alert('error')
-        console.error('An error occurred', error);
+        console.error('An error occurred fetchUserDetails', error);
       }
     }
   }
 
-  const fetchUserProfileImage = async () => {
-    if (localStorage.token) {
-      try {
-        const response = await axios.get(`${process.env.REACT_APP_SOCKET}/user/download/image`, {
-          headers: {
-            'Authorization': localStorage.getItem('token')
-          },
-          responseType: 'arraybuffer'
-        });
-        const imageBlob = new Blob([response.data], { type: 'image/jpeg' }); // Change the type if needed
-        const imageUrl = URL.createObjectURL(imageBlob);
-        setImageSrc(imageUrl);
-        // if (response.ok) {
-        //   // Handle success, e.g., show a success message
-        //   alert(body.message);
-        // } else {
-        //   // Handle error, e.g., show an error message
-        //   alert(body.error);
-        // }
-      } catch (error) {
-        alert('error')
-        console.error('An error occurred', error);
-      }
-    }
-
-    console.log(imageSrc);
-  }
 
   useEffect(() => {
-    fetchUserDetails()
-    fetchUserProfileImage()
+    // fetchUserDetails()
   }, [])
   return (
     <nav className='nav'>

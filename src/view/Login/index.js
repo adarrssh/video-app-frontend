@@ -15,7 +15,7 @@ const HorizontalDivider = () => {
 };
 
 
-const Login = () => {
+const Login = ({setLoading}) => {
 
   const navigate = useNavigate()
 
@@ -36,6 +36,7 @@ const Login = () => {
     // e.preventDefault();
 
     try {
+      setLoading(false)
       const response = await fetch(`${process.env.REACT_APP_SOCKET}/auth/login`, {
         method: 'POST',
         headers: {
@@ -55,9 +56,11 @@ const Login = () => {
         // Handle error, e.g., show an error message
         alert(body.error);
       }
+      setLoading(false)
     } catch (error) {
       alert('error')
       console.error('An error occurred', error);
+      setLoading(false)
     }
   };
 
@@ -69,11 +72,11 @@ const Login = () => {
           <h3>Log In</h3>
         </div>
         <div className='input-email-div'>
-          <input type="text" className='input-el' name="email" value={formData.email} onChange={handleChange} />
+          <input type="text" className='input-el' name="email" value={formData.email} onChange={handleChange} autoComplete='off'/>
           <div className='inp-email-placeholder'>Email address</div>
         </div>
         <div className='input-pwd-div'>
-          <input type="text" className='input-el pwd-inp-margin'  name="password" value={formData.password} onChange={handleChange}
+          <input type="text" className='input-el pwd-inp-margin'  name="password" value={formData.password} onChange={handleChange} autoComplete='off'
            />
           <div className='inp-pwd-placeholder'>Password</div>
         </div>

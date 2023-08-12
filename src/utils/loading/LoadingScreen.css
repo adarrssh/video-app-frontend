@@ -1,0 +1,9 @@
+.loading-screen{
+    font-size: 5rem;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #ffff;
+  }

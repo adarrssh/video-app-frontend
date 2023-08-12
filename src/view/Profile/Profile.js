@@ -2,7 +2,15 @@ import React from 'react'
 import './Profile.css'
 import ProfileBgSvg from '../../utils/svg/ProfileBgSvg'
 import DefaultProfileSvg from '../../utils/svg/DefaultProfileSvg'
-const Profile = () => {
+import Button from '../../components/button/button'
+import { useNavigate } from 'react-router-dom'
+const Profile = ({setImageSrc}) => {
+    const navigate = useNavigate()
+    const logout = () =>{
+        localStorage.clear('token')
+        setImageSrc(null)
+        navigate('/')
+    }
     return (
         <main className='profile-main'>
             <div className="profile-content">
@@ -22,7 +30,7 @@ const Profile = () => {
                                 <input className='input-css w-100' type="text" placeholder='Swarna' />
                             </div>
                         </div>
-                        <div className="m-t-20 w-80">
+                        <div className="m-t-30 w-80">
                             <div className="email-text input-heading">
                                 Email address
                             </div>
@@ -30,14 +38,16 @@ const Profile = () => {
                                 <input className='input-css  w-100' type="text" placeholder='adarsh00502@gmail.com' />
                             </div>
                         </div>
-                        <div className="m-t-20 w-80">
+                        <div className="m-t-30 w-80">
                             <div className="passwoed-text input-heading">
                                 password
                             </div>
                             <div className="m-t-10">
                                 <input className='input-css  w-100' type="text" placeholder='******************' />
-
                             </div>
+                        </div>
+                        <div className='m-t-30 w-80 log-out-div'>
+                            <Button className={'log-out'} text={'log out'} onClick={logout}/>
                         </div>
                     </div>
                 </div>
