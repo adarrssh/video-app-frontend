@@ -4,6 +4,7 @@ import Button from '../../components/button/button'
 import HostBtnSvg from '../../utils/svg/HostBtnSvg'
 import KeyboadSvg from '../../utils/svg/KeyboadSvg'
 import GoogleIconSvg from '../../utils/svg/GoogleIconSvg'
+import { useNavigate } from 'react-router-dom'
 
 const HorizontalDivider = () => {
   return (
@@ -14,7 +15,49 @@ const HorizontalDivider = () => {
 };
 
 
-const Signup = ({ handleCreateRoom }) => {
+const Signup = () => {
+  const navigate = useNavigate()
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    // e.preventDefault();
+
+    try {
+      const response = await fetch(`${process.env.REACT_APP_SOCKET}/auth/signup`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+      let body = await response.json()
+      console.log(response);
+      console.log(body);
+      if (response.ok) {
+        // Handle success, e.g., show a success message
+        alert(body.message);
+        navigate('/login')
+      } else {
+        // Handle error, e.g., show an error message
+        alert(body.error);
+      }
+    } catch (error) {
+      alert('error')
+      console.error('An error occurred', error);
+    }
+  };
 
 
   return (
@@ -24,19 +67,19 @@ const Signup = ({ handleCreateRoom }) => {
           <h3>Sign Up</h3>
         </div>
         <div className='input-name-div'>
-          <input type="text" className='input-el' />
+          <input type="text" className='input-el' name="username" value={formData.username} onChange={handleChange} />
           <div className='inp-name-placeholder'>Full Name</div>
         </div>
         <div className='input-email-div'>
-          <input type="text" className='input-el' />
+          <input type="text" className='input-el' name="email" value={formData.email} onChange={handleChange} />
           <div className='inp-email-placeholder'>Email address</div>
         </div>
         <div className='input-pwd-div'>
-          <input type="text" className='input-el pwd-inp-margin' />
+          <input type="text" className='input-el pwd-inp-margin' name="password" value={formData.password} onChange={handleChange} />
           <div className='inp-pwd-placeholder'>Password</div>
         </div>
         <div>
-          <Button text={"Create an account"} className={'signup-div-btn'} />
+          <Button text={"Create an account"} className={'signup-div-btn'} onClick={handleSubmit}/>
         </div>
         <div className="btn-partition">
           <HorizontalDivider />
