@@ -12,12 +12,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* margin-top: 20px; */
+  margin-top: 20px;
   border-radius: 1rem;
   background: #000;
   display: flex;
   width: 28rem;
-  height: 520px;
+  height: auto;
   padding: 2.125rem 3.5rem;
   flex-direction: column;
   align-items: center;

@@ -8,16 +8,15 @@
   .signup-modal-content {
     position: absolute;
     top: 10px;
-    bottom: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    /* margin-top: 20px; */
+    margin-top: 20px;
     border-radius: 1rem;
     background: #000;
     width: 28rem;
-    height: 580px;
+    height: auto;
     padding: 2.125rem 3.5rem;
     gap: 3rem;
     flex-shrink: 0;
