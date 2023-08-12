@@ -5,6 +5,7 @@ import HostBtnSvg from '../../utils/svg/HostBtnSvg'
 import KeyboadSvg from '../../utils/svg/KeyboadSvg'
 import GoogleIconSvg from '../../utils/svg/GoogleIconSvg'
 import { useNavigate } from 'react-router-dom'
+import LoadingScreen from '../../utils/loading/LoadingScreen'
 
 const HorizontalDivider = () => {
   return (
@@ -15,7 +16,7 @@ const HorizontalDivider = () => {
 };
 
 
-const Signup = () => {
+const Signup = ({setLoading,loading}) => {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
     username: '',
@@ -35,6 +36,7 @@ const Signup = () => {
     // e.preventDefault();
 
     try {
+      setLoading(true)
       const response = await fetch(`${process.env.REACT_APP_SOCKET}/auth/signup`, {
         method: 'POST',
         headers: {
@@ -53,14 +55,21 @@ const Signup = () => {
         // Handle error, e.g., show an error message
         alert(body.error);
       }
+      setLoading(false)
     } catch (error) {
       alert('error')
       console.error('An error occurred', error);
+      setLoading(false)
     }
   };
 
 
   return (
+    <>
+    {loading? (
+      <LoadingScreen/>
+    ):
+    (
     <div className='signup-modal-parent'>
       <div className="signup-modal-content">
         <div className="signup-modal-heading">
@@ -94,6 +103,10 @@ const Signup = () => {
         </div>
       </div>
     </div>
+    )
+    }
+    </>
+
   )
 }
 

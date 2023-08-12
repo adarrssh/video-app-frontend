@@ -14,17 +14,39 @@ import Signup from './view/Signup';
 import Tutorial from './view/Tutorial'
 import "./App.css"
 import Profile from './view/Profile/Profile';
+import fetchUserProfileImage from './services/fetchProfileImage';
+import LoadingScreen from './utils/loading/LoadingScreen';
 function App() {
   const [imageSrc, setImageSrc] = useState(null)
   const [loading, setLoading] = useState(false)
 
-
+  useEffect(()=>{
+    if(localStorage.getItem('token')){
+      console.log('in app');
+      const fetchData = async () => {
+        if(!imageSrc){
+          setLoading(true)
+          try {
+            await fetchUserProfileImage(setImageSrc, setLoading);
+          } catch (error) {
+            console.error('Error fetching user profile image', error);
+          }
+          setLoading(false)
+        }
+      };
+      fetchData();
+    }
+  },[])
   return (
     <Router>
-          <div className="nav-div">
-            <Navbar imageSrc={imageSrc} setImageSrc={setImageSrc} />
-          </div>
-          <div className="body-div">
+
+          {
+            loading? (<LoadingScreen/>):( 
+              <>
+              <div className="nav-div">
+              <Navbar imageSrc={imageSrc} setImageSrc={setImageSrc} />
+            </div>
+              <div className="body-div">
             <Routes>
               <Route path="/" element={<Home imageSrc={imageSrc} setImageSrc={setImageSrc} setLoading={setLoading} loading={loading} />} />
               <Route exact path="/stream" element={<Stream />} />
@@ -35,6 +57,10 @@ function App() {
               <Route exact path="/profile" element={< Profile setImageSrc={setImageSrc} />} />
             </Routes>
           </div>
+              </>
+          )
+          }
+        
     </Router>
   );
 }

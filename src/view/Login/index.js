@@ -37,7 +37,7 @@ const Login = ({setLoading,loading}) => {
     // e.preventDefault();
 
     try {
-      setLoading(false)
+      setLoading(true)
       const response = await fetch(`${process.env.REACT_APP_SOCKET}/auth/login`, {
         method: 'POST',
         headers: {
