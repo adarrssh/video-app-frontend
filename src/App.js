@@ -30,8 +30,8 @@ function App() {
               <Route exact path="/stream" element={<Stream />} />
               <Route exact path="/room" element={<UserB />} />
               <Route exact path="/tutorial" element={< Tutorial />} />
-              <Route exact path="/login" element={<Login setLoading={setLoading} />} />
-              <Route exact path="/signup" element={< Signup setLoading={setLoading} />} />
+              <Route exact path="/login" element={<Login setLoading={setLoading}  loading={loading}  />} />
+              <Route exact path="/signup" element={< Signup setLoading={setLoading} loading={loading} />} />
               <Route exact path="/profile" element={< Profile setImageSrc={setImageSrc} />} />
             </Routes>
           </div>
