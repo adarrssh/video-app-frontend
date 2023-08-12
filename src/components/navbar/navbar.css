@@ -18,6 +18,10 @@
   align-items: center;
 }
 
+.profile-info:hover{
+  cursor: pointer;
+}
+
 .profile-info .nav-profile-img{
   width: 40px;
   height: 40px;

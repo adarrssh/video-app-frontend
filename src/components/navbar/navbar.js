@@ -3,11 +3,12 @@ import Button from '../button/button'
 import { navbarData } from '../../utils/data/navbar'
 import './navbar.css'
 import { ReactComponent as MySVG } from '../../utils/img/logo.svg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import NavLogoSvg from '../../utils/svg/NavLogoSvg';
 import axios from 'axios';
 
 const Navbar = () => {
+  const navigate = useNavigate()
   const [imageSrc, setImageSrc] = useState(null)
   const fetchUserDetails = async () => {
     if (localStorage.token) {
@@ -84,7 +85,7 @@ const Navbar = () => {
         )}
 
         {imageSrc ? (
-          <div className='profile-info'>
+          <div className='profile-info' onClick={()=>{navigate('/profile')}}>
              <img className='nav-profile-img' src={imageSrc} alt="Profile" />
           </div>
         ) : (
