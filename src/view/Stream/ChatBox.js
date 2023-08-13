@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import logo from '../../utils/img/logo.png'
 import './ChatBox.css'
+import PinSvg from '../../utils/svg/PinSvg'
 const ChatBox = ({ socket, roomId }) => {
   const [message, setMessage] = useState("")
   const [chatMessage, setChatMessage] = useState([])
@@ -65,6 +66,17 @@ const ChatBox = ({ socket, roomId }) => {
         <div className='chatbox-header'>
           In lounge: no cuties
         </div>
+          <div className='room-id-div'>
+            <div className='room-id'>
+
+            <div >
+            {`room id: ${roomId}`} 
+            </div>
+            <div>
+              <PinSvg/>
+            </div>
+            </div>
+          </div>
         <div className="chatbox-body">
           {chatMessage.map((item, index) =>
             <>
