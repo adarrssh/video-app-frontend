@@ -9,24 +9,24 @@ import LoadingScreen from '../../utils/loading/LoadingScreen'
 
 const Index = ({imageSrc,setImageSrc,setLoading,loading}) => {
   
-  useEffect(()=>{
-    console.log('useEffect');
+  // useEffect(()=>{
+  //   console.log('useEffect');
   
-  const fetchData = async () => {
-    if(!imageSrc){
+  // const fetchData = async () => {
+  //   if(!imageSrc){
 
-      setLoading(true)
-      try {
-        await fetchUserProfileImage(setImageSrc, setLoading);
-      } catch (error) {
-        console.error('Error fetching user profile image', error);
-      }
-      setLoading(false)
-    }
-  };
+  //     setLoading(true)
+  //     try {
+  //       await fetchUserProfileImage(setImageSrc, setLoading);
+  //     } catch (error) {
+  //       console.error('Error fetching user profile image', error);
+  //     }
+  //     setLoading(false)
+  //   }
+  // };
   
-  fetchData();
-  },[])
+  // fetchData();
+  // },[])
 
 
   return (

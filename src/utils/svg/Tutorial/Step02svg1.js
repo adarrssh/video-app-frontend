@@ -2,8 +2,8 @@ import React from 'react'
 
 const Step02svg1 = () => {
     return (
-        <svg width="350" height="278" viewBox="0 0 456 278" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXink="http://www.w3.org/1999/xlink">
-            <rect x="8" y="7.5" width="440" height="263" rx="8.5" fill="url(#pattern2)" stroke="#0F0F0F" stroke-width="15" />
+        <svg width="350" height="278" viewBox="0 0 456 278" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsxink="http://www.w3.org/1999/xlink">
+            <rect x="8" y="7.5" width="440" height="263" rx="8.5" fill="url(#pattern2)" stroke="#0F0F0F" strokeWidth="15" />
             <defs>
                 <pattern id="pattern2" patternContentUnits="objectBoundingBox" width="1" height="1">
                     <use xlinkHref="#image0_349_457" transform="matrix(0.000651042 0 0 0.00106555 0 -0.000810289)" />

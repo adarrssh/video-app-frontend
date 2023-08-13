@@ -19,6 +19,7 @@ function App() {
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
+      console.log('app useEffect');
       const fetchData = async () => {
         if (!imageSrc) {
           setLoading(true);
