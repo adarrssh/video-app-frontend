@@ -5,14 +5,22 @@ import Button from '../../components/button/button'
 import { io } from 'socket.io-client';
 import Modal from './Modal';
 import UserB from '../JoinRoom/JoinRoom';
+import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
+    const navigate = useNavigate()
     const [room, setRoom] = useState(false)
     const [isHost, setIsHost] = useState(false)
     const [roomId, setRoomId] = useState('');
 
     const socket = useRef(null);
     // console.log(socket);
+
+    useEffect(()=>{
+        if(!localStorage.getItem('token')){
+            navigate('/login')
+        }
+    })
     useEffect(() => {
         // Socket event listeners
         const handleConnect = () => {
