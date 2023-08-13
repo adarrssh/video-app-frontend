@@ -104,6 +104,12 @@
     left: 350px;
 }
 
+.user-profile-pic{
+  border-radius: 50%;
+  width: 124px;
+  height: 124px;
+}
+
 .log-out-div{
   display: flex;
   justify-content: flex-end;

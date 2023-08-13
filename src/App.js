@@ -63,7 +63,7 @@ function App() {
                   <Route path="/tutorial" element={<Tutorial />} />
                   <Route path="/login" element={<Login setLoading={setLoading} loading={loading} setAccessToken={setAccessToken} />} />
                   <Route path="/signup" element={<Signup setLoading={setLoading} loading={loading} />} />
-                  <Route path="/profile" element={<Profile setImageSrc={setImageSrc} userData={userData} setUserData={userData} />} />
+                  <Route path="/profile" element={<Profile setImageSrc={setImageSrc} imageSrc={imageSrc} userData={userData} setUserData={userData} />} />
                 </Routes>
               </Suspense>
             </div>

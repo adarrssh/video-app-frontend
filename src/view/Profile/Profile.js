@@ -4,7 +4,7 @@ import ProfileBgSvg from '../../utils/svg/ProfileBgSvg'
 import DefaultProfileSvg from '../../utils/svg/DefaultProfileSvg'
 import Button from '../../components/button/button'
 import { useNavigate } from 'react-router-dom'
-const Profile = ({setImageSrc,userData}) => {
+const Profile = ({setImageSrc,imageSrc,userData}) => {
     const navigate = useNavigate()
     const logout = () =>{
         localStorage.clear('token')
@@ -52,7 +52,8 @@ const Profile = ({setImageSrc,userData}) => {
                     </div>
                 </div>
                 <div className="profile-pic">
-                    <DefaultProfileSvg/>
+                    {imageSrc?<img className='user-profile-pic' src={imageSrc}/>:   <DefaultProfileSvg/>}   
+
                 </div>
             </div>
         </main>
