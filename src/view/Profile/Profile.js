@@ -4,7 +4,7 @@ import ProfileBgSvg from '../../utils/svg/ProfileBgSvg'
 import DefaultProfileSvg from '../../utils/svg/DefaultProfileSvg'
 import Button from '../../components/button/button'
 import { useNavigate } from 'react-router-dom'
-const Profile = ({setImageSrc}) => {
+const Profile = ({setImageSrc,userData}) => {
     const navigate = useNavigate()
     const logout = () =>{
         localStorage.clear('token')
@@ -27,7 +27,7 @@ const Profile = ({setImageSrc}) => {
                                 Username
                             </div>
                             <div className="username-inp m-t-10">
-                                <input className='input-css w-100' type="text" placeholder='Swarna' />
+                                <input className='input-css w-100' type="text" value={userData.username} />
                             </div>
                         </div>
                         <div className="m-t-30 w-80">
@@ -35,7 +35,7 @@ const Profile = ({setImageSrc}) => {
                                 Email address
                             </div>
                             <div className="email-inp m-t-10">
-                                <input className='input-css  w-100' type="text" placeholder='adarsh00502@gmail.com' />
+                                <input className='input-css  w-100' type="text"  value={userData.email}/>
                             </div>
                         </div>
                         <div className="m-t-30 w-80">
@@ -43,7 +43,7 @@ const Profile = ({setImageSrc}) => {
                                 password
                             </div>
                             <div className="m-t-10">
-                                <input className='input-css  w-100' type="text" placeholder='******************' />
+                                <input className='input-css  w-100' type="text"  value={userData.password} />
                             </div>
                         </div>
                         <div className='m-t-30 w-80 log-out-div'>

@@ -7,31 +7,8 @@ import NavLogoSvg from '../../utils/svg/NavLogoSvg';
 
 const Navbar = ({imageSrc}) => {
   const navigate = useNavigate()
-  const fetchUserDetails = async () => {
-    if (localStorage.token) {
-      try {
-        const response = await fetch(`${process.env.REACT_APP_SOCKET}/user/`, {
-          method: 'GET',
-          headers: {
-            'Authorization': localStorage.getItem('token'),
-            'Content-Type': 'application/json'
-          }
-        });
-        let body = await response.json()
-        console.log(response);
-        console.log(body);
+  
 
-      } catch (error) {
-        alert('error')
-        console.error('An error occurred fetchUserDetails', error);
-      }
-    }
-  }
-
-
-  useEffect(() => {
-    // fetchUserDetails()
-  }, [])
   return (
     <nav className='nav'>
       .      <Link to={"/"} className='remove-hover-text-underline'>

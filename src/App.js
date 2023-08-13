@@ -4,6 +4,7 @@ import LoadingScreen from './utils/loading/LoadingScreen';
 import Navbar from './components/navbar/navbar';
 import fetchUserProfileImage from './services/fetchProfileImage';
 import './App.css';
+import fetchUserDetails from './services/fetchUserDetails';
 
 const Home = lazy(() => import('./view/Home'));
 const Stream = lazy(() => import('./view/Stream/Index'));
@@ -14,26 +15,36 @@ const Tutorial = lazy(() => import('./view/Tutorial'));
 const Profile = lazy(() => import('./view/Profile/Profile'));
 
 function App() {
+  const [accessToken, setAccessToken] = useState(null)
   const [imageSrc, setImageSrc] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  const [userData, setUserData] = useState({
+    username: '',
+    email: '',
+    password: ''
+  });
+
+
   useEffect(() => {
+    console.log('App useEffect');
     if (localStorage.getItem('token')) {
-      console.log('app useEffect');
       const fetchData = async () => {
         if (!imageSrc) {
-          setLoading(true);
+          setLoading(true)
           try {
             await fetchUserProfileImage(setImageSrc, setLoading);
+            await fetchUserDetails(setUserData,setLoading)
+            setLoading(false)
           } catch (error) {
             console.error('Error fetching user profile image', error);
+            setLoading(false)
           }
-          setLoading(false);
         }
       };
       fetchData();
     }
-  }, []);
+  }, [accessToken]);
 
   return (
     <Router>
@@ -50,9 +61,9 @@ function App() {
                   <Route path="/stream" element={<Stream />} />
                   <Route path="/room" element={<UserB />} />
                   <Route path="/tutorial" element={<Tutorial />} />
-                  <Route path="/login" element={<Login setLoading={setLoading} loading={loading} />} />
+                  <Route path="/login" element={<Login setLoading={setLoading} loading={loading} setAccessToken={setAccessToken} />} />
                   <Route path="/signup" element={<Signup setLoading={setLoading} loading={loading} />} />
-                  <Route path="/profile" element={<Profile setImageSrc={setImageSrc} />} />
+                  <Route path="/profile" element={<Profile setImageSrc={setImageSrc} userData={userData} setUserData={userData} />} />
                 </Routes>
               </Suspense>
             </div>

@@ -2,6 +2,7 @@ import axios from "axios";
 
 
 const fetchUserProfileImage = async (setImageSrc,setLoading) => {
+
     if (localStorage.token) {
       try {
         const response = await axios(`${process.env.REACT_APP_SOCKET}/user/download/image`, {
@@ -12,8 +13,6 @@ const fetchUserProfileImage = async (setImageSrc,setLoading) => {
         });
       
         if (response.status === 200) {
-          // Handle success, e.g., show a success message
-          console.log(typeof response.status);
           const imageBlob = new Blob([response.data], { type: 'image/jpeg' }); // Change the type if needed
           const imageUrl = URL.createObjectURL(imageBlob);
           setImageSrc(imageUrl);
