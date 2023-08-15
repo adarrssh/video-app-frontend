@@ -6,7 +6,10 @@ import Button from '../../components/button/button'
 import { useNavigate } from 'react-router-dom'
 import updateUserDetails from '../../services/updateUserDetails'
 import PencilSvg from '../../utils/svg/PencilSvg'
+import axios from 'axios'
 const Profile = ({setImageSrc,imageSrc,userData,setUserData,setLoading}) => {
+
+    const fileInputRef = React.createRef();
 
     const navigate = useNavigate()
 
@@ -21,7 +24,6 @@ const Profile = ({setImageSrc,imageSrc,userData,setUserData,setLoading}) => {
     const [updateUserData, setUpdateUserData] = useState(initialUserData);
     const [editableField, setEditableField] = useState(null);
     const [updatedData, setUpdatedData] = useState(initialUserData);
-    const [isDataChanged, setIsDataChanged] = useState(false);
 
     const logout = () =>{
         localStorage.clear('token')
@@ -83,13 +85,47 @@ const Profile = ({setImageSrc,imageSrc,userData,setUserData,setLoading}) => {
         return true;
       }
 
+      const handleFileChange = (event) => {
+        const file = event.target.files[0]
+
+        if(file){
+            handleUpload(file)
+        }
+
+      };
+
   const shouldShowButton = areObjectsEqual(userData, updateUserData);
+
+  const handleUpload = async (file) => {
+    const formData = new FormData();
+    formData.append('avatar', file);
+
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_SOCKET}/user/upload/image`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization':  localStorage.getItem('token')
+        },
+      });
+      console.log(response);
+    } catch (error) {
+      console.error('Error uploading image:', error);
+    }
+  };
+
 
     return (
         <main className='profile-main'>
             <div className="profile-content">
                 <div className="left-profile">
                     <ProfileBgSvg/>
+                </div>
+                <div className="profile-pic">
+                    <input type="file" ref={fileInputRef} className='input-profile-img' onChange={handleFileChange} accept="image/*" />
+                    <div className='edit-profil-pic-icon' onClick={()=>{fileInputRef.current.click()}}>
+                        <PencilSvg/>
+                    </div>
+                    {imageSrc?<img className='user-profile-pic' src={imageSrc}/>:   <DefaultProfileSvg/>}   
                 </div>
                 <div className="right-profile">
                     <div className="profile-details">
@@ -112,7 +148,7 @@ const Profile = ({setImageSrc,imageSrc,userData,setUserData,setLoading}) => {
                                     ):
                                     ( 
                                         <>
-                                        <input className='input-css w-100' type="text" value={updateUserData.username} name='username' />
+                                        <input className='input-css w-100' type="text" value={updateUserData.username} name='username' readOnly/>
                                         <div className="user-data-edit-icon"  onClick={()=>{handleEditClick('username')}} >
                                             <PencilSvg />
                                         </div>
@@ -139,7 +175,7 @@ const Profile = ({setImageSrc,imageSrc,userData,setUserData,setLoading}) => {
                                     ):
                                     ( 
                                         <>
-                                        <input className='input-css  w-100' type="text"  value={updateUserData.email} name='email' />
+                                        <input className='input-css  w-100' type="text"  value={updateUserData.email} name='email' readOnly />
                                         <div className="user-data-edit-icon" onClick={()=>{handleEditClick('email')}}>
                                         <PencilSvg />
                                         </div>
@@ -165,7 +201,7 @@ const Profile = ({setImageSrc,imageSrc,userData,setUserData,setLoading}) => {
                                     ):
                                     ( 
                                         <>
-                                        <input className='input-css  w-100' type="password"   value={updateUserData.password} name='password'   onChange={(e)=>{handleInputChange(e,'password')}} />
+                                        <input className='input-css  w-100' type="password"   value={updateUserData.password} name='password'   onChange={(e)=>{handleInputChange(e,'password')}} readOnly />
                                         <div className="user-data-edit-icon" onClick={()=>{handleEditClick('password')}}>
                                         <PencilSvg />
                                         </div>
@@ -182,9 +218,7 @@ const Profile = ({setImageSrc,imageSrc,userData,setUserData,setLoading}) => {
                         </div>
                     </div>
                 </div>
-                <div className="profile-pic">
-                    {imageSrc?<img className='user-profile-pic' src={imageSrc}/>:   <DefaultProfileSvg/>}   
-                </div>
+
             </div>
         </main>
     )
