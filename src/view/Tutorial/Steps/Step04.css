@@ -10,13 +10,8 @@
     flex: 1;
     display: flex;
     justify-content: flex-start;
-    /* background-color: aqua; */
   }
   
-  /* .step-02 .step-02-svg-div {
-    position: relative;
-  } */
-
 
   .step-02 .right-02 {
     display: flex;
@@ -28,7 +23,6 @@
     flex-direction: column;
     text-align: right;
     justify-content: center;
-    /* background-color: aqua; */
   }
   
   .right-02-text h4 {

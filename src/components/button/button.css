@@ -5,15 +5,19 @@
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
-    border-radius: 0.625rem;
+    border-radius: 8px;
     height: 30px;
     font-size: 13px;
-    color: #333333;
+}
+
+button:focus{
+    outline: none;
 }
 
 .btn:hover{
     text-decoration: none;
 }
+
 
 .svg-icon{
 padding-right: 8px;

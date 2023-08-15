@@ -1,40 +1,77 @@
-import React from 'react';
-import {
-    Route,
-    BrowserRouter as Router,
-    Routes
-} from "react-router-dom";
-import Home from './view/Home'
-// import Stream from './view/Stream/Stream';
-import Stream from './view/Stream/Index';
-import UserB from './view/JoinRoom/index';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import LoadingScreen from './utils/loading/LoadingScreen';
 import Navbar from './components/navbar/navbar';
-import Login from './view/Login';
-import Signup from './view/Signup';
-import Tutorial from './view/Tutorial'
-import "./App.css"
-import Profile from './view/Profile/Profile';
+import fetchUserProfileImage from './services/fetchProfileImage';
+import './App.css';
+import fetchUserDetails from './services/fetchUserDetails';
+
+const Home = lazy(() => import('./view/Home'));
+const Stream = lazy(() => import('./view/Stream/Index'));
+const UserB = lazy(() => import('./view/JoinRoom/index'));
+const Login = lazy(() => import('./view/Login'));
+const Signup = lazy(() => import('./view/Signup'));
+const Tutorial = lazy(() => import('./view/Tutorial'));
+const Profile = lazy(() => import('./view/Profile/Profile'));
+
 function App() {
-    return (
-      <Router>
+  const [accessToken, setAccessToken] = useState(null)
+  const [imageSrc, setImageSrc] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const [userData, setUserData] = useState({
+    username: '',
+    email: '',
+    password: ''
+  });
+
+
+  useEffect(() => {
+    console.log('App useEffect');
+    if (localStorage.getItem('token')) {
+      const fetchData = async () => {
+        if (!imageSrc) {
+          setLoading(true)
+          try {
+            await fetchUserProfileImage(setImageSrc, setLoading);
+            await fetchUserDetails(setUserData,setLoading)
+            setLoading(false)
+          } catch (error) {
+            console.error('Error fetching user profile image', error);
+            setLoading(false)
+          }
+        }
+      };
+      fetchData();
+    }
+  }, [accessToken]);
+
+  return (
+    <Router>
+      {
+        loading ? (<LoadingScreen />) : (
+          <>
             <div className="nav-div">
-              <Navbar />
+              <Navbar imageSrc={imageSrc} setImageSrc={setImageSrc} />
             </div>
             <div className="body-div">
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route exact path="/stream" element={<Stream />} />
-                <Route exact path="/room" element={<UserB />} />
-                <Route exact path="/tutorial" element={< Tutorial/>} />
-                <Route exact path="/login" element={<Login/>} />
-                <Route exact path="/signup" element={< Signup/>} />
-                <Route exact path="/profile" element={< Profile/>} />
-              </Routes>
+              <Suspense fallback={<LoadingScreen />}>
+                <Routes>
+                  <Route path="/" element={<Home imageSrc={imageSrc} setImageSrc={setImageSrc} setLoading={setLoading} loading={loading} />} />
+                  <Route path="/stream" element={<Stream />} />
+                  <Route path="/room" element={<UserB />} />
+                  <Route path="/tutorial" element={<Tutorial />} />
+                  <Route path="/login" element={<Login setLoading={setLoading} loading={loading} setAccessToken={setAccessToken} />} />
+                  <Route path="/signup" element={<Signup setLoading={setLoading} loading={loading} />} />
+                  <Route path="/profile" element={<Profile setImageSrc={setImageSrc} imageSrc={imageSrc} userData={userData} setUserData={setUserData} setLoading={setLoading}/>} />
+                </Routes>
+              </Suspense>
             </div>
-      </Router>
-    );
-  }
-  
-  
+          </>
+        )
+      }
+    </Router>
+  );
+}
 
 export default App;

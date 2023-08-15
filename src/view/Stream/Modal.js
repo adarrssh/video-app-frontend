@@ -12,7 +12,7 @@ const HorizontalDivider = () => {
     );
 };
 
-const Modal = ({ handleCreateRoom }) => {
+const Modal = ({ handleCreateRoom, handleJoinRoom, setRoomId }) => {
 
     const [inputValue, setInputValue] = useState('');
     const [showButton, setShowButton] = useState(false);
@@ -20,15 +20,16 @@ const Modal = ({ handleCreateRoom }) => {
     const handleInputChange = (event) => {
         const value = event.target.value;
         setInputValue(value);
-
+        setRoomId(value)
+        console.log(value);
         // Show the button if the input has some value
         setShowButton(value.trim() !== '');
     };
 
-    const handleInputFocus = () => {
-        // Show the button when the input receives focus
-        setShowButton(true);
-    };
+    // const handleInputFocus = () => {
+    //     // Show the button when the input receives focus
+    //     setShowButton(true);
+    // };
 
     return (
         <div className='stram-modal-parent'>
@@ -58,7 +59,7 @@ const Modal = ({ handleCreateRoom }) => {
                         </div>
                     </div>
                     <div className={showButton ? 'w-40 center-element' : 'hide-btn'}>
-                        {showButton && <Button className={'join-room-btn'} text={'Join'}/>}
+                        {showButton && <Button className={'join-room-btn'} text={'Join'} onClick={handleJoinRoom}/>}
                     </div>
                 </div>
                 <div className='descp2'>

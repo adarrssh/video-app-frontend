@@ -4,13 +4,23 @@ import Stream from './Stream'
 import Button from '../../components/button/button'
 import { io } from 'socket.io-client';
 import Modal from './Modal';
+import UserB from '../JoinRoom/JoinRoom';
+import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
+    const navigate = useNavigate()
     const [room, setRoom] = useState(false)
+    const [isHost, setIsHost] = useState(false)
     const [roomId, setRoomId] = useState('');
 
     const socket = useRef(null);
     // console.log(socket);
+
+    useEffect(()=>{
+        if(!localStorage.getItem('token')){
+            navigate('/login')
+        }
+    })
     useEffect(() => {
         // Socket event listeners
         const handleConnect = () => {
@@ -45,17 +55,28 @@ const Index = () => {
 
     const handleCreateRoom = () => {
         setRoom(true)
+        setIsHost(true)
         socket.current.emit('createRoom');
+    };
+
+    const handleJoinRoom = () => {
+        setRoom(true)
+        console.log(roomId);
+        socket.current.emit('joinRoom', roomId);
     };
 
     return (
         <>
             {
                 !room ?
-                <Modal handleCreateRoom={handleCreateRoom}/>
-                //  <Button className="create-room-btn" onClick={handleCreateRoom} text={"Create Room"} />
+                (
 
-                    : <Stream socket={socket} roomId={roomId} />
+                    <Modal handleCreateRoom={handleCreateRoom} handleJoinRoom={handleJoinRoom} setRoomId={setRoomId}/>
+                    )
+
+                    : 
+                    
+                    ( isHost? <Stream socket={socket} roomId={roomId}/>: <UserB socket={socket} roomId={roomId}/>) 
             }
         </>
     )

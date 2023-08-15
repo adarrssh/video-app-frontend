@@ -3,7 +3,7 @@ import React from 'react'
 const Step02svg2 = () => {
     return (
         <svg width="350" height="282" viewBox="0 0 432 282" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-            <rect x="3.5" y="3" width="425" height="276" rx="5" fill="url(#pattern24)" stroke="#0F0F0F" stroke-width="6" />
+            <rect x="3.5" y="3" width="425" height="276" rx="5" fill="url(#pattern24)" stroke="#0F0F0F" strokeWidth="6" />
             <defs>
                 <pattern id="pattern24" patternContentUnits="objectBoundingBox" width="1" height="1">
                     <use xlinkHref="#image0_349_458" transform="matrix(0.00125155 0 0 0.00179688 0 -0.0530766)" />

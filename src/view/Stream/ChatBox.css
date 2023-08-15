@@ -31,6 +31,24 @@
     overflow-y: auto;
   }
   
+  .room-id-div{
+    width: 100%;
+    padding: 8px;
+  }
+  .room-id{
+    /* top: 0; */
+    padding: 8px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    background-color: #222;
+   
+    border-radius: 0rem 0.625rem 0.625rem 0.625rem;
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
   
   .stream-chat-box .chatbox-msg {
     height: 10vh;
@@ -78,6 +96,7 @@
   
   .chatbox-body .chat-msg-right .chat-msg{
       margin-top: 1.2rem;
+      margin-bottom: 1.2rem;
       color: #fff;
       font-size: 0.8rem;
       background-color: #222;

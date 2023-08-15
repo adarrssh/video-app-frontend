@@ -42,7 +42,7 @@
 }
 
 .m-t-20 {
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .m-t-30 {
@@ -102,4 +102,54 @@
     position: absolute;
     top: 150px;
     left: 350px;
+}
+
+.user-profile-pic{
+  border-radius: 50%;
+  width: 124px;
+  height: 124px;
+}
+
+.log-out-div{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.log-out{
+  border-radius: 8px;
+background: #AA0E0E;
+color: #fff;
+display: inline-flex;
+padding: 16px;
+justify-content: center;
+align-items: center;
+gap: 8px;
+}
+
+.log-out:hover{
+  color: #fff;
+  cursor: pointer;
+}
+
+.log-out:focus{
+  outline: none;
+}
+
+.relative-ps{
+  position: relative;
+}
+
+.user-data-edit-icon{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+.user-data-edit-icon:hover{
+  background: #000;
+  color: #fff;
+  cursor: pointer;
 }

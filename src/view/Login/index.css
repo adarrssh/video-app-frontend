@@ -8,15 +8,16 @@
 .login-modal-content {
   position: absolute;
   top: 10px;
+  bottom: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
+  /* margin-top: 20px; */
   border-radius: 1rem;
   background: #000;
   display: flex;
   width: 28rem;
-  height: auto;
+  height: 520px;
   padding: 2.125rem 3.5rem;
   flex-direction: column;
   align-items: center;
@@ -36,7 +37,6 @@
 
 .input-email-div {
   position: relative;
-  /* background-color: #039ee1; */
 }
 
 .inp-email-placeholder {
@@ -59,7 +59,6 @@
 
 .input-pwd-div {
   position: relative;
-  /* background-color: #039ee1; */
 }
 
 
@@ -95,10 +94,12 @@
 .pwd-inp-margin {
   margin-top: -10px;
 }
+
 .input-el:focus {
   outline: none;
 }
-.login-div-btn {
+
+.login-div .login-div-btn {
   margin-top: -40px;
   color: #fff;
   padding: 0.5rem 1.5rem;
@@ -114,19 +115,22 @@
   );
 }
 
-.fg-pwd {
+.fg-pwd-div {
   margin-top: -30px;
   color: rgba(255, 255, 255, 0.7);
   text-align: center;
   font-size: 0.875rem;
   font-style: normal;
-  /* font-weight: 600; */
   line-height: normal;
+  text-decoration: underline;
+}
+
+.fg-pwd-div:hover{
+  cursor: pointer;
 }
 
 .btn-partition {
   margin-top: -30px;
-  /* background-color: #039ee1; */
   position: relative;
   display: flex;
   flex-direction: row;
@@ -159,6 +163,10 @@
   line-height: normal;
 }
 
+.google-btn:hover{
+  color: #fff;
+}
+
 .stream-invite-link {
   display: flex;
   flex-direction: row;
@@ -188,6 +196,16 @@
   font-weight: 400;
   line-height: normal;
   margin-top: -20px;
+}
+
+.sign-up-text .signup-span-el{
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.sign-up-text  .login-span-el{
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .center-element {

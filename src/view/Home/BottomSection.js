@@ -10,7 +10,7 @@ const BottomSection = () => {
       </div>
       <div className='features'>
         {
-          boxData.map((data)=> <Box data={data}/>)
+          boxData.map((data,key)=> <Box data={data} key={key}/>)
         }
       </div>
     </main>
