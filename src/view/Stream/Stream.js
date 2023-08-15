@@ -75,10 +75,7 @@ function Stream({socket,roomId}) {
   };
 
   const leaveRoom = () => {
-    // Disconnect from server
     socket.current.disconnect();
-
-    // Navigate to home page or desired route
     navigate('/');
   };
 

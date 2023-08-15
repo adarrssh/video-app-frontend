@@ -1,16 +1,90 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
 import './Profile.css'
 import ProfileBgSvg from '../../utils/svg/ProfileBgSvg'
 import DefaultProfileSvg from '../../utils/svg/DefaultProfileSvg'
 import Button from '../../components/button/button'
 import { useNavigate } from 'react-router-dom'
-const Profile = ({setImageSrc,imageSrc,userData}) => {
+import updateUserDetails from '../../services/updateUserDetails'
+import PencilSvg from '../../utils/svg/PencilSvg'
+const Profile = ({setImageSrc,imageSrc,userData,setUserData,setLoading}) => {
+
     const navigate = useNavigate()
+
+    const initialUserData = {
+        username: userData.username,
+        email: userData.email,
+        password: userData.password
+    }
+
+    console.log(initialUserData);
+
+    const [updateUserData, setUpdateUserData] = useState(initialUserData);
+    const [editableField, setEditableField] = useState(null);
+    const [updatedData, setUpdatedData] = useState(initialUserData);
+    const [isDataChanged, setIsDataChanged] = useState(false);
+
     const logout = () =>{
         localStorage.clear('token')
         setImageSrc(null)
         navigate('/')
     }
+
+    const handleInputChange = (event, fieldName) => {
+        const {name,value} = event.target
+        console.log(name,value);
+        setUpdateUserData((prevData)=>(
+            {
+                ...prevData,
+                [name]:value
+            }
+        ))
+      };
+
+    const resetUserData = (name)=>{
+        console.log(userData);
+        setEditableField(null)
+        setUpdateUserData((prevData)=>(
+            {
+                ...prevData,
+                [name]: userData[name]
+            }
+        ))
+    }  
+
+      const handleEditClick = (fieldName) => {
+        console.log(fieldName);
+        setEditableField(fieldName);
+        if(fieldName === 'password'){
+            setUpdateUserData((prevData)=>(
+                {
+                    ...prevData,
+                    password: ''
+                }
+            ))
+        }else{
+            setUpdatedData(userData); // Reset updated data to current data
+        }
+      };
+
+      function areObjectsEqual(obj1, obj2) {
+        const keys1 = Object.keys(obj1);
+        const keys2 = Object.keys(obj2);
+      
+        if (keys1.length !== keys2.length) {
+          return false;
+        }
+      
+        for (const key of keys1) {
+          if (obj1[key] !== obj2[key]) {
+            return false;
+          }
+        }
+      
+        return true;
+      }
+
+  const shouldShowButton = areObjectsEqual(userData, updateUserData);
+
     return (
         <main className='profile-main'>
             <div className="profile-content">
@@ -26,34 +100,90 @@ const Profile = ({setImageSrc,imageSrc,userData}) => {
                             <div className="username-text input-heading">
                                 Username
                             </div>
-                            <div className="username-inp m-t-10">
-                                <input className='input-css w-100' type="text" value={userData.username} />
+                            <div className="relative-ps m-t-10">
+                                {
+                                    editableField === 'username'?  (
+                                        <>
+                                        <input className='input-css w-100' type="text" value={updateUserData.username} name='username' onChange={(e)=>{handleInputChange(e,'username')}}  />
+                                        <div className='user-data-edit-icon' onClick={()=>{resetUserData('username')}}>
+                                            X
+                                        </div>
+                                        </>
+                                    ):
+                                    ( 
+                                        <>
+                                        <input className='input-css w-100' type="text" value={updateUserData.username} name='username' />
+                                        <div className="user-data-edit-icon"  onClick={()=>{handleEditClick('username')}} >
+                                            <PencilSvg />
+                                        </div>
+                                        </>
+                                    )
+
+                                }
+                               
                             </div>
                         </div>
                         <div className="m-t-30 w-80">
                             <div className="email-text input-heading">
                                 Email address
                             </div>
-                            <div className="email-inp m-t-10">
-                                <input className='input-css  w-100' type="text"  value={userData.email}/>
+                            <div className="relative-ps  m-t-10">
+                                {
+                                    editableField === 'email' ?  (
+                                        <>
+                                        <input className='input-css  w-100' type="text"  value={updateUserData.email} name='email'  onChange={(e)=>{handleInputChange(e,'username')}} />
+                                        <div className='user-data-edit-icon'  onClick={()=>{resetUserData('email')}}>
+                                            X
+                                        </div>
+                                        </>
+                                    ):
+                                    ( 
+                                        <>
+                                        <input className='input-css  w-100' type="text"  value={updateUserData.email} name='email' />
+                                        <div className="user-data-edit-icon" onClick={()=>{handleEditClick('email')}}>
+                                        <PencilSvg />
+                                        </div>
+                                        </>
+                                    )
+
+                                }
                             </div>
                         </div>
-                        <div className="m-t-30 w-80">
+                        <div className=" m-t-30 w-80">
                             <div className="passwoed-text input-heading">
                                 password
                             </div>
-                            <div className="m-t-10">
-                                <input className='input-css  w-100' type="text"  value={userData.password} />
+                            <div className="relative-ps m-t-10">
+                                {
+                                    editableField === 'password'?  (
+                                        <>
+                                        <input className='input-css  w-100' type="password"   value={updateUserData.password} name='password'   onChange={(e)=>{handleInputChange(e,'password')}} />
+                                        <div className='user-data-edit-icon'  onClick={()=>{resetUserData('password')}}>
+                                            X
+                                        </div>
+                                        </>
+                                    ):
+                                    ( 
+                                        <>
+                                        <input className='input-css  w-100' type="password"   value={updateUserData.password} name='password'   onChange={(e)=>{handleInputChange(e,'password')}} />
+                                        <div className="user-data-edit-icon" onClick={()=>{handleEditClick('password')}}>
+                                        <PencilSvg />
+                                        </div>
+                                        </>
+                                    )
+
+                                }
                             </div>
                         </div>
                         <div className='m-t-30 w-80 log-out-div'>
-                            <Button className={'log-out'} text={'log out'} onClick={logout}/>
+                            {
+                                !shouldShowButton ?    <Button className={'log-out'} text={'update'} onClick={()=>updateUserDetails(setUserData,updateUserData,setLoading)}/> :                             <Button className={'log-out'} text={'log out'} onClick={logout}/>
+                            }
                         </div>
                     </div>
                 </div>
                 <div className="profile-pic">
                     {imageSrc?<img className='user-profile-pic' src={imageSrc}/>:   <DefaultProfileSvg/>}   
-
                 </div>
             </div>
         </main>
