@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import logo from '../../utils/img/logo.png'
 import './ChatBox.css'
 import PinSvg from '../../utils/svg/PinSvg'
 const ChatBox = ({ socket, roomId }) => {
   const [message, setMessage] = useState("")
   const [chatMessage, setChatMessage] = useState([])
+  const messageEl = useRef(null)
 
   const sendMessage = (event) => {
     if (event.key === 'Enter') {
@@ -19,6 +20,15 @@ const ChatBox = ({ socket, roomId }) => {
       setMessage('');
     }
   };
+
+  useEffect(()=>{
+    if(messageEl){
+      messageEl.current.addEventListener('DOMNodeInserted', event => {
+        const {currentTarget: target} = event
+        target.scroll({top:target.scrollHeight})
+      })
+    }
+  },[])
   
   useEffect(()=>{
 
@@ -77,7 +87,7 @@ const ChatBox = ({ socket, roomId }) => {
             </div>
             </div>
           </div>
-        <div className="chatbox-body">
+        <div className="chatbox-body" ref={messageEl}>
           {chatMessage.map((item, index) =>
             <>
               <AppendMessage key={index.toString()} item={item} />
