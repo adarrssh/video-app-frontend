@@ -5,7 +5,7 @@ import HostBtnSvg from '../../utils/svg/HostBtnSvg'
 import KeyboadSvg from '../../utils/svg/KeyboadSvg'
 import GoogleIconSvg from '../../utils/svg/GoogleIconSvg'
 import { useNavigate } from 'react-router-dom'
-import LoadingScreen from '../../utils/loading/LoadingScreen'
+import Loading from '../../components/Loading/Loading'
 
 const HorizontalDivider = () => {
   return (
@@ -71,7 +71,7 @@ const Login = ({setLoading,loading,setAccessToken}) => {
     <>
     {
       loading?(
-      <LoadingScreen/>
+      <Loading/>
       ):(    
       <div className='login-modal-parent'>
       <div className="login-modal-content">

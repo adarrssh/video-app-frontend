@@ -5,6 +5,7 @@ import Navbar from './components/navbar/navbar';
 import fetchUserProfileImage from './services/fetchProfileImage';
 import './App.css';
 import fetchUserDetails from './services/fetchUserDetails';
+import Loading from './components/Loading/Loading';
 
 const Home = lazy(() => import('./view/Home'));
 const Stream = lazy(() => import('./view/Stream/Index'));
@@ -49,13 +50,13 @@ function App() {
   return (
     <Router>
       {
-        loading ? (<LoadingScreen />) : (
+        loading ? (<Loading />) : (
           <>
             <div className="nav-div">
               <Navbar imageSrc={imageSrc} setImageSrc={setImageSrc} />
             </div>
             <div className="body-div">
-              <Suspense fallback={<LoadingScreen />}>
+              <Suspense fallback={<Loading />}>
                 <Routes>
                   <Route path="/" element={<Home imageSrc={imageSrc} setImageSrc={setImageSrc} setLoading={setLoading} loading={loading} />} />
                   <Route path="/stream" element={<Stream />} />
