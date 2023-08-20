@@ -111,28 +111,3 @@ const ChatBox = ({ socket, roomId }) => {
 }
 
 export default ChatBox
-
-
-
-
-{/* <div className="chat-msg-left">
-<div className='profile-pic'>
-  <img src={logo} alt="profile-pic" />
-</div>
-<div className='chat-msg'>
-  {text}
-</div>
-</div>  */}
-
-
-
-{/* <div className='chat-msg-right'>
-<div className='profile-pic'>
-  <img src={logo} alt="profile-pic" />
-</div>
-<div className='chat-msg'>
-  {text}
-</div>
-</div> */}
-
-

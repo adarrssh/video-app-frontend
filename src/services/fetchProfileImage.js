@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const fetchUserProfileImage = async (setImageSrc,setLoading) => {
+const fetchUserProfileImage = async (alertVisible,setAlertVisible, setImageSrc,setLoading) => {
 
     if (localStorage.token) {
       try {
@@ -11,7 +11,6 @@ const fetchUserProfileImage = async (setImageSrc,setLoading) => {
           },
           responseType: 'arraybuffer'
         });
-      
         if (response.status === 200) {
           const imageBlob = new Blob([response.data], { type: 'image/jpeg' }); // Change the type if needed
           const imageUrl = URL.createObjectURL(imageBlob);
@@ -20,7 +19,11 @@ const fetchUserProfileImage = async (setImageSrc,setLoading) => {
           throw new Error('Error in fetching profile image')
         }
       } catch (error) {
-        alert('error')
+        setAlertVisible({
+          show:true,
+          message:'Error in fetching details',
+          severity:'error'
+        })
         console.error('An error occurred fetchUserProfileImage', error);
       }
     }

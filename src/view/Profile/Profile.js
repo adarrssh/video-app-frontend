@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import updateUserDetails from '../../services/updateUserDetails'
 import PencilSvg from '../../utils/svg/PencilSvg'
 import axios from 'axios'
-const Profile = ({setImageSrc,imageSrc,userData,setUserData,setLoading}) => {
+const Profile = ({  alertVisible, setAlertVisible, setImageSrc,imageSrc,userData,setUserData,setLoading}) => {
 
     const fileInputRef = React.createRef();
 
@@ -213,7 +213,7 @@ const Profile = ({setImageSrc,imageSrc,userData,setUserData,setLoading}) => {
                         </div>
                         <div className='m-t-30 w-80 log-out-div'>
                             {
-                                !shouldShowButton ?    <Button className={'log-out'} text={'update'} onClick={()=>updateUserDetails(setUserData,updateUserData,setLoading)}/> :                             <Button className={'log-out'} text={'log out'} onClick={logout}/>
+                                !shouldShowButton ?    <Button className={'log-out'} text={'update'} onClick={()=>updateUserDetails(alertVisible, setAlertVisible,setUserData,updateUserData,setLoading)}/> :                             <Button className={'log-out'} text={'log out'} onClick={logout}/>
                             }
                         </div>
                     </div>

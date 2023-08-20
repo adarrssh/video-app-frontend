@@ -16,7 +16,7 @@ const HorizontalDivider = () => {
 };
 
 
-const Signup = ({ alertVisible, setAlertVisible ,setLoading,loading}) => {
+const Signup = ({   alertVisible, setAlertVisible ,setLoading,loading}) => {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
     username: '',
@@ -45,24 +45,35 @@ const Signup = ({ alertVisible, setAlertVisible ,setLoading,loading}) => {
         body: JSON.stringify(formData)
       });
       let body = await response.json()
-      console.log(response);
       console.log(body);
       if (response.ok) {
         // Handle success, e.g., show a success message
-        alert(body.message);
         setAlertVisible(true)
         navigate('/login')
+        setAlertVisible({
+          show:true,
+          message:body.message,
+          severity:'success'
+        })
       } else {
         // Handle error, e.g., show an error message
-        alert(body.error);
-        setAlertVisible(true)
+        console.log('here');
+        setAlertVisible({
+          show:true,
+          message:body.error,
+          severity:'error'
+        })
 
       }
       setLoading(false)
     } catch (error) {
-      alert('error')
       console.error('An error occurred', error);
       setLoading(false)
+      setAlertVisible({
+        show:true,
+        message:'Something bad happened',
+        severity:'error'
+      })
     }
   };
 

@@ -55,18 +55,28 @@ const Login = ({alertVisible, setAlertVisible,setLoading,loading,setAccessToken}
         // Handle success, e.g., show a success message
         localStorage.setItem('token',body.token)
         setAccessToken(body.token);
-        alert('success');
-        setAlertVisible(true)
         navigate('/');
+        setAlertVisible({
+          show:true,
+          message:'Success',
+          severity:'success'
+        })
       } else {
         // Handle error, e.g., show an error message
-        alert(body.error);
+         setAlertVisible({
+          show:true,
+          message:body.error,
+          severity:'error'
+        })
       }
       setLoading(false)
     } catch (error) {
-      alert('error')
       console.error('An error occurred', error);
       setLoading(false)
+      setAlertVisible({
+        show:true,
+        message:'Error'
+      })
     }
   };
 

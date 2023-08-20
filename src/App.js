@@ -21,7 +21,11 @@ function App() {
   const [accessToken, setAccessToken] = useState(null);
   const [imageSrc, setImageSrc] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [alertVisible, setAlertVisible] = useState(true);
+  const [alertVisible, setAlertVisible] = useState({
+    show:false,
+    message:'',
+    severity: ''
+  });
 
   const [userData, setUserData] = useState({
     username: "",
@@ -36,8 +40,8 @@ function App() {
         if (!imageSrc) {
           setLoading(true);
           try {
-            await fetchUserProfileImage(setImageSrc, setLoading);
-            await fetchUserDetails(setUserData, setLoading);
+            await fetchUserProfileImage(alertVisible,setAlertVisible,setImageSrc, setLoading);
+            await fetchUserDetails(alertVisible,setAlertVisible,setUserData, setLoading);
             setLoading(false);
           } catch (error) {
             console.error("Error fetching user profile image", error);
@@ -56,7 +60,7 @@ function App() {
       ) : (
         <>
           <div className="nav-div">
-            {alertVisible ? (
+            {alertVisible.show ? (
               <ShowAlert
                 alertVisible={alertVisible}
                 setAlertVisible={setAlertVisible}
@@ -106,6 +110,8 @@ function App() {
                   path="/profile"
                   element={
                     <Profile
+                      alertVisible={alertVisible}
+                      setAlertVisible={setAlertVisible}
                       setImageSrc={setImageSrc}
                       imageSrc={imageSrc}
                       userData={userData}
