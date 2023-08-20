@@ -16,7 +16,7 @@ const HorizontalDivider = () => {
 };
 
 
-const Signup = ({setLoading,loading}) => {
+const Signup = ({ alertVisible, setAlertVisible ,setLoading,loading}) => {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
     username: '',
@@ -50,10 +50,13 @@ const Signup = ({setLoading,loading}) => {
       if (response.ok) {
         // Handle success, e.g., show a success message
         alert(body.message);
+        setAlertVisible(true)
         navigate('/login')
       } else {
         // Handle error, e.g., show an error message
         alert(body.error);
+        setAlertVisible(true)
+
       }
       setLoading(false)
     } catch (error) {

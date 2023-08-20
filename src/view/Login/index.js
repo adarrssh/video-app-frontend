@@ -6,6 +6,9 @@ import KeyboadSvg from '../../utils/svg/KeyboadSvg'
 import GoogleIconSvg from '../../utils/svg/GoogleIconSvg'
 import { useNavigate } from 'react-router-dom'
 import Loading from '../../components/Loading/Loading'
+import Alert from '../../components/Alert/Alert'
+
+
 
 const HorizontalDivider = () => {
   return (
@@ -16,7 +19,7 @@ const HorizontalDivider = () => {
 };
 
 
-const Login = ({setLoading,loading,setAccessToken}) => {
+const Login = ({alertVisible, setAlertVisible,setLoading,loading,setAccessToken}) => {
 
   const navigate = useNavigate()
 
@@ -51,9 +54,10 @@ const Login = ({setLoading,loading,setAccessToken}) => {
       if (response.ok) {
         // Handle success, e.g., show a success message
         localStorage.setItem('token',body.token)
-        setAccessToken(body.token)
-        alert(body.message);
-        navigate('/')
+        setAccessToken(body.token);
+        alert('success');
+        setAlertVisible(true)
+        navigate('/');
       } else {
         // Handle error, e.g., show an error message
         alert(body.error);
@@ -73,11 +77,14 @@ const Login = ({setLoading,loading,setAccessToken}) => {
       loading?(
       <Loading/>
       ):(    
+        
       <div className='login-modal-parent'>
+
       <div className="login-modal-content">
         <div className="login-modal-heading">
           <h3>Log In</h3>
         </div>
+        {/* <Alert/> */}
         <div className='input-email-div'>
           <input type="text" className='input-el' name="email" value={formData.email} onChange={handleChange} autoComplete='off'/>
           <div className='inp-email-placeholder'>Email address</div>
