@@ -11,7 +11,7 @@ import ShowAlert from "./components/Alert/Alert";
 
 const Home = lazy(() => import("./view/Home"));
 const Stream = lazy(() => import("./view/Stream/Index"));
-const UserB = lazy(() => import("./view/JoinRoom/index"));
+// const User = lazy(() => import("./view/User/index"));
 const Login = lazy(() => import("./view/Login"));
 const Signup = lazy(() => import("./view/Signup"));
 const Tutorial = lazy(() => import("./view/Tutorial"));
@@ -85,7 +85,7 @@ function App() {
                   }
                 />
                 <Route path="/stream" element={<Stream imageSrc={imageSrc} userData={userData} />} />
-                <Route path="/room" element={<UserB />} />
+                {/* <Route path="/room" element={<User/>} /> */}
                 <Route path="/tutorial" element={<Tutorial />} />
                 <Route
                   path="/login"

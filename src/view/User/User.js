@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const socket = io(process.env.REACT_APP_SOCKET);
 
 
-function UserB({socket,roomId}) {
+function UserB({socket,roomId,userData,imageSrc}) {
   const navigate = useNavigate()
   const fileInputRef = useRef(null);
   // const [message, setMessage] = useState("")
@@ -103,7 +103,7 @@ function UserB({socket,roomId}) {
             </div>
           )}
         </div>
-        <ChatBox socket={socket} roomId={roomId} />
+        <ChatBox socket={socket} roomId={roomId}  userData={userData} imageSrc={imageSrc}/>
       </main>
     </>
   );

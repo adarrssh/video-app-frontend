@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 // import "./index.css"
 // import Stream from './Stream'
-import JoinRoom from './JoinRoom'
+import JoinRoom from './User'
 import Button from '../../components/button/button'
 import { io } from 'socket.io-client';
 

@@ -4,7 +4,7 @@ import Stream from './Stream'
 import Button from '../../components/button/button'
 import { io } from 'socket.io-client';
 import Modal from './Modal';
-import UserB from '../JoinRoom/JoinRoom';
+import User from '../User/User';
 import { useNavigate } from 'react-router-dom';
 
 const Index = ({imageSrc,userData}) => {
@@ -76,7 +76,7 @@ const Index = ({imageSrc,userData}) => {
 
                     : 
                     
-                    ( isHost? <Stream socket={socket} roomId={roomId} imageSrc={imageSrc} userData={userData}/>: <UserB socket={socket} roomId={roomId}/>) 
+                    ( isHost? <Stream socket={socket} roomId={roomId} imageSrc={imageSrc} userData={userData}/>: <User socket={socket} roomId={roomId} userData={userData} imageSrc={imageSrc}/>) 
             }
         </>
     )
