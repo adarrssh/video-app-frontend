@@ -7,7 +7,7 @@ import Modal from './Modal';
 import User from '../User/User';
 import { useNavigate } from 'react-router-dom';
 
-const Index = ({imageSrc,userData}) => {
+const Index = ({imageSrc, userData, setAlertVisible}) => {
     const navigate = useNavigate()
     const [room, setRoom] = useState(false)
     const [isHost, setIsHost] = useState(false)
@@ -36,6 +36,11 @@ const Index = ({imageSrc,userData}) => {
 
         socket.current.on('userJoined', (id) => {
             console.log(id, ' joined the room');
+            setAlertVisible({
+                show:true,
+                message:`${id} joined the room`,
+                severity:'success'
+              })
         });
 
         const handleDisconnect = () => {

@@ -84,7 +84,16 @@ function App() {
                     />
                   }
                 />
-                <Route path="/stream" element={<Stream imageSrc={imageSrc} userData={userData} />} />
+                <Route 
+                  path="/stream" 
+                  element={
+                    <Stream 
+                    imageSrc={imageSrc} 
+                    userData={userData} 
+                    setAlertVisible={setAlertVisible}
+                    />
+                  }
+                  />
                 {/* <Route path="/room" element={<User/>} /> */}
                 <Route path="/tutorial" element={<Tutorial />} />
                 <Route
