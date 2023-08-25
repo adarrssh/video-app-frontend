@@ -88,6 +88,21 @@
     border-radius: 0rem 0.625rem 0.625rem 0.625rem;
   }
   
+  .chatbox-body .chat-profile-pic{
+    display: flex;
+    color: #fff;
+    font-size: 0.8rem;
+  }
+
+  .chatbox-body .chat-msg-left .chat-profile-pic p{
+    padding-left: 10px;
+    padding-top: 5px;
+  }
+
+  .chatbox-body .chat-msg-right .chat-profile-pic p{
+    padding-right: 10px;
+    padding-top: 5px;
+  }
   .chatbox-body .chat-profile-pic img{
       border-radius: 50%;
       width: 1.8rem;

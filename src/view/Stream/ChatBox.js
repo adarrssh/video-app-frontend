@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import logo from '../../utils/img/logo.png'
 import './ChatBox.css'
 import PinSvg from '../../utils/svg/PinSvg'
-const ChatBox = ({ socket, roomId }) => {
+const ChatBox = ({ socket, roomId ,imageSrc,userData}) => {
   const [message, setMessage] = useState("")
   const [chatMessage, setChatMessage] = useState([])
   const messageEl = useRef(null)
@@ -48,6 +48,7 @@ const ChatBox = ({ socket, roomId }) => {
       return (<div className="chat-msg-left">
         <div className='chat-profile-pic'>
           <img src={logo} alt="profile-pic" />
+          <p>user</p>
         </div>
         <div className='chat-msg'>
           {item.message}
@@ -58,7 +59,8 @@ const ChatBox = ({ socket, roomId }) => {
       return (
         <div className='chat-msg-right'>
           <div className='chat-profile-pic'>
-            <img src={logo} alt="profile-pic" />
+            <p>{userData?.username}</p>
+            <img src={imageSrc} alt="profile-pic" />
           </div>
           <div className='chat-msg'>
             {item.message}
@@ -80,7 +82,7 @@ const ChatBox = ({ socket, roomId }) => {
             <div className='room-id'>
 
             <div >
-            {`room id: ${roomId}`} 
+            roomId : {roomId ? roomId:"loading ..."}
             </div>
             <div>
               <PinSvg/>

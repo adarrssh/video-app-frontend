@@ -5,7 +5,7 @@ import Button from '../../components/button/button';
 // import { io } from 'socket.io-client';
 import { useNavigate } from 'react-router-dom';
 
-function Stream({socket,roomId}) {
+function Stream({socket,roomId, imageSrc,userData}) {
   const fileInputRef = useRef(null);
   const videoRef = useRef(null);
   // const [roomId, setRoomId] = useState('');
@@ -103,7 +103,7 @@ function Stream({socket,roomId}) {
             </div>
           )}
         </div>
-        <ChatBox socket={socket} roomId={roomId}/>
+        <ChatBox imageSrc={imageSrc} socket={socket} roomId={roomId} userData={userData}/>
       </main>
     </>
   );

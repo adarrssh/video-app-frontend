@@ -209,6 +209,10 @@ margin-bottom: -5px;  }
     line-height: normal;
     margin-top: -20px;
   }
+
+  .login-span-el:hover{
+    cursor: pointer;
+  }
   
   .center-element {
     display: flex;

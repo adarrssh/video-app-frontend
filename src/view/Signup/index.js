@@ -113,7 +113,7 @@ const Signup = ({   alertVisible, setAlertVisible ,setLoading,loading}) => {
           <Button className={'google-btn'} text={'Continue with google'} svgIcon={<GoogleIconSvg />} />
         </div>
         <div className='sign-up-text'>
-          <h3>Already have an account? <span className='login-span-el'>Log In!</span></h3>
+          <h3>Already have an account? <span className='login-span-el' onClick={()=> navigate('/login')}>Log In!</span></h3>
         </div>
       </div>
     </div>

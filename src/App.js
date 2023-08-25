@@ -84,7 +84,7 @@ function App() {
                     />
                   }
                 />
-                <Route path="/stream" element={<Stream />} />
+                <Route path="/stream" element={<Stream imageSrc={imageSrc} userData={userData} />} />
                 <Route path="/room" element={<UserB />} />
                 <Route path="/tutorial" element={<Tutorial />} />
                 <Route

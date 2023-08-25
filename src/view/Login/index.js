@@ -121,7 +121,7 @@ const Login = ({alertVisible, setAlertVisible,setLoading,loading,setAccessToken}
           <Button className={'google-btn'} text={'Continue with google'} svgIcon={<GoogleIconSvg />} />
         </div>
         <div className='sign-up-text'>
-          <h3>Don’t have an account?<span className='signup-span-el'> Sign up!</span></h3>
+          <h3>Don’t have an account?<span className='signup-span-el' onClick={()=> navigate('/signup')}> Sign up!</span></h3>
         </div>
       </div>
     </div>)

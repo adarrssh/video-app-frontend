@@ -7,7 +7,7 @@ import Modal from './Modal';
 import UserB from '../JoinRoom/JoinRoom';
 import { useNavigate } from 'react-router-dom';
 
-const Index = () => {
+const Index = ({imageSrc,userData}) => {
     const navigate = useNavigate()
     const [room, setRoom] = useState(false)
     const [isHost, setIsHost] = useState(false)
@@ -76,7 +76,7 @@ const Index = () => {
 
                     : 
                     
-                    ( isHost? <Stream socket={socket} roomId={roomId}/>: <UserB socket={socket} roomId={roomId}/>) 
+                    ( isHost? <Stream socket={socket} roomId={roomId} imageSrc={imageSrc} userData={userData}/>: <UserB socket={socket} roomId={roomId}/>) 
             }
         </>
     )
