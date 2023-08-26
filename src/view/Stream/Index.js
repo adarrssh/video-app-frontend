@@ -6,21 +6,31 @@ import { io } from 'socket.io-client';
 import Modal from './Modal';
 import User from '../User/User';
 import { useNavigate } from 'react-router-dom';
+import fetchSenderProfileImage from '../../services/fetchSenderProfileImage';
 
 const Index = ({imageSrc, userData, setAlertVisible}) => {
     const navigate = useNavigate()
     const [room, setRoom] = useState(false)
     const [isHost, setIsHost] = useState(false)
     const [roomId, setRoomId] = useState('');
+    const [senderProfileImage, setSenderProfileImage] = useState(null)
 
     const socket = useRef(null);
     // console.log(socket);
+    const fetchSenderImage = async (users) =>{
+        const email = isHost? users[1].email : users[0].email
+        const data = await fetchSenderProfileImage(email,setSenderProfileImage)
+        console.log(data);
+    }  
+
 
     useEffect(()=>{
         if(!localStorage.getItem('token')){
             navigate('/login')
         }
     })
+
+
     useEffect(() => {
         // Socket event listeners
         const handleConnect = () => {
@@ -29,18 +39,23 @@ const Index = ({imageSrc, userData, setAlertVisible}) => {
 
         socket.current = io(process.env.REACT_APP_SOCKET);
 
-        socket.current.on('roomCreated', (roomId) => {
+        socket.current.on('roomCreated', (data) => {
+            console.log(data);
+            const {users,roomId} = data
             setRoomId(roomId);
             console.log('created room id', roomId);
         });
 
-        socket.current.on('userJoined', (id) => {
-            console.log(id, ' joined the room');
+        socket.current.on('userJoined', ({users}) => {
+            console.log(users[0]);
+            
             setAlertVisible({
                 show:true,
-                message:`${id} joined the room`,
+                message:`joined the room`,
                 severity:'success'
               })
+
+              fetchSenderImage(users)
         });
 
         const handleDisconnect = () => {
@@ -61,13 +76,13 @@ const Index = ({imageSrc, userData, setAlertVisible}) => {
     const handleCreateRoom = () => {
         setRoom(true)
         setIsHost(true)
-        socket.current.emit('createRoom');
+        socket.current.emit('createRoom',userData);
     };
 
     const handleJoinRoom = () => {
         setRoom(true)
-        console.log(roomId);
-        socket.current.emit('joinRoom', roomId);
+        console.log(roomId,userData);
+        socket.current.emit('joinRoom', {roomId,userData});
     };
 
     return (
@@ -76,12 +91,12 @@ const Index = ({imageSrc, userData, setAlertVisible}) => {
                 !room ?
                 (
 
-                    <Modal handleCreateRoom={handleCreateRoom} handleJoinRoom={handleJoinRoom} setRoomId={setRoomId}/>
+                    <Modal handleCreateRoom={handleCreateRoom} handleJoinRoom={handleJoinRoom} setRoomId={setRoomId} userData={userData}/>
                     )
 
                     : 
                     
-                    ( isHost? <Stream socket={socket} roomId={roomId} imageSrc={imageSrc} userData={userData}/>: <User socket={socket} roomId={roomId} userData={userData} imageSrc={imageSrc}/>) 
+                    ( isHost? <Stream socket={socket} roomId={roomId} imageSrc={imageSrc} userData={userData} senderProfileImage={senderProfileImage}/>: <User socket={socket} roomId={roomId} userData={userData} imageSrc={imageSrc} senderProfileImage={senderProfileImage}/>) 
             }
         </>
     )

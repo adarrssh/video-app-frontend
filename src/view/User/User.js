@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const socket = io(process.env.REACT_APP_SOCKET);
 
 
-function UserB({socket,roomId,userData,imageSrc}) {
+function User({socket,roomId,userData,imageSrc,senderProfileImage}) {
   const navigate = useNavigate()
   const fileInputRef = useRef(null);
   // const [message, setMessage] = useState("")
@@ -55,6 +55,8 @@ function UserB({socket,roomId,userData,imageSrc}) {
   }, []);
 
   const handleJoinRoom = () => {
+    console.log(userData);
+    alert('hi')
     socket.current.emit('joinRoom', roomId);
   };
 
@@ -76,6 +78,12 @@ function UserB({socket,roomId,userData,imageSrc}) {
     navigate('/');
   };
 
+  const handleClick = (e) => {
+    e.preventDefault(); 
+    console.log(e);
+  };
+
+
   return (
     <>
       <main className='stream-main-comp'>
@@ -94,7 +102,7 @@ function UserB({socket,roomId,userData,imageSrc}) {
 
           ) : (
             <div className='video-div'>
-              <video ref={videoRef}>
+              <video ref={videoRef} controls onClick={(e)=>handleClick(e)}>
                 <source src={selectedVideo} />
               </video>
               <div className='stream-end-div'>
@@ -103,35 +111,10 @@ function UserB({socket,roomId,userData,imageSrc}) {
             </div>
           )}
         </div>
-        <ChatBox socket={socket} roomId={roomId}  userData={userData} imageSrc={imageSrc}/>
+        <ChatBox socket={socket} roomId={roomId}  userData={userData} imageSrc={imageSrc} senderProfileImage={senderProfileImage}/>
       </main>
     </>
   );
 }
 
-export default UserB;
-
-
-{/* <div>
-<input
-  type="text"
-  value={roomId}
-  onChange={(e) => {
-    setRoomId(e.target.value);
-    setIsValidRoomId(true);
-  }}
-  placeholder="Enter Room ID"
-/>
-<button onClick={handleJoinRoom}>Join Room</button>
-{!isValidRoomId && <p>Invalid Room ID</p>}
-
-<div>
-  <video
-    ref={videoRef}
-
-    style={{ height: '60%', width: '80%' }}
-  />
-  <input type="file" accept="video/*" onChange={handleFileChange} />
-
-</div>
-</div> */}
+export default User;

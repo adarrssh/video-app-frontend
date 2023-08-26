@@ -12,8 +12,7 @@ const HorizontalDivider = () => {
     );
 };
 
-const Modal = ({ handleCreateRoom, handleJoinRoom, setRoomId }) => {
-
+const Modal = ({ handleCreateRoom, handleJoinRoom, setRoomId, userData }) => {
     const [inputValue, setInputValue] = useState('');
     const [showButton, setShowButton] = useState(false);
 

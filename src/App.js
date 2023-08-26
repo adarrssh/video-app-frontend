@@ -1,17 +1,14 @@
 import React, { useEffect, useState, lazy, Suspense } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import LoadingScreen from "./utils/loading/LoadingScreen";
 import Navbar from "./components/navbar/navbar";
 import fetchUserProfileImage from "./services/fetchProfileImage";
 import "./App.css";
 import fetchUserDetails from "./services/fetchUserDetails";
 import Loading from "./components/Loading/Loading";
-import Alert from "./components/Alert/Alert";
 import ShowAlert from "./components/Alert/Alert";
 
 const Home = lazy(() => import("./view/Home"));
 const Stream = lazy(() => import("./view/Stream/Index"));
-// const User = lazy(() => import("./view/User/index"));
 const Login = lazy(() => import("./view/Login"));
 const Signup = lazy(() => import("./view/Signup"));
 const Tutorial = lazy(() => import("./view/Tutorial"));
@@ -22,8 +19,8 @@ function App() {
   const [imageSrc, setImageSrc] = useState(null);
   const [loading, setLoading] = useState(false);
   const [alertVisible, setAlertVisible] = useState({
-    show:false,
-    message:'',
+    show: false,
+    message: '',
     severity: ''
   });
 
@@ -40,8 +37,8 @@ function App() {
         if (!imageSrc) {
           setLoading(true);
           try {
-            await fetchUserProfileImage(alertVisible,setAlertVisible,setImageSrc, setLoading);
-            await fetchUserDetails(alertVisible,setAlertVisible,setUserData, setLoading);
+            await fetchUserProfileImage(alertVisible, setAlertVisible, setImageSrc, setLoading);
+            await fetchUserDetails(alertVisible, setAlertVisible, setUserData, setLoading);
             setLoading(false);
           } catch (error) {
             console.error("Error fetching user profile image", error);
@@ -84,16 +81,16 @@ function App() {
                     />
                   }
                 />
-                <Route 
-                  path="/stream" 
+                <Route
+                  path="/stream"
                   element={
-                    <Stream 
-                    imageSrc={imageSrc} 
-                    userData={userData} 
-                    setAlertVisible={setAlertVisible}
+                    <Stream
+                      imageSrc={imageSrc}
+                      userData={userData}
+                      setAlertVisible={setAlertVisible}
                     />
                   }
-                  />
+                />
                 {/* <Route path="/room" element={<User/>} /> */}
                 <Route path="/tutorial" element={<Tutorial />} />
                 <Route
@@ -110,10 +107,12 @@ function App() {
                 />
                 <Route
                   path="/signup"
-                  element={<Signup
-                    alertVisible={alertVisible}
-                    setAlertVisible={setAlertVisible}
-                    setLoading={setLoading} loading={loading} />}
+                  element={
+                    <Signup
+                      alertVisible={alertVisible}
+                      setAlertVisible={setAlertVisible}
+                      setLoading={setLoading}
+                      loading={loading} />}
                 />
                 <Route
                   path="/profile"
