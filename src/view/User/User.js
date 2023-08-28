@@ -4,10 +4,12 @@ import { io } from 'socket.io-client';
 import Button from '../../components/button/button';
 import ChatBox from '../Stream/ChatBox';
 import { useNavigate } from 'react-router-dom';
+import './User.css'
+import { duration } from '@mui/material';
 const socket = io(process.env.REACT_APP_SOCKET);
 
 
-function User({socket,roomId,userData,imageSrc,senderProfileImage}) {
+function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
   const navigate = useNavigate()
   const fileInputRef = useRef(null);
   // const [message, setMessage] = useState("")
@@ -16,6 +18,9 @@ function User({socket,roomId,userData,imageSrc,senderProfileImage}) {
   // const [roomId, setRoomId] = useState('');
   const [isValidRoomId, setIsValidRoomId] = useState(true);
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const [currentTime, setCurrentTime] = useState([0, 0]);
+  const [isPlaying,setIsPlaying] = useState(false)
+  const [totalDuration, setTotalDuration] = useState(0);
 
   useEffect(() => {
     socket.current.on('invalidRoomId', () => {
@@ -26,6 +31,7 @@ function User({socket,roomId,userData,imageSrc,senderProfileImage}) {
       console.log('playBroadcast');
       if (videoRef.current && videoRef.current.paused) {
         videoRef.current.play();
+        setIsPlaying(true)
       }
     };
 
@@ -33,6 +39,7 @@ function User({socket,roomId,userData,imageSrc,senderProfileImage}) {
       console.log('pauseBroadcast');
       if (videoRef.current && !videoRef.current.paused) {
         videoRef.current.pause();
+        setIsPlaying(false)
       }
     };
 
@@ -78,11 +85,28 @@ function User({socket,roomId,userData,imageSrc,senderProfileImage}) {
     navigate('/');
   };
 
-  const handleClick = (e) => {
-    e.preventDefault(); 
-    console.log(e);
+  const formatTime = (timeInSeconds) => {
+    if (isNaN(timeInSeconds)) {
+      return '00:00:00';
+    }
+    const hours = Math.floor(timeInSeconds / 3600);
+    const minutes = Math.floor((timeInSeconds % 3600) / 60);
+    const seconds = Math.floor(timeInSeconds % 60);
+    return `${hours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
   };
 
+  const updateTime = () => {
+    if (videoRef.current) {
+      console.log('update');
+      setCurrentTime(videoRef.current.currentTime);
+    }
+  };
+
+  const setVideoDuration = () => {
+    if (videoRef.current) {
+      setTotalDuration(videoRef.current.duration);
+    }
+  };
 
   return (
     <>
@@ -101,17 +125,37 @@ function User({socket,roomId,userData,imageSrc,senderProfileImage}) {
             </div>
 
           ) : (
-            <div className='video-div'>
-              <video ref={videoRef} controls onClick={(e)=>handleClick(e)}>
-                <source src={selectedVideo} />
-              </video>
+            <div className='user-video-div'>
+              <div className='rel-pos-video-div'>
+
+                <video ref={videoRef}   onTimeUpdate={updateTime}  onLoadedMetadata={setVideoDuration}>
+                  <source src={selectedVideo} />
+                </video>
+
+                <div className='user-video-control'>
+                  <div className='user-video-time-line'>
+                    <p className='video-time'>{formatTime(currentTime)} / {formatTime(totalDuration)}</p>
+                  </div>
+                  <input
+                    type="range"
+                    min={0}
+                    max={totalDuration}
+                    value={currentTime}
+                    className="timeline"
+                  />
+
+                </div>
+
+              </div>
+              Current Time: {formatTime(currentTime)} / Total Duration: {formatTime(totalDuration)}
+
               <div className='stream-end-div'>
                 <Button text={"Leave lounge"} className="leave-btn" onClick={leaveRoom} />
               </div>
             </div>
           )}
         </div>
-        <ChatBox socket={socket} roomId={roomId}  userData={userData} imageSrc={imageSrc} senderProfileImage={senderProfileImage}/>
+        <ChatBox socket={socket} roomId={roomId} userData={userData} imageSrc={imageSrc} senderProfileImage={senderProfileImage} />
       </main>
     </>
   );
