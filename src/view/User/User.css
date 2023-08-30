@@ -142,7 +142,10 @@
 
   .video-controls .video-timeline{
     height: 10px;
-    background-color: blue;
+  }
+
+  .video-controls .video-timeline .timeline{
+    width: 100%;
   }
 
   .stream-main-comp {
