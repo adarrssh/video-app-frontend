@@ -18,7 +18,8 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [currentTime, setCurrentTime] = useState(0);
   const [totalDuration, setTotalDuration] = useState(0);
-  const [fullScreen, setFullScreen] = useState(false)
+  const [showVideoControls, setShowVideoControls] = useState(false)
+  const [fullScreen , setFullScreen] = useState(false)
   const [notifyMsgInFullScreen, setNotifyMsgInFulScreen] = useState(false)
   useEffect(() => {
     socket.current.on("invalidRoomId", () => {
@@ -68,11 +69,15 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
 
   useEffect(() => {
     // Hide the button after 3 seconds
-    setTimeout(() => {
-      setFullScreen(false)
-    }, 5000)
+    const timer = setTimeout(() => {
+      setShowVideoControls(false);
+    }, 5000);
+  
+    return () => {
+      clearTimeout(timer); // Clear the timer when the effect is cleaned up
+    };
 
-  }, [fullScreen]);
+  }, [showVideoControls]);
 
 
   const handleJoinRoom = () => {
@@ -132,17 +137,19 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
       container.webkitRequestFullScreen ||
       container.mozRequestFullScreen ||
       container.msRequestFullscreen;
-      setFullScreen(true)
+      setShowVideoControls(true)
     if (!document.fullscreenElement) {
       fullscreenApi.call(container);
+      setFullScreen(true)
     } else {
-      if(notifyMsgInFullScreen){
-        setNotifyMsgInFulScreen(false)
-      }
       document.exitFullscreen();
+      setShowVideoControls(false)
+      setFullScreen(false)
+      setNotifyMsgInFulScreen(false)
     }
   };
 
+  console.log({notifyMsgInFullScreen,fullScreen});
 
   return (
     <>
@@ -166,7 +173,7 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
             </div>
           ) : (
             <>
-              <div onClick={() => setFullScreen(true)} className="video-div" id="video-div-fullScreen">
+              <div onClick={() => setShowVideoControls(true)} className="video-div" id="video-div-fullScreen">
                 <video
                   ref={videoRef}
                   onTimeUpdate={updateTime}
@@ -175,13 +182,13 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
                   <source src={selectedVideo} />
                 </video>
                 <div className="video-controls">
-                  {fullScreen ?
+                  {showVideoControls ?
                     <>
                       <div className="">
                         <Button onClick={toggleFullScreen} text={"fullScreen"} className={'exit-fullScreen'} />
                         <Button onClick={()=>{videoRef.current.pause()}} text={"pause"} className={'exit-fullScreen'} />
                         <Button onClick={()=>{videoRef.current.play()}} text={"play"} className={'exit-fullScreen'} />
-                        {notifyMsgInFullScreen?  <Button text={"msg"} className={'exit-fullScreen'} />: ''}
+                        {notifyMsgInFullScreen && fullScreen?  <Button text={"msg"} className={'exit-fullScreen'} />: ''}
                        
                       </div>
                       <div className="video-timeline">
@@ -214,8 +221,9 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
           userData={userData}
           imageSrc={imageSrc}
           senderProfileImage={senderProfileImage}
-          fullScreen={fullScreen}
+          showVideoControls={showVideoControls}
           setNotifyMsgInFulScreen={setNotifyMsgInFulScreen}
+          fullScreen = {fullScreen}
         />
       </main>
     </>
