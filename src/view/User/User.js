@@ -9,16 +9,17 @@ const socket = io(process.env.REACT_APP_SOCKET);
 function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
+  const videoRef = useRef(null);
   // const [message, setMessage] = useState("")
   // const [chatMessage, setChatMessage] = useState([])
-  const videoRef = useRef(null);
   // const [roomId, setRoomId] = useState('');
+  // const [isPlaying, setIsPlaying] = useState(false);
   const [isValidRoomId, setIsValidRoomId] = useState(true);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [currentTime, setCurrentTime] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
   const [totalDuration, setTotalDuration] = useState(0);
   const [fullScreen, setFullScreen] = useState(false)
+  const [notifyMsgInFullScreen, setNotifyMsgInFulScreen] = useState(false)
   useEffect(() => {
     socket.current.on("invalidRoomId", () => {
       setIsValidRoomId(false);
@@ -28,7 +29,7 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
       console.log("playBroadcast");
       if (videoRef.current && videoRef.current.paused) {
         videoRef.current.play();
-        setIsPlaying(true);
+        // setIsPlaying(true);
       }
     };
 
@@ -36,7 +37,7 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
       console.log("pauseBroadcast");
       if (videoRef.current && !videoRef.current.paused) {
         videoRef.current.pause();
-        setIsPlaying(false);
+        // setIsPlaying(false);
       }
     };
 
@@ -131,10 +132,13 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
       container.webkitRequestFullScreen ||
       container.mozRequestFullScreen ||
       container.msRequestFullscreen;
-    setFullScreen(true)
+      setFullScreen(true)
     if (!document.fullscreenElement) {
       fullscreenApi.call(container);
     } else {
+      if(notifyMsgInFullScreen){
+        setNotifyMsgInFulScreen(false)
+      }
       document.exitFullscreen();
     }
   };
@@ -177,6 +181,8 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
                         <Button onClick={toggleFullScreen} text={"fullScreen"} className={'exit-fullScreen'} />
                         <Button onClick={()=>{videoRef.current.pause()}} text={"pause"} className={'exit-fullScreen'} />
                         <Button onClick={()=>{videoRef.current.play()}} text={"play"} className={'exit-fullScreen'} />
+                        {notifyMsgInFullScreen?  <Button text={"msg"} className={'exit-fullScreen'} />: ''}
+                       
                       </div>
                       <div className="video-timeline">
                         <input
@@ -208,6 +214,8 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
           userData={userData}
           imageSrc={imageSrc}
           senderProfileImage={senderProfileImage}
+          fullScreen={fullScreen}
+          setNotifyMsgInFulScreen={setNotifyMsgInFulScreen}
         />
       </main>
     </>
