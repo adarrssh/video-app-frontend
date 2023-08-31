@@ -4,7 +4,12 @@ import Button from "../../components/button/button";
 import ChatBox from "../Stream/ChatBox";
 import { useNavigate } from "react-router-dom";
 import "./User.css";
-const socket = io(process.env.REACT_APP_SOCKET);
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
+import PauseIcon from '@mui/icons-material/Pause';
+
+
+// const socket = io(process.env.REACT_APP_SOCKET);
 
 function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
   const navigate = useNavigate();
@@ -13,7 +18,7 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
   // const [message, setMessage] = useState("")
   // const [chatMessage, setChatMessage] = useState([])
   // const [roomId, setRoomId] = useState('');
-  // const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isValidRoomId, setIsValidRoomId] = useState(true);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [currentTime, setCurrentTime] = useState(0);
@@ -30,7 +35,7 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
       console.log("playBroadcast");
       if (videoRef.current && videoRef.current.paused) {
         videoRef.current.play();
-        // setIsPlaying(true);
+        setIsPlaying(true);
       }
     };
 
@@ -38,7 +43,7 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
       console.log("pauseBroadcast");
       if (videoRef.current && !videoRef.current.paused) {
         videoRef.current.pause();
-        // setIsPlaying(false);
+        setIsPlaying(false);
       }
     };
 
@@ -184,10 +189,16 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
                 <div className="video-controls">
                   {showVideoControls ?
                     <>
-                      <div className="">
-                        <Button onClick={toggleFullScreen} text={"fullScreen"} className={'exit-fullScreen'} />
-                        <Button onClick={()=>{videoRef.current.pause()}} text={"pause"} className={'exit-fullScreen'} />
-                        <Button onClick={()=>{videoRef.current.play()}} text={"play"} className={'exit-fullScreen'} />
+                      <div className="video-controls-btn">
+                        {
+                          isPlaying ? 
+
+                          <PauseIcon fontSize="large" className="play-pause"/> :
+                          <PlayArrowIcon  fontSize="large" className="play-pause"/> 
+                          
+
+                        }
+                        <FullscreenExitIcon onClick={toggleFullScreen}   fontSize="large" className="full-screen-toggle-icon"/>
                         {notifyMsgInFullScreen && fullScreen?  <Button text={"msg"} className={'exit-fullScreen'} />: ''}
                        
                       </div>

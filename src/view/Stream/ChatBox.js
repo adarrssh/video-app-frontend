@@ -35,7 +35,6 @@ const ChatBox = ({ socket, roomId ,imageSrc,userData,senderProfileImage, fullScr
     const printMessage = (message) => {
 
       if(fullScreen){
-        console.log('here');
         setNotifyMsgInFulScreen(true)
       }
       setChatMessage(prevChatMessage => [
