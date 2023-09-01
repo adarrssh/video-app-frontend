@@ -26,6 +26,10 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
   const [showVideoControls, setShowVideoControls] = useState(false)
   const [fullScreen , setFullScreen] = useState(false)
   const [notifyMsgInFullScreen, setNotifyMsgInFulScreen] = useState(false)
+  
+  
+  
+  
   useEffect(() => {
     socket.current.on("invalidRoomId", () => {
       setIsValidRoomId(false);
@@ -62,15 +66,6 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
       socket.current.off("invalidRoomId");
     };
   }, []);
-
-
-
-  // useEffect(()=>{
-  //   if(selectedVideo !== null && videoRef.current){
-  //     console.log(videoRef.current);
-  //   }
-  // },[selectedVideo])
-
 
   useEffect(() => {
     // Hide the button after 3 seconds
@@ -154,7 +149,6 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
     }
   };
 
-  console.log({notifyMsgInFullScreen,fullScreen});
 
   return (
     <>

@@ -4,12 +4,21 @@ import ChatBox from './ChatBox';
 import Button from '../../components/button/button';
 // import { io } from 'socket.io-client';
 import { useNavigate } from 'react-router-dom';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
+import PauseIcon from '@mui/icons-material/Pause';
 
 function Stream({socket,roomId, imageSrc,userData,senderProfileImage}) {
   const fileInputRef = useRef(null);
   const videoRef = useRef(null);
-  // const [roomId, setRoomId] = useState('');
+  const [currentTime, setCurrentTime] = useState(0);
+  const [totalDuration, setTotalDuration] = useState(0);
+  const [showVideoControls, setShowVideoControls] = useState(false)
+  const [fullScreen , setFullScreen] = useState(false)
+  const [notifyMsgInFullScreen, setNotifyMsgInFulScreen] = useState(false)
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
   const navigate = useNavigate();
 
   const handleFileChange = (event) => {
@@ -21,37 +30,6 @@ function Stream({socket,roomId, imageSrc,userData,senderProfileImage}) {
     fileInputRef.current.click();
   };
 
-  // useEffect(() => {
-  //   // Socket event listeners
-  //   const handleConnect = () => {
-  //     console.log('Connected to server');
-  //   };
-
-  //   socket.current = io(process.env.REACT_APP_SOCKET);
-
-  //   socket.current.on('roomCreated', (roomId) => {
-  //     setRoomId(roomId);
-  //     console.log('created room id', roomId);
-  //   });
-
-  //   socket.current.on('userJoined', (id) => {
-  //     console.log(id, ' joined the room');
-  //   });
-
-  //   const handleDisconnect = () => {
-  //     console.log('Disconnected from server');
-  //   };
-
-  //   socket.current.on('connect', handleConnect);
-  //   socket.current.on('disconnect', handleDisconnect);
-
-  //   // Clean up the socket connection
-  //   return () => {
-  //     socket.current.off('connect', handleConnect);
-  //     socket.current.off('disconnect', handleDisconnect);
-  //     socket.current.disconnect();
-  //   };
-  // }, []);
 
   const handleSeeked = () => {
     if (videoRef.current) {
@@ -62,12 +40,16 @@ function Stream({socket,roomId, imageSrc,userData,senderProfileImage}) {
 
   const handlePlay = () => {
     console.log('handlePlay');
+    videoRef.current.play()
     socket.current.emit('play', roomId);
+    setIsPlaying(true)
   };
 
   const handlePause = () => {
     console.log('handlePause');
+    videoRef.current.pause()
     socket.current.emit('pause', roomId);
+    setIsPlaying(false)
   };
 
   const handleCreateRoom = () => {
@@ -78,6 +60,51 @@ function Stream({socket,roomId, imageSrc,userData,senderProfileImage}) {
     socket.current.disconnect();
     navigate('/');
   };
+
+  const updateTime = () => {
+    if (videoRef.current) {
+      setCurrentTime(videoRef.current.currentTime);
+    }
+  };
+
+  const setVideoDuration = () => {
+    if (videoRef.current) {
+      console.log(videoRef.current.duration);
+      setTotalDuration(videoRef.current.duration);
+    }
+  };
+
+
+  const toggleFullScreen = async () => {
+    const container = document.getElementById("video-div-fullScreen");
+    const fullscreenApi =
+      container.requestFullscreen ||
+      container.webkitRequestFullScreen ||
+      container.mozRequestFullScreen ||
+      container.msRequestFullscreen;
+      setShowVideoControls(true)
+    if (!document.fullscreenElement) {
+      fullscreenApi.call(container);
+      setFullScreen(true)
+    } else {
+      document.exitFullscreen();
+      setShowVideoControls(false)
+      setFullScreen(false)
+      setNotifyMsgInFulScreen(false)
+    }
+  };
+
+  useEffect(() => {
+    // Hide the button after 3 seconds
+    const timer = setTimeout(() => {
+      setShowVideoControls(false);
+    }, 5000);
+  
+    return () => {
+      clearTimeout(timer); // Clear the timer when the effect is cleaned up
+    };
+
+  }, [showVideoControls]);
 
   return (
     <>
@@ -93,20 +120,80 @@ function Stream({socket,roomId, imageSrc,userData,senderProfileImage}) {
               <Button className="choose-btn" onClick={handleButtonClick} text={"Choose your video"} />
             </div>
           ) : (
-            <div className='video-div'>
-              <video ref={videoRef} controls onSeeked={handleSeeked} onPlay={handlePlay} onPause={handlePause}>
+            <>
+            <div onClick={() => setShowVideoControls(true)} className="video-div" id="video-div-fullScreen">
+              <video
+                ref={videoRef}
+                onTimeUpdate={updateTime}
+                onLoadedMetadata={setVideoDuration}
+                onhandle
+                onSeeked={handleSeeked} onPlay={handlePlay} onPause={handlePause}
+              >
                 <source src={selectedVideo} />
               </video>
-              <div className='stream-end-div'>
-                <Button text={"Leave lounge"} className="leave-btn" onClick={leaveRoom} />
+              <div className="video-controls">
+                {showVideoControls ?
+                  <>
+                    <div className="video-timeline">
+                      <input
+                        type="range"
+                        min={0}
+                        max={totalDuration}
+                        value={currentTime}
+                        className="timeline"
+                      />
+                    </div>
+                    <div className="video-controls-btn">
+                      {
+                        isPlaying ? 
+
+                        <PauseIcon fontSize="large" className="play-pause" onClick={handlePause}/> :
+                        <PlayArrowIcon  fontSize="large" className="play-pause" onClick={handlePlay}/> 
+                        
+
+                      }
+                      <FullscreenExitIcon onClick={toggleFullScreen}   fontSize="large" className="full-screen-toggle-icon"/>
+                      {notifyMsgInFullScreen && fullScreen?  <Button text={"msg"} className={'exit-fullScreen'} />: ''}
+                     
+                    </div>
+                  </>
+                  : ""}
+
               </div>
             </div>
+            <div className="stream-end-div">
+              <Button
+                text={"Leave lounge"}
+                className="leave-btn"
+                onClick={leaveRoom}
+              />
+            </div>
+          </>
           )}
         </div>
-        <ChatBox imageSrc={imageSrc} socket={socket} roomId={roomId} userData={userData} senderProfileImage={senderProfileImage}/>
+        <ChatBox 
+          imageSrc={imageSrc}
+          socket={socket} 
+          roomId={roomId} 
+          userData={userData} 
+          senderProfileImage={senderProfileImage}
+          showVideoControls={showVideoControls}
+          setNotifyMsgInFulScreen={setNotifyMsgInFulScreen}
+          fullScreen = {fullScreen}
+          />
       </main>
     </>
   );
 }
 
 export default Stream;
+
+
+{/* <div className='video-div'>
+<video ref={videoRef} controls onSeeked={handleSeeked} onPlay={handlePlay} onPause={handlePause}>
+  <source src={selectedVideo} />
+</video>
+<div className='stream-end-div'>
+  <Button text={"Leave lounge"} className="leave-btn" onClick={leaveRoom} />
+</div>
+</div> */}
