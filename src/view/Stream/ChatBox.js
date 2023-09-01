@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import logo from '../../utils/img/logo.png'
 import './ChatBox.css'
 import PinSvg from '../../utils/svg/PinSvg'
-const ChatBox = ({ socket, roomId }) => {
+const ChatBox = ({ socket, roomId ,imageSrc,userData,senderProfileImage, fullScreen, setNotifyMsgInFulScreen}) => {
   const [message, setMessage] = useState("")
   const [chatMessage, setChatMessage] = useState([])
+  const messageEl = useRef(null)
 
   const sendMessage = (event) => {
     if (event.key === 'Enter') {
@@ -19,10 +20,23 @@ const ChatBox = ({ socket, roomId }) => {
       setMessage('');
     }
   };
+
+  useEffect(()=>{
+    if(messageEl){
+      messageEl.current.addEventListener('DOMNodeInserted', event => {
+        const {currentTarget: target} = event
+        target.scroll({top:target.scrollHeight})
+      })
+    }
+  },[])
   
   useEffect(()=>{
 
     const printMessage = (message) => {
+
+      if(fullScreen){
+        setNotifyMsgInFulScreen(true)
+      }
       setChatMessage(prevChatMessage => [
         ...prevChatMessage,
         { messgeRecieved: true, message }
@@ -37,7 +51,8 @@ const ChatBox = ({ socket, roomId }) => {
 
       return (<div className="chat-msg-left">
         <div className='chat-profile-pic'>
-          <img src={logo} alt="profile-pic" />
+          <img src={senderProfileImage||logo} alt="profile-pic" />
+          <p>user</p>
         </div>
         <div className='chat-msg'>
           {item.message}
@@ -48,7 +63,8 @@ const ChatBox = ({ socket, roomId }) => {
       return (
         <div className='chat-msg-right'>
           <div className='chat-profile-pic'>
-            <img src={logo} alt="profile-pic" />
+            <p>{userData?.username}</p>
+            <img src={imageSrc} alt="profile-pic" />
           </div>
           <div className='chat-msg'>
             {item.message}
@@ -70,14 +86,14 @@ const ChatBox = ({ socket, roomId }) => {
             <div className='room-id'>
 
             <div >
-            {`room id: ${roomId}`} 
+            roomId : {roomId ? roomId:"loading ..."}
             </div>
             <div>
               <PinSvg/>
             </div>
             </div>
           </div>
-        <div className="chatbox-body">
+        <div className="chatbox-body" ref={messageEl}>
           {chatMessage.map((item, index) =>
             <>
               <AppendMessage key={index.toString()} item={item} />
@@ -101,28 +117,3 @@ const ChatBox = ({ socket, roomId }) => {
 }
 
 export default ChatBox
-
-
-
-
-{/* <div className="chat-msg-left">
-<div className='profile-pic'>
-  <img src={logo} alt="profile-pic" />
-</div>
-<div className='chat-msg'>
-  {text}
-</div>
-</div>  */}
-
-
-
-{/* <div className='chat-msg-right'>
-<div className='profile-pic'>
-  <img src={logo} alt="profile-pic" />
-</div>
-<div className='chat-msg'>
-  {text}
-</div>
-</div> */}
-
-

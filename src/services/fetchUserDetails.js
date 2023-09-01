@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const fetchUserDetails = async (setUserData,setLoading) => {
+const fetchUserDetails = async (alertVisible,setAlertVisible,setUserData,setLoading) => {
     if (localStorage.token) {
       try {
         const response = await axios(`${process.env.REACT_APP_SOCKET}/user/`, {
@@ -16,7 +16,11 @@ const fetchUserDetails = async (setUserData,setLoading) => {
             password: user?.password
         })        
       } catch (error) {
-        alert('error')
+        setAlertVisible({
+          show:true,
+          message:'Error in fetching details',
+          severity:'error'
+        })
         console.error('An error occurred fetchUserDetails', error);
       }
     }

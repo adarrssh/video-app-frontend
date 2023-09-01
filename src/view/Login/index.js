@@ -5,7 +5,10 @@ import HostBtnSvg from '../../utils/svg/HostBtnSvg'
 import KeyboadSvg from '../../utils/svg/KeyboadSvg'
 import GoogleIconSvg from '../../utils/svg/GoogleIconSvg'
 import { useNavigate } from 'react-router-dom'
-import LoadingScreen from '../../utils/loading/LoadingScreen'
+import Loading from '../../components/Loading/Loading'
+import Alert from '../../components/Alert/Alert'
+
+
 
 const HorizontalDivider = () => {
   return (
@@ -16,7 +19,7 @@ const HorizontalDivider = () => {
 };
 
 
-const Login = ({setLoading,loading,setAccessToken}) => {
+const Login = ({alertVisible, setAlertVisible,setLoading,loading,setAccessToken}) => {
 
   const navigate = useNavigate()
 
@@ -51,18 +54,29 @@ const Login = ({setLoading,loading,setAccessToken}) => {
       if (response.ok) {
         // Handle success, e.g., show a success message
         localStorage.setItem('token',body.token)
-        setAccessToken(body.token)
-        alert(body.message);
-        navigate('/')
+        setAccessToken(body.token);
+        navigate('/');
+        setAlertVisible({
+          show:true,
+          message:'Success',
+          severity:'success'
+        })
       } else {
         // Handle error, e.g., show an error message
-        alert(body.error);
+         setAlertVisible({
+          show:true,
+          message:body.error,
+          severity:'error'
+        })
       }
       setLoading(false)
     } catch (error) {
-      alert('error')
       console.error('An error occurred', error);
       setLoading(false)
+      setAlertVisible({
+        show:true,
+        message:'Error'
+      })
     }
   };
 
@@ -71,13 +85,16 @@ const Login = ({setLoading,loading,setAccessToken}) => {
     <>
     {
       loading?(
-      <LoadingScreen/>
+      <Loading/>
       ):(    
+        
       <div className='login-modal-parent'>
+
       <div className="login-modal-content">
         <div className="login-modal-heading">
           <h3>Log In</h3>
         </div>
+        {/* <Alert/> */}
         <div className='input-email-div'>
           <input type="text" className='input-el' name="email" value={formData.email} onChange={handleChange} autoComplete='off'/>
           <div className='inp-email-placeholder'>Email address</div>
@@ -104,7 +121,7 @@ const Login = ({setLoading,loading,setAccessToken}) => {
           <Button className={'google-btn'} text={'Continue with google'} svgIcon={<GoogleIconSvg />} />
         </div>
         <div className='sign-up-text'>
-          <h3>Don’t have an account?<span className='signup-span-el'> Sign up!</span></h3>
+          <h3>Don’t have an account?<span className='signup-span-el' onClick={()=> navigate('/signup')}> Sign up!</span></h3>
         </div>
       </div>
     </div>)

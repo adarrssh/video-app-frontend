@@ -153,3 +153,19 @@ gap: 8px;
   color: #fff;
   cursor: pointer;
 }
+
+.edit-profil-pic-icon{
+  background-color: #000;
+  color: grey;
+  position: absolute;
+  right: 30px;
+  bottom: 0;
+}
+
+.edit-profil-pic-icon:hover{
+  cursor: pointer;
+}
+
+.input-profile-img{
+  display: none;
+}

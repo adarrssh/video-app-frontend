@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const updateUserDetails = async (setUserData,userData,setLoading) => {
+const updateUserDetails = async (alertVisible, setAlertVisible, setUserData,userData,setLoading) => {
     console.log(userData);
     if (localStorage.token) {
         console.log(localStorage.token);
@@ -24,10 +24,18 @@ const updateUserDetails = async (setUserData,userData,setLoading) => {
             email: user?.email,
             password: user?.password
         })        
-        alert('success')
+        setAlertVisible({
+          show:true,
+          message:'Success',
+          severity:'success'
+        })
         setLoading(false)
       } catch (error) {
-        alert('error')
+        setAlertVisible({
+          show:true,
+          message:'Error in update details',
+          severity:'error'
+        })
         console.error('An error occurred fetchUserDetails', error);
         setLoading(false)
       }

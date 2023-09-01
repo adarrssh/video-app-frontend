@@ -5,7 +5,7 @@ import MiddleSection from './MiddleSection'
 import BottomSection from './BottomSection'
 import VideoTutorial from '../Tutorial/index'
 import fetchUserProfileImage from '../../services/fetchProfileImage'
-import LoadingScreen from '../../utils/loading/LoadingScreen'
+import Loading from '../../components/Loading/Loading'
 
 const Index = ({imageSrc,setImageSrc,setLoading,loading}) => {
   
@@ -32,7 +32,7 @@ const Index = ({imageSrc,setImageSrc,setLoading,loading}) => {
   return (
     <main className='home-main-comp'>
     {loading ? (
-      <LoadingScreen />
+      <Loading />
     ) : (
       <>
         <TopSection />
