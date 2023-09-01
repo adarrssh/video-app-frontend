@@ -76,6 +76,13 @@
   cursor: pointer;
 }
 
+#video-div-fullScreen .notificaton-msg{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: rgb(161, 33, 33);
+}
+
 .video-controls .video-controls-btn .video-time{
   position: absolute;
   bottom: 5px;

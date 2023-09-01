@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import logo from '../../utils/img/logo.png'
 import './ChatBox.css'
 import PinSvg from '../../utils/svg/PinSvg'
-const ChatBox = ({ socket, roomId ,imageSrc,userData,senderProfileImage, fullScreen, setNotifyMsgInFulScreen}) => {
+const ChatBox = ({ socket, roomId ,imageSrc,userData,senderProfileImage, fullScreen,notifyMsgInFullScreen, setNotifyMsgInFulScreen}) => {
   const [message, setMessage] = useState("")
   const [chatMessage, setChatMessage] = useState([])
   const messageEl = useRef(null)
@@ -30,13 +30,16 @@ const ChatBox = ({ socket, roomId ,imageSrc,userData,senderProfileImage, fullScr
     }
   },[])
   
+  console.log('In chat box,',{fullScreen,notifyMsgInFullScreen});
   useEffect(()=>{
 
     const printMessage = (message) => {
-
-      if(fullScreen){
+      console.log('before if statement',{fullScreen});
+      if(fullScreen === true){
         setNotifyMsgInFulScreen(true)
       }
+
+      console.log('after the if statement');
       setChatMessage(prevChatMessage => [
         ...prevChatMessage,
         { messgeRecieved: true, message }

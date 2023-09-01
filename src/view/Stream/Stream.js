@@ -7,7 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 import PauseIcon from '@mui/icons-material/Pause';
-import { duration } from '@mui/material';
+import MessageNotificationSvg from '../../utils/svg/MessageNotificationSvg';
+import NotificationAddIcon from '@mui/icons-material/NotificationAdd';
 
 function Stream({ socket, roomId, imageSrc, userData, senderProfileImage }) {
   const fileInputRef = useRef(null);
@@ -107,6 +108,12 @@ function Stream({ socket, roomId, imageSrc, userData, senderProfileImage }) {
 
   }, [showVideoControls]);
 
+
+
+  useEffect(()=>{
+    console.log('notification changed',{notifyMsgInFullScreen});
+  },[notifyMsgInFullScreen])
+
   const formatTime = (timeInSeconds) => {
     const hours = Math.floor(timeInSeconds / 3600);
     const minutes = Math.floor((timeInSeconds % 3600) / 60);
@@ -168,13 +175,15 @@ function Stream({ socket, roomId, imageSrc, userData, senderProfileImage }) {
                         <span>{formatTime(currentTime)}</span> / <span>{formatTime(totalDuration)}</span>
                         </div>
                         <FullscreenExitIcon onClick={toggleFullScreen} fontSize="large" className="full-screen-toggle-icon" />
-                        {notifyMsgInFullScreen && fullScreen ? <Button text={"msg"} className={'exit-fullScreen'} /> : ''}
-
+                        {/* {notifyMsgInFullScreen && fullScreen ? <MessageNotificationSvg/> : ''} */}
                       </div>
+
+
                     </>
                     : ""}
 
                 </div>
+                    {notifyMsgInFullScreen && fullScreen ? <NotificationAddIcon fontSize='large' className='notificaton-msg'/> : ''}
               </div>
               <div className="stream-end-div">
                 <Button
@@ -193,6 +202,7 @@ function Stream({ socket, roomId, imageSrc, userData, senderProfileImage }) {
           userData={userData}
           senderProfileImage={senderProfileImage}
           showVideoControls={showVideoControls}
+          notifyMsgInFullScreen={notifyMsgInFullScreen}
           setNotifyMsgInFulScreen={setNotifyMsgInFulScreen}
           fullScreen={fullScreen}
         />
