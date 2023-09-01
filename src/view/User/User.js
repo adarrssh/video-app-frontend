@@ -103,17 +103,7 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
     navigate("/");
   };
 
-  const formatTime = (timeInSeconds) => {
-    if (isNaN(timeInSeconds)) {
-      return "00:00:00";
-    }
-    const hours = Math.floor(timeInSeconds / 3600);
-    const minutes = Math.floor((timeInSeconds % 3600) / 60);
-    const seconds = Math.floor(timeInSeconds % 60);
-    return `${hours}:${String(minutes).padStart(2, "0")}:${String(
-      seconds
-    ).padStart(2, "0")}`;
-  };
+ 
 
   const updateTime = () => {
     if (videoRef.current) {
@@ -128,7 +118,13 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
     }
   };
 
-
+  const formatTime = (timeInSeconds) => {
+    const hours = Math.floor(timeInSeconds / 3600);
+    const minutes = Math.floor((timeInSeconds % 3600) / 60);
+    const seconds = Math.floor(timeInSeconds % 60);
+  
+    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+  };
 
   const toggleFullScreen = async () => {
     const container = document.getElementById("video-div-fullScreen");
@@ -183,6 +179,15 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
                 <div className="video-controls">
                   {showVideoControls ?
                     <>
+                      <div className="video-timeline">
+                        <input
+                          type="range"
+                          min={0}
+                          max={totalDuration}
+                          value={currentTime}
+                          className="timeline"
+                        />
+                      </div>
                       <div className="video-controls-btn">
                         {
                           isPlaying ? 
@@ -192,18 +197,12 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
                           
 
                         }
+                         <div className="video-time">
+                        <span>{formatTime(currentTime)}</span> / <span>{formatTime(totalDuration)}</span>
+                        </div>
                         <FullscreenExitIcon onClick={toggleFullScreen}   fontSize="large" className="full-screen-toggle-icon"/>
                         {notifyMsgInFullScreen && fullScreen?  <Button text={"msg"} className={'exit-fullScreen'} />: ''}
                        
-                      </div>
-                      <div className="video-timeline">
-                        <input
-                          type="range"
-                          min={0}
-                          max={totalDuration}
-                          value={currentTime}
-                          className="timeline"
-                        />
                       </div>
                     </>
                     : ""}
