@@ -35,10 +35,7 @@ const ChatBox = ({ socket, roomId ,imageSrc,userData,senderProfileImage, fullScr
 
     const printMessage = (message) => {
       console.log('before if statement',{fullScreen});
-      if(fullScreen === true){
         setNotifyMsgInFulScreen(true)
-      }
-
       console.log('after the if statement');
       setChatMessage(prevChatMessage => [
         ...prevChatMessage,

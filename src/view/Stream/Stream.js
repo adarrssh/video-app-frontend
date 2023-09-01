@@ -84,10 +84,11 @@ function Stream({ socket, roomId, imageSrc, userData, senderProfileImage }) {
       container.webkitRequestFullScreen ||
       container.mozRequestFullScreen ||
       container.msRequestFullscreen;
-    setShowVideoControls(true)
+      setShowVideoControls(true)
     if (!document.fullscreenElement) {
       fullscreenApi.call(container);
       setFullScreen(true)
+      setNotifyMsgInFulScreen(false)
     } else {
       document.exitFullscreen();
       setShowVideoControls(false)
@@ -107,6 +108,19 @@ function Stream({ socket, roomId, imageSrc, userData, senderProfileImage }) {
     };
 
   }, [showVideoControls]);
+
+
+  useEffect(() => {
+    // Hide the button after 3 seconds
+    const timer = setTimeout(() => {
+      setNotifyMsgInFulScreen(false);
+    }, 5000);
+
+    return () => {
+      clearTimeout(timer); // Clear the timer when the effect is cleaned up
+    };
+
+  }, [notifyMsgInFullScreen]);
 
 
 
