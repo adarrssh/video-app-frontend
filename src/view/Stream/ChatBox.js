@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import logo from '../../utils/img/logo.png'
 import './ChatBox.css'
 import PinSvg from '../../utils/svg/PinSvg'
-const ChatBox = ({ socket, roomId ,imageSrc,userData,senderProfileImage, setNotifyMsgInFulScreen,senderUsername, isHost}) => {
+const ChatBox = ({ socket, roomId ,imageSrc,userData,senderProfileImage, setNotifyMsgInFulScreen,senderUsername}) => {
   const [message, setMessage] = useState("")
   const [chatMessage, setChatMessage] = useState([])
   const messageEl = useRef(null)
@@ -43,7 +43,6 @@ const ChatBox = ({ socket, roomId ,imageSrc,userData,senderProfileImage, setNoti
   },[])
 
   const AppendMessage = ({ item }) => {
-    console.log('Append message',{isHost});
     if (item.messgeRecieved) {
 
       return (<div className="chat-msg-left">
