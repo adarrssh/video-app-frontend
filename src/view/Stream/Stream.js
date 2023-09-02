@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 import PauseIcon from '@mui/icons-material/Pause';
-import MessageNotificationSvg from '../../utils/svg/MessageNotificationSvg';
 import NotificationAddIcon from '@mui/icons-material/NotificationAdd';
 
 function Stream({ socket, roomId, imageSrc, userData, senderProfileImage }) {
@@ -84,7 +83,7 @@ function Stream({ socket, roomId, imageSrc, userData, senderProfileImage }) {
       container.webkitRequestFullScreen ||
       container.mozRequestFullScreen ||
       container.msRequestFullscreen;
-      setShowVideoControls(true)
+    setShowVideoControls(true)
     if (!document.fullscreenElement) {
       fullscreenApi.call(container);
       setFullScreen(true)
@@ -124,19 +123,19 @@ function Stream({ socket, roomId, imageSrc, userData, senderProfileImage }) {
 
 
 
-  useEffect(()=>{
-    console.log('notification changed',{notifyMsgInFullScreen});
-  },[notifyMsgInFullScreen])
+  useEffect(() => {
+    console.log('notification changed', { notifyMsgInFullScreen });
+  }, [notifyMsgInFullScreen])
 
   const formatTime = (timeInSeconds) => {
     const hours = Math.floor(timeInSeconds / 3600);
     const minutes = Math.floor((timeInSeconds % 3600) / 60);
     const seconds = Math.floor(timeInSeconds % 60);
-  
+
     return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
   };
-  
-  
+
+
 
   return (
     <>
@@ -184,20 +183,16 @@ function Stream({ socket, roomId, imageSrc, userData, senderProfileImage }) {
                             <PlayArrowIcon fontSize="large" className="play-pause" onClick={handlePlay} />
 
                         }
-                        {/* show current video time and total video time  here  */}
                         <div className="video-time">
-                        <span>{formatTime(currentTime)}</span> / <span>{formatTime(totalDuration)}</span>
+                          <span>{formatTime(currentTime)}</span> / <span>{formatTime(totalDuration)}</span>
                         </div>
                         <FullscreenExitIcon onClick={toggleFullScreen} fontSize="large" className="full-screen-toggle-icon" />
-                        {/* {notifyMsgInFullScreen && fullScreen ? <MessageNotificationSvg/> : ''} */}
                       </div>
-
-
                     </>
                     : ""}
 
                 </div>
-                    {notifyMsgInFullScreen && fullScreen ? <NotificationAddIcon fontSize='large' className='notificaton-msg'/> : ''}
+                {notifyMsgInFullScreen && fullScreen ? <NotificationAddIcon fontSize='large' className='notificaton-msg' /> : ''}
               </div>
               <div className="stream-end-div">
                 <Button

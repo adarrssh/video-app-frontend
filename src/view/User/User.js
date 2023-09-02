@@ -7,6 +7,7 @@ import "./User.css";
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 import PauseIcon from '@mui/icons-material/Pause';
+import NotificationAddIcon from '@mui/icons-material/NotificationAdd';
 
 
 // const socket = io(process.env.REACT_APP_SOCKET);
@@ -24,12 +25,10 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
   const [currentTime, setCurrentTime] = useState(0);
   const [totalDuration, setTotalDuration] = useState(0);
   const [showVideoControls, setShowVideoControls] = useState(false)
-  const [fullScreen , setFullScreen] = useState(false)
+  const [fullScreen, setFullScreen] = useState(false)
   const [notifyMsgInFullScreen, setNotifyMsgInFulScreen] = useState(false)
-  
-  
-  
-  
+
+
   useEffect(() => {
     socket.current.on("invalidRoomId", () => {
       setIsValidRoomId(false);
@@ -67,17 +66,6 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
     };
   }, []);
 
-  useEffect(() => {
-    // Hide the button after 3 seconds
-    const timer = setTimeout(() => {
-      setShowVideoControls(false);
-    }, 5000);
-  
-    return () => {
-      clearTimeout(timer); // Clear the timer when the effect is cleaned up
-    };
-
-  }, [showVideoControls]);
 
 
   const handleJoinRoom = () => {
@@ -103,7 +91,7 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
     navigate("/");
   };
 
- 
+
 
   const updateTime = () => {
     if (videoRef.current) {
@@ -122,7 +110,7 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
     const hours = Math.floor(timeInSeconds / 3600);
     const minutes = Math.floor((timeInSeconds % 3600) / 60);
     const seconds = Math.floor(timeInSeconds % 60);
-  
+
     return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
   };
 
@@ -133,10 +121,11 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
       container.webkitRequestFullScreen ||
       container.mozRequestFullScreen ||
       container.msRequestFullscreen;
-      setShowVideoControls(true)
+    setShowVideoControls(true)
     if (!document.fullscreenElement) {
       fullscreenApi.call(container);
       setFullScreen(true)
+      setNotifyMsgInFulScreen(false)
     } else {
       document.exitFullscreen();
       setShowVideoControls(false)
@@ -144,6 +133,30 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
       setNotifyMsgInFulScreen(false)
     }
   };
+
+  useEffect(() => {
+    // Hide the button after 3 seconds
+    const timer = setTimeout(() => {
+      setShowVideoControls(false);
+    }, 5000);
+
+    return () => {
+      clearTimeout(timer); // Clear the timer when the effect is cleaned up
+    };
+
+  }, [showVideoControls]);
+
+  useEffect(() => {
+    // Hide the button after 3 seconds
+    const timer = setTimeout(() => {
+      setNotifyMsgInFulScreen(false);
+    }, 5000);
+
+    return () => {
+      clearTimeout(timer); // Clear the timer when the effect is cleaned up
+    };
+
+  }, [notifyMsgInFullScreen]);
 
 
   return (
@@ -190,24 +203,23 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
                       </div>
                       <div className="video-controls-btn">
                         {
-                          isPlaying ? 
+                          isPlaying ?
 
-                          <PauseIcon fontSize="large" className="play-pause"/> :
-                          <PlayArrowIcon  fontSize="large" className="play-pause"/> 
-                          
+                            <PauseIcon fontSize="large" className="play-pause" /> :
+                            <PlayArrowIcon fontSize="large" className="play-pause" />
+
 
                         }
-                         <div className="video-time">
-                        <span>{formatTime(currentTime)}</span> / <span>{formatTime(totalDuration)}</span>
+                        <div className="video-time">
+                          <span>{formatTime(currentTime)}</span> / <span>{formatTime(totalDuration)}</span>
                         </div>
-                        <FullscreenExitIcon onClick={toggleFullScreen}   fontSize="large" className="full-screen-toggle-icon"/>
-                        {notifyMsgInFullScreen && fullScreen?  <Button text={"msg"} className={'exit-fullScreen'} />: ''}
-                       
+                        <FullscreenExitIcon onClick={toggleFullScreen} fontSize="large" className="full-screen-toggle-icon" />
                       </div>
                     </>
                     : ""}
 
                 </div>
+                {notifyMsgInFullScreen && fullScreen ? <NotificationAddIcon fontSize='large' className='notificaton-msg' /> : ''}
               </div>
               <div className="stream-end-div">
                 <Button
@@ -227,7 +239,7 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
           senderProfileImage={senderProfileImage}
           showVideoControls={showVideoControls}
           setNotifyMsgInFulScreen={setNotifyMsgInFulScreen}
-          fullScreen = {fullScreen}
+          fullScreen={fullScreen}
         />
       </main>
     </>
