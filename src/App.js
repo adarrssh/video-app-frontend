@@ -31,13 +31,12 @@ function App() {
   });
 
   useEffect(() => {
-    console.log("App useEffect");
     if (localStorage.getItem("token")) {
       const fetchData = async () => {
         if (!imageSrc) {
           setLoading(true);
           try {
-            await fetchUserProfileImage(alertVisible, setAlertVisible, setImageSrc, setLoading);
+            await fetchUserProfileImage(setAlertVisible, setImageSrc);
             await fetchUserDetails(alertVisible, setAlertVisible, setUserData, setLoading);
             setLoading(false);
           } catch (error) {
