@@ -2,11 +2,10 @@ import React, { useEffect, useRef, useState } from 'react'
 import logo from '../../utils/img/logo.png'
 import './ChatBox.css'
 import PinSvg from '../../utils/svg/PinSvg'
-const ChatBox = ({ socket, roomId ,imageSrc,userData,senderProfileImage, fullScreen,notifyMsgInFullScreen, setNotifyMsgInFulScreen}) => {
+const ChatBox = ({ socket, roomId ,imageSrc,userData,senderProfileImage, setNotifyMsgInFulScreen,senderUsername, isHost}) => {
   const [message, setMessage] = useState("")
   const [chatMessage, setChatMessage] = useState([])
   const messageEl = useRef(null)
-
   const sendMessage = (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
@@ -30,13 +29,11 @@ const ChatBox = ({ socket, roomId ,imageSrc,userData,senderProfileImage, fullScr
     }
   },[])
   
-  console.log('In chat box,',{fullScreen,notifyMsgInFullScreen});
   useEffect(()=>{
 
     const printMessage = (message) => {
-      console.log('before if statement',{fullScreen});
-        setNotifyMsgInFulScreen(true)
-      console.log('after the if statement');
+      console.log(message);
+      setNotifyMsgInFulScreen(true)
       setChatMessage(prevChatMessage => [
         ...prevChatMessage,
         { messgeRecieved: true, message }
@@ -46,13 +43,13 @@ const ChatBox = ({ socket, roomId ,imageSrc,userData,senderProfileImage, fullScr
   },[])
 
   const AppendMessage = ({ item }) => {
-
+    console.log('Append message',{isHost});
     if (item.messgeRecieved) {
 
       return (<div className="chat-msg-left">
         <div className='chat-profile-pic'>
           <img src={senderProfileImage||logo} alt="profile-pic" />
-          <p>user</p>
+          <p>{senderUsername}</p>
         </div>
         <div className='chat-msg'>
           {item.message}

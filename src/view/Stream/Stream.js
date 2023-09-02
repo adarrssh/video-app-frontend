@@ -9,7 +9,7 @@ import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 import PauseIcon from '@mui/icons-material/Pause';
 import NotificationAddIcon from '@mui/icons-material/NotificationAdd';
 
-function Stream({ socket, roomId, imageSrc, userData, senderProfileImage }) {
+function Stream({ socket, roomId, imageSrc, userData, senderProfileImage, senderUsername, isHost }) {
   const fileInputRef = useRef(null);
   const videoRef = useRef(null);
   const [currentTime, setCurrentTime] = useState(0);
@@ -52,10 +52,6 @@ function Stream({ socket, roomId, imageSrc, userData, senderProfileImage }) {
     videoRef.current.pause()
     socket.current.emit('pause', roomId);
     setIsPlaying(false)
-  };
-
-  const handleCreateRoom = () => {
-    socket.current.emit('createRoom');
   };
 
   const leaveRoom = () => {
@@ -124,7 +120,6 @@ function Stream({ socket, roomId, imageSrc, userData, senderProfileImage }) {
 
 
   useEffect(() => {
-    console.log('notification changed', { notifyMsgInFullScreen });
   }, [notifyMsgInFullScreen])
 
   const formatTime = (timeInSeconds) => {
@@ -214,6 +209,8 @@ function Stream({ socket, roomId, imageSrc, userData, senderProfileImage }) {
           notifyMsgInFullScreen={notifyMsgInFullScreen}
           setNotifyMsgInFulScreen={setNotifyMsgInFulScreen}
           fullScreen={fullScreen}
+          senderUsername={senderUsername}
+          isHost={isHost}
         />
       </main>
     </>

@@ -12,7 +12,7 @@ import NotificationAddIcon from '@mui/icons-material/NotificationAdd';
 
 // const socket = io(process.env.REACT_APP_SOCKET);
 
-function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
+function User({ socket, roomId, userData, imageSrc, senderProfileImage, senderUsername,isHost }) {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
   const videoRef = useRef(null);
@@ -240,6 +240,8 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage }) {
           showVideoControls={showVideoControls}
           setNotifyMsgInFulScreen={setNotifyMsgInFulScreen}
           fullScreen={fullScreen}
+          senderUsername={senderUsername}
+          isHost={isHost}
         />
       </main>
     </>

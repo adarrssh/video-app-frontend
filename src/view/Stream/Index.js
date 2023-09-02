@@ -12,15 +12,16 @@ const Index = ({imageSrc, userData, setAlertVisible}) => {
     const navigate = useNavigate()
     const [room, setRoom] = useState(false)
     const [isHost, setIsHost] = useState(false)
+    const isHostRef = useRef(isHost); 
     const [roomId, setRoomId] = useState('');
     const [senderProfileImage, setSenderProfileImage] = useState(null)
+    const [senderUsername, setSenderUserName] = useState('user')
 
     const socket = useRef(null);
     // console.log(socket);
     const fetchSenderImage = async (users) =>{
         const email = isHost? users[1].email : users[0].email
         const data = await fetchSenderProfileImage(email,setSenderProfileImage)
-        console.log(data);
     }  
 
 
@@ -40,18 +41,24 @@ const Index = ({imageSrc, userData, setAlertVisible}) => {
         socket.current = io(process.env.REACT_APP_SOCKET);
 
         socket.current.on('roomCreated', (data) => {
-            console.log(data);
             const {users,roomId} = data
             setRoomId(roomId);
             console.log('created room id', roomId);
         });
 
         socket.current.on('userJoined', ({users}) => {
-            console.log(users[0]);
-            
+            console.log({isHost:isHostRef.current});
+            if(isHostRef.current){
+                console.log('is true');
+                setSenderUserName(users[1].username)
+            }else{
+                console.log('isfalse');
+                setSenderUserName(users[0].username)
+            }
+            // isHost ? setSenderUserName(users[1].username) : setSenderUserName(users[0].username)
             setAlertVisible({
                 show:true,
-                message:`joined the room`,
+                message:`${users[1].username} joined the room`,
                 severity:'success'
               })
 
@@ -73,17 +80,22 @@ const Index = ({imageSrc, userData, setAlertVisible}) => {
         };
     }, []);
 
+    useEffect(()=>{
+        isHostRef.current = isHost
+    },[isHost])
+
+
     const handleCreateRoom = () => {
         setRoom(true)
         setIsHost(true)
         socket.current.emit('createRoom',userData);
     };
-
     const handleJoinRoom = () => {
         setRoom(true)
         console.log(roomId,userData);
         socket.current.emit('joinRoom', {roomId,userData});
     };
+
 
     return (
         <>
@@ -96,7 +108,26 @@ const Index = ({imageSrc, userData, setAlertVisible}) => {
 
                     : 
                     
-                    ( isHost? <Stream socket={socket} roomId={roomId} imageSrc={imageSrc} userData={userData} senderProfileImage={senderProfileImage}/>: <User socket={socket} roomId={roomId} userData={userData} imageSrc={imageSrc} senderProfileImage={senderProfileImage}/>) 
+                    ( isHost? 
+                    
+                    <Stream 
+                        socket={socket}
+                        roomId={roomId} 
+                        imageSrc={imageSrc} 
+                        userData={userData} 
+                        senderProfileImage={senderProfileImage}
+                        senderUsername={senderUsername}
+                        isHost={isHost}
+                        />:
+                    <User 
+                        socket={socket} 
+                        roomId={roomId} 
+                        userData={userData} 
+                        imageSrc={imageSrc} 
+                        senderProfileImage={senderProfileImage}
+                        senderUsername={senderUsername}
+                        isHost={isHost}
+                        />) 
             }
         </>
     )
