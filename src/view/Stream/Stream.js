@@ -9,7 +9,7 @@ import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 import PauseIcon from '@mui/icons-material/Pause';
 import NotificationAddIcon from '@mui/icons-material/NotificationAdd';
 
-function Stream({ socket, roomId, imageSrc, userData, senderProfileImage, senderUsername }) {
+function Stream({ socket, roomId, imageSrc, userData, senderProfileImage, senderUsername, totalUserInRoom }) {
   const fileInputRef = useRef(null);
   const videoRef = useRef(null);
   const [currentTime, setCurrentTime] = useState(0);
@@ -210,6 +210,7 @@ function Stream({ socket, roomId, imageSrc, userData, senderProfileImage, sender
           setNotifyMsgInFulScreen={setNotifyMsgInFulScreen}
           fullScreen={fullScreen}
           senderUsername={senderUsername}
+          totalUserInRoom={totalUserInRoom}
         />
       </main>
     </>

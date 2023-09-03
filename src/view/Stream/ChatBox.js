@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import logo from '../../utils/img/logo.png'
 import './ChatBox.css'
 import PinSvg from '../../utils/svg/PinSvg'
-const ChatBox = ({ socket, roomId ,imageSrc,userData,senderProfileImage, setNotifyMsgInFulScreen,senderUsername}) => {
+const ChatBox = ({ socket, roomId ,imageSrc,userData,senderProfileImage, setNotifyMsgInFulScreen,senderUsername, totalUserInRoom}) => {
   const [message, setMessage] = useState("")
   const [chatMessage, setChatMessage] = useState([])
   const messageEl = useRef(null)
@@ -76,7 +76,7 @@ const ChatBox = ({ socket, roomId ,imageSrc,userData,senderProfileImage, setNoti
 
       <div className='stream-chat-box'>
         <div className='chatbox-header'>
-          In lounge: no cuties
+          In lounge: {totalUserInRoom} cuties
         </div>
           <div className='room-id-div'>
             <div className='room-id'>

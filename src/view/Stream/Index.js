@@ -16,7 +16,7 @@ const Index = ({imageSrc, userData, setAlertVisible}) => {
     const [roomId, setRoomId] = useState('');
     const [senderProfileImage, setSenderProfileImage] = useState(null)
     const [senderUsername, setSenderUserName] = useState('user')
-
+    const [totalUserInRoom, setTotalUserInRoom] = useState(1)
     const socket = useRef(null);
     // console.log(socket);
     const fetchSenderImage = async (users) =>{
@@ -47,7 +47,7 @@ const Index = ({imageSrc, userData, setAlertVisible}) => {
         });
 
         socket.current.on('userJoined', ({users}) => {
-            console.log({isHost:isHostRef.current});
+            setTotalUserInRoom(users.length)
             if(isHostRef.current){
                 console.log('is true');
                 setSenderUserName(users[1].username)
@@ -118,6 +118,7 @@ const Index = ({imageSrc, userData, setAlertVisible}) => {
                         senderProfileImage={senderProfileImage}
                         senderUsername={senderUsername}
                         isHost={isHost}
+                        totalUserInRoom={totalUserInRoom}
                         />:
                     <User 
                         socket={socket} 
@@ -127,6 +128,7 @@ const Index = ({imageSrc, userData, setAlertVisible}) => {
                         senderProfileImage={senderProfileImage}
                         senderUsername={senderUsername}
                         isHost={isHost}
+                        totalUserInRoom={totalUserInRoom}
                         />) 
             }
         </>
