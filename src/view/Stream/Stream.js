@@ -35,20 +35,17 @@ function Stream({ socket, roomId, imageSrc, userData, senderProfileImage,isHostR
   const handleSeeked = (e) => {
     if (videoRef.current) {
       videoRef.current.currentTime = e.target.value;
-      console.log('handleSeeked', videoRef.current.currentTime);
       socket.current.emit('timeChanged', { roomId, time: videoRef.current.currentTime });
     }
   };
 
   const handlePlay = () => {
-    console.log('handlePlay');
     videoRef.current.play()
     socket.current.emit('play', roomId);
     setIsPlaying(true)
   };
 
   const handlePause = () => {
-    console.log('handlePause');
     videoRef.current.pause()
     socket.current.emit('pause', roomId);
     setIsPlaying(false)
