@@ -50,6 +50,7 @@ const ChatBox = ({ socket, roomId ,imageSrc,userData, setNotifyMsgInFulScreen, i
     const userJoined = ({users}) =>{
       console.log(users)
       setTotalUserInRoom(users.length)
+      console.log({isTrue:isHostRef.current});
       if(isHostRef.current){
           setSenderUserName(users[1].username)
       }else{
