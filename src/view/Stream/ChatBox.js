@@ -2,21 +2,25 @@ import React, { useEffect, useRef, useState } from 'react'
 import logo from '../../utils/img/logo.png'
 import './ChatBox.css'
 import PinSvg from '../../utils/svg/PinSvg'
-const ChatBox = ({ socket, roomId ,imageSrc,userData,senderProfileImage, fullScreen, setNotifyMsgInFulScreen}) => {
+import fetchSenderImage from '../../services/fetchSenderImage'
+
+const ChatBox = ({ socket, roomId ,imageSrc,userData, setNotifyMsgInFulScreen, isHostRef,setAlertVisible}) => {
   const [message, setMessage] = useState("")
   const [chatMessage, setChatMessage] = useState([])
+  const [totalUserInRoom, setTotalUserInRoom] = useState(1)
+  const [senderUsername, setSenderUserName] = useState('user')
+  const [senderProfileImage, setSenderProfileImage] = useState(null)
+
   const messageEl = useRef(null)
 
   const sendMessage = (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
 
-      // Add your code to send the message to the server or perform any desired action
-      console.log('Sending message:', message);
+     
       setChatMessage([...chatMessage, { messgeRecieved: false, message }])
       socket.current.emit('send-message', { roomId, message })
 
-      // Clear the input field after sending the message
       setMessage('');
     }
   };
@@ -33,26 +37,42 @@ const ChatBox = ({ socket, roomId ,imageSrc,userData,senderProfileImage, fullScr
   useEffect(()=>{
 
     const printMessage = (message) => {
-
-      if(fullScreen){
-        setNotifyMsgInFulScreen(true)
-      }
+      setNotifyMsgInFulScreen(true)
       setChatMessage(prevChatMessage => [
         ...prevChatMessage,
         { messgeRecieved: true, message }
       ]);
     };
+
+    const userJoined = ({users}) =>{
+      setTotalUserInRoom(users.length)
+
+      if(isHostRef.current){
+          setSenderUserName(users[1].username)
+      }else{
+          setSenderUserName(users[0].username)
+      }
+
+      setAlertVisible({
+          show:true,
+          message:`${users[1].username} joined the room`,
+          severity:'success'
+        })
+
+        fetchSenderImage(users,isHostRef,setSenderProfileImage)
+    }
+
     socket.current.on('messageBroadcast', printMessage)
+    socket.current.on('userJoined', userJoined);
   },[])
 
   const AppendMessage = ({ item }) => {
-
     if (item.messgeRecieved) {
 
       return (<div className="chat-msg-left">
         <div className='chat-profile-pic'>
           <img src={senderProfileImage||logo} alt="profile-pic" />
-          <p>user</p>
+          <p>{senderUsername}</p>
         </div>
         <div className='chat-msg'>
           {item.message}
@@ -80,7 +100,7 @@ const ChatBox = ({ socket, roomId ,imageSrc,userData,senderProfileImage, fullScr
 
       <div className='stream-chat-box'>
         <div className='chatbox-header'>
-          In lounge: no cuties
+          In lounge: {totalUserInRoom} cuties
         </div>
           <div className='room-id-div'>
             <div className='room-id'>

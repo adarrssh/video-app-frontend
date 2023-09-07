@@ -31,14 +31,16 @@ function App() {
   });
 
   useEffect(() => {
-    console.log("App useEffect");
     if (localStorage.getItem("token")) {
       const fetchData = async () => {
         if (!imageSrc) {
           setLoading(true);
           try {
-            await fetchUserProfileImage(alertVisible, setAlertVisible, setImageSrc, setLoading);
-            await fetchUserDetails(alertVisible, setAlertVisible, setUserData, setLoading);
+
+            await Promise.all([
+              fetchUserProfileImage(setAlertVisible, setImageSrc),
+              fetchUserDetails(alertVisible, setAlertVisible, setUserData, setLoading)
+            ])
             setLoading(false);
           } catch (error) {
             console.error("Error fetching user profile image", error);

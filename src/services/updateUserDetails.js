@@ -1,16 +1,15 @@
 import axios from "axios";
 
-const updateUserDetails = async (alertVisible, setAlertVisible, setUserData,userData,setLoading) => {
-    console.log(userData);
+const updateUserDetails = async (setAlertVisible, setUserData,userData,setLoading) => {
     if (localStorage.token) {
-        console.log(localStorage.token);
         setLoading(true)
       try {
         const response = await axios.post(
             `${process.env.REACT_APP_SOCKET}/user/`, 
-            { email: userData.email,
-              password: userData.password,
-              username: userData.username
+            {
+              email: userData.email,
+              username: userData.username,
+              password: userData.password
             },
             {
               headers: {

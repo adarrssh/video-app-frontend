@@ -1,7 +1,102 @@
+#video-div-fullScreen:fullscreen video{
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.full-screen-toggle{
+  position: absolute;
+  background-color: aqua;
+}
+
+.show-full-btn{
+  position: absolute;
+  background-color: rebeccapurple;
+  color: white;
+  bottom: 0;
+}
+
+.video-controls{
+  position: absolute;
+  /* background-color: #aa0e0e; */
+  width: 100%;
+  bottom: 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+.video-controls .exit-fullScreen{
+  background-color: grey;
+  color: white;
+  border-right-color: rgb(113, 109, 109);
+  height: 5px;
+}
+
+.video-controls .video-timeline{
+  height: 10px;
+  /* background-color: #fff; */
+  margin-bottom: 10px;
+}
+
+.video-controls .video-timeline .timeline{
+  width: 100%;
+  height: 100%
+  
+}
+
+.video-controls .video-controls-btn{
+  height: 40px;
+  position: relative;
+  width: 100%;
+}
+
+.video-controls .full-screen-toggle-icon{
+  color: white;
+  position: absolute;
+  right: 0;
+  padding-right: 10px;
+}
+
+.video-controls .full-screen-toggle-icon:hover{
+  cursor: pointer;
+}
+
+.video-controls .video-controls-btn .play-pause{
+  color: white;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.video-controls .video-controls-btn .play-pause:hover{
+  cursor: pointer;
+}
+
+.video-controls .video-controls-btn .play-pause:hover{
+  cursor: pointer;
+}
+
+#video-div-fullScreen .notificaton-msg{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: rgb(161, 33, 33);
+}
+
+.video-controls .video-controls-btn .video-time{
+  position: absolute;
+  bottom: 5px;
+  left: 50px;
+  color: white;
+}
 .stream-main-comp {
+  /* display: flex;
+  position: absolute;
+  top: 0px;
+  z-index: 9999;
+  height: 100vh; */
   width: 100%;
   max-width: 1500px;
-  display: flex;
 }
 
 .stream-main-comp .stream-left {

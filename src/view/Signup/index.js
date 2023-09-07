@@ -45,7 +45,6 @@ const Signup = ({   alertVisible, setAlertVisible ,setLoading,loading}) => {
         body: JSON.stringify(formData)
       });
       let body = await response.json()
-      console.log(body);
       if (response.ok) {
         // Handle success, e.g., show a success message
         setAlertVisible(true)
@@ -57,7 +56,6 @@ const Signup = ({   alertVisible, setAlertVisible ,setLoading,loading}) => {
         })
       } else {
         // Handle error, e.g., show an error message
-        console.log('here');
         setAlertVisible({
           show:true,
           message:body.error,

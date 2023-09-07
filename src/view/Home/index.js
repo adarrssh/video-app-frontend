@@ -9,26 +9,6 @@ import Loading from '../../components/Loading/Loading'
 
 const Index = ({imageSrc,setImageSrc,setLoading,loading}) => {
   
-  // useEffect(()=>{
-  //   console.log('useEffect');
-  
-  // const fetchData = async () => {
-  //   if(!imageSrc){
-
-  //     setLoading(true)
-  //     try {
-  //       await fetchUserProfileImage(setImageSrc, setLoading);
-  //     } catch (error) {
-  //       console.error('Error fetching user profile image', error);
-  //     }
-  //     setLoading(false)
-  //   }
-  // };
-  
-  // fetchData();
-  // },[])
-
-
   return (
     <main className='home-main-comp'>
     {loading ? (

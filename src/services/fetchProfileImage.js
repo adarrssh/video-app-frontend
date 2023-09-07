@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const fetchUserProfileImage = async (alertVisible,setAlertVisible, setImageSrc,setLoading) => {
+const fetchUserProfileImage = async (setAlertVisible, setImageSrc) => {
 
     if (localStorage.token) {
       try {

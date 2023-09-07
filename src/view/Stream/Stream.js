@@ -7,18 +7,19 @@ import { useNavigate } from 'react-router-dom';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 import PauseIcon from '@mui/icons-material/Pause';
+import NotificationAddIcon from '@mui/icons-material/NotificationAdd';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-function Stream({socket,roomId, imageSrc,userData,senderProfileImage}) {
+function Stream({ socket, roomId, imageSrc, userData, senderProfileImage,isHostRef, setAlertVisible }) {
   const fileInputRef = useRef(null);
   const videoRef = useRef(null);
   const [currentTime, setCurrentTime] = useState(0);
   const [totalDuration, setTotalDuration] = useState(0);
   const [showVideoControls, setShowVideoControls] = useState(false)
-  const [fullScreen , setFullScreen] = useState(false)
+  const [fullScreen, setFullScreen] = useState(false)
   const [notifyMsgInFullScreen, setNotifyMsgInFulScreen] = useState(false)
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
-
   const navigate = useNavigate();
 
   const handleFileChange = (event) => {
@@ -31,32 +32,27 @@ function Stream({socket,roomId, imageSrc,userData,senderProfileImage}) {
   };
 
 
-  const handleSeeked = () => {
+  const handleSeeked = (e) => {
     if (videoRef.current) {
-      console.log('handleSeeked', videoRef.current.currentTime);
+      videoRef.current.currentTime = e.target.value;
       socket.current.emit('timeChanged', { roomId, time: videoRef.current.currentTime });
     }
   };
 
   const handlePlay = () => {
-    console.log('handlePlay');
     videoRef.current.play()
     socket.current.emit('play', roomId);
     setIsPlaying(true)
   };
 
   const handlePause = () => {
-    console.log('handlePause');
     videoRef.current.pause()
     socket.current.emit('pause', roomId);
     setIsPlaying(false)
   };
 
-  const handleCreateRoom = () => {
-    socket.current.emit('createRoom');
-  };
-
-  const leaveRoom = () => {
+  const leaveRoom = () => {  
+    socket.current.emit('userLeft',{userData,roomId})
     socket.current.disconnect();
     navigate('/');
   };
@@ -69,7 +65,6 @@ function Stream({socket,roomId, imageSrc,userData,senderProfileImage}) {
 
   const setVideoDuration = () => {
     if (videoRef.current) {
-      console.log(videoRef.current.duration);
       setTotalDuration(videoRef.current.duration);
     }
   };
@@ -82,10 +77,11 @@ function Stream({socket,roomId, imageSrc,userData,senderProfileImage}) {
       container.webkitRequestFullScreen ||
       container.mozRequestFullScreen ||
       container.msRequestFullscreen;
-      setShowVideoControls(true)
+    setShowVideoControls(true)
     if (!document.fullscreenElement) {
       fullscreenApi.call(container);
       setFullScreen(true)
+      setNotifyMsgInFulScreen(false)
     } else {
       document.exitFullscreen();
       setShowVideoControls(false)
@@ -99,12 +95,39 @@ function Stream({socket,roomId, imageSrc,userData,senderProfileImage}) {
     const timer = setTimeout(() => {
       setShowVideoControls(false);
     }, 5000);
-  
+
     return () => {
       clearTimeout(timer); // Clear the timer when the effect is cleaned up
     };
 
   }, [showVideoControls]);
+
+
+  useEffect(() => {
+    // Hide the button after 3 seconds
+    const timer = setTimeout(() => {
+      setNotifyMsgInFulScreen(false);
+    }, 5000);
+
+    return () => {
+      clearTimeout(timer); // Clear the timer when the effect is cleaned up
+    };
+
+  }, [notifyMsgInFullScreen]);
+
+
+
+  useEffect(() => {
+  }, [notifyMsgInFullScreen])
+
+  const formatTime = (timeInSeconds) => {
+    const hours = Math.floor(timeInSeconds / 3600);
+    const minutes = Math.floor((timeInSeconds % 3600) / 60);
+    const seconds = Math.floor(timeInSeconds % 60);
+
+    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+  };
+
 
   return (
     <>
@@ -121,79 +144,74 @@ function Stream({socket,roomId, imageSrc,userData,senderProfileImage}) {
             </div>
           ) : (
             <>
-            <div onClick={() => setShowVideoControls(true)} className="video-div" id="video-div-fullScreen">
-              <video
-                ref={videoRef}
-                onTimeUpdate={updateTime}
-                onLoadedMetadata={setVideoDuration}
-                onhandle
-                onSeeked={handleSeeked} onPlay={handlePlay} onPause={handlePause}
-              >
-                <source src={selectedVideo} />
-              </video>
-              <div className="video-controls">
-                {showVideoControls ?
-                  <>
-                    <div className="video-timeline">
-                      <input
-                        type="range"
-                        min={0}
-                        max={totalDuration}
-                        value={currentTime}
-                        className="timeline"
-                      />
-                    </div>
-                    <div className="video-controls-btn">
-                      {
-                        isPlaying ? 
+              <div onClick={() => setShowVideoControls(true)} className="video-div" id="video-div-fullScreen">
+                <video
+                  ref={videoRef}
+                  onTimeUpdate={updateTime}
+                  onLoadedMetadata={setVideoDuration}
+                >
+                  <source src={selectedVideo} />
+                </video>
+                <div className="video-controls">
+                  {showVideoControls ?
+                    <>
+                      <div className="video-timeline">
+                        <input
+                          type="range"
+                          min={0}
+                          max={totalDuration}
+                          value={currentTime}
+                          onChange={(e) => {
+                            handleSeeked(e)
+                          }}
+                          className="timeline"
+                        />
+                      </div>
+                      <div className="video-controls-btn">
+                        {
+                          isPlaying ?
 
-                        <PauseIcon fontSize="large" className="play-pause" onClick={handlePause}/> :
-                        <PlayArrowIcon  fontSize="large" className="play-pause" onClick={handlePlay}/> 
-                        
+                            <PauseIcon fontSize="large" className="play-pause" onClick={handlePause} /> :
+                            <PlayArrowIcon fontSize="large" className="play-pause" onClick={handlePlay} />
 
-                      }
-                      <FullscreenExitIcon onClick={toggleFullScreen}   fontSize="large" className="full-screen-toggle-icon"/>
-                      {notifyMsgInFullScreen && fullScreen?  <Button text={"msg"} className={'exit-fullScreen'} />: ''}
-                     
-                    </div>
-                  </>
-                  : ""}
+                        }
+                        <div className="video-time">
+                          <span>{formatTime(currentTime)}</span> / <span>{formatTime(totalDuration)}</span>
+                        </div>
+                        <FullscreenExitIcon onClick={toggleFullScreen} fontSize="large" className="full-screen-toggle-icon" />
+                      </div>
+                    </>
+                    : ""}
 
+                </div>
+                {notifyMsgInFullScreen && fullScreen ? <NotificationAddIcon fontSize='large' className='notificaton-msg' /> : ''}
               </div>
-            </div>
-            <div className="stream-end-div">
-              <Button
-                text={"Leave lounge"}
-                className="leave-btn"
-                onClick={leaveRoom}
-              />
-            </div>
-          </>
+              <div className="stream-end-div">
+                <Button
+                  text={"Leave lounge"}
+                  className="leave-btn"
+                  onClick={leaveRoom}
+                />
+              </div>
+            </>
           )}
         </div>
-        <ChatBox 
+        <ChatBox
           imageSrc={imageSrc}
-          socket={socket} 
-          roomId={roomId} 
-          userData={userData} 
+          socket={socket}
+          roomId={roomId}
+          userData={userData}
           senderProfileImage={senderProfileImage}
           showVideoControls={showVideoControls}
+          notifyMsgInFullScreen={notifyMsgInFullScreen}
           setNotifyMsgInFulScreen={setNotifyMsgInFulScreen}
-          fullScreen = {fullScreen}
-          />
+          fullScreen={fullScreen}
+          isHostRef={isHostRef}
+          setAlertVisible={setAlertVisible}
+        />
       </main>
     </>
   );
 }
 
 export default Stream;
-
-
-{/* <div className='video-div'>
-<video ref={videoRef} controls onSeeked={handleSeeked} onPlay={handlePlay} onPause={handlePause}>
-  <source src={selectedVideo} />
-</video>
-<div className='stream-end-div'>
-  <Button text={"Leave lounge"} className="leave-btn" onClick={leaveRoom} />
-</div>
-</div> */}

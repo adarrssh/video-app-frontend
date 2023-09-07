@@ -49,8 +49,7 @@ const Login = ({alertVisible, setAlertVisible,setLoading,loading,setAccessToken}
         body: JSON.stringify(formData)
       });
       let body = await response.json()
-      console.log(response);
-      console.log(body);
+
       if (response.ok) {
         // Handle success, e.g., show a success message
         localStorage.setItem('token',body.token)
