@@ -92,12 +92,10 @@ const Profile = ({ alertVisible, setAlertVisible, setImageSrc, imageSrc, userDat
                 },
             });
             if (response.status === 200) {
-                console.log('here');
                 await fetchUserProfileImage(setAlertVisible, setImageSrc)
             } else {
                   throw new Error('Error in updating profile image')
               }
-              console.log('end');
             setLoading(false)
         } catch (error) {
             setLoading(false)

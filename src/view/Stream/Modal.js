@@ -20,7 +20,7 @@ const Modal = ({ handleCreateRoom, handleJoinRoom, setRoomId, userData }) => {
         const value = event.target.value;
         setInputValue(value);
         setRoomId(value)
-        console.log(value);
+
         // Show the button if the input has some value
         setShowButton(value.trim() !== '');
     };

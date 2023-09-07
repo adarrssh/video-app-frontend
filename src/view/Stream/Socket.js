@@ -3,11 +3,11 @@ import { io } from 'socket.io-client';
 const socket = io(process.env.REACT_APP_SOCKET);
 
 const handleConnect = () => {
-    console.log('Connected to server');
+
 };
 
 const handleDisconnect = () => {
-    console.log('Disconnected from server');
+
 };
 
 const createRoom = () => {
@@ -16,11 +16,11 @@ const createRoom = () => {
 
 const initializeSocket = (handlePause, handlePlay, handleSeeked) => {
   socket.on('roomCreated', (roomId) => {
-    console.log('created room id', roomId);
+
   });
 
   socket.on('userJoined', (id) => {
-    console.log(id, ' joined the room');
+
   });
 
   socket.on('connect', handleConnect);

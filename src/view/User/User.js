@@ -30,7 +30,6 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage,setAlertV
     });
 
     const handlePlayBroadcast = () => {
-      console.log("playBroadcast");
       if (videoRef.current && videoRef.current.paused) {
         videoRef.current.play();
         setIsPlaying(true);
@@ -38,7 +37,6 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage,setAlertV
     };
 
     const handlePauseBroadcast = () => {
-      console.log("pauseBroadcast");
       if (videoRef.current && !videoRef.current.paused) {
         videoRef.current.pause();
         setIsPlaying(false);
@@ -47,7 +45,6 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage,setAlertV
 
     const handleBroadcastTime = (time) => {
       if (videoRef.current) {
-        console.log("broadcastTime", time);
         videoRef.current.currentTime = time;
       }
     };
@@ -55,7 +52,6 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage,setAlertV
     const userLeftRoom = (data)=>{
       const {user} = data
       alert(`${user} has left`)
-      console.log(user);
     }
 
     socket.current.on("playBroadcast", handlePlayBroadcast);
@@ -68,13 +64,6 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage,setAlertV
   }, []);
 
 
-
-  // const handleJoinRoom = () => {
-  //   console.log(userData);
-  //   alert("hi");
-  //   socket.current.emit("joinRoom", roomId);
-  // };
-
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     setSelectedVideo(URL.createObjectURL(file));
@@ -86,7 +75,6 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage,setAlertV
 
   const leaveRoom = () => {
     // Disconnect from server
-    console.log({userData});
     socket.current.emit('userLeft',{userData,roomId})
     socket.current.disconnect();
     // Navigate to home page or desired route
@@ -103,7 +91,6 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage,setAlertV
 
   const setVideoDuration = () => {
     if (videoRef.current) {
-      console.log(videoRef.current.duration);
       setTotalDuration(videoRef.current.duration);
     }
   };

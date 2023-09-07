@@ -17,12 +17,10 @@ const ChatBox = ({ socket, roomId ,imageSrc,userData, setNotifyMsgInFulScreen, i
     if (event.key === 'Enter') {
       event.preventDefault();
 
-      // Add your code to send the message to the server or perform any desired action
-      console.log('Sending message:', message);
+     
       setChatMessage([...chatMessage, { messgeRecieved: false, message }])
       socket.current.emit('send-message', { roomId, message })
 
-      // Clear the input field after sending the message
       setMessage('');
     }
   };
@@ -39,7 +37,6 @@ const ChatBox = ({ socket, roomId ,imageSrc,userData, setNotifyMsgInFulScreen, i
   useEffect(()=>{
 
     const printMessage = (message) => {
-      console.log(message);
       setNotifyMsgInFulScreen(true)
       setChatMessage(prevChatMessage => [
         ...prevChatMessage,
@@ -48,9 +45,8 @@ const ChatBox = ({ socket, roomId ,imageSrc,userData, setNotifyMsgInFulScreen, i
     };
 
     const userJoined = ({users}) =>{
-      console.log(users)
       setTotalUserInRoom(users.length)
-      console.log({isTrue:isHostRef.current});
+
       if(isHostRef.current){
           setSenderUserName(users[1].username)
       }else{

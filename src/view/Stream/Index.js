@@ -26,7 +26,6 @@ const Index = ({imageSrc, userData,setAlertVisible}) => {
     useEffect(() => {
         // Socket event listeners
         const handleConnect = () => {
-            console.log('Connected to server');
         };
 
         socket.current = io(process.env.REACT_APP_SOCKET);
@@ -35,21 +34,19 @@ const Index = ({imageSrc, userData,setAlertVisible}) => {
             const {users,roomId} = data
             setRoomId(roomId);
             localStorage.setItem('roomId',roomId)
-            console.log('created room id', roomId);
         });
 
 
         
 
         const handleDisconnect = () => {
-            console.log('Disconnected from server');
         };
 
         const userLeftRoom = (data)=>{
             const {user} = data
             alert(`${user} has left`)
-            console.log(user);
-          }
+        }
+
         socket.current.on('connect', handleConnect);
         socket.current.on('disconnect', handleDisconnect);
         socket.current.on("userDisconnected",userLeftRoom)
@@ -76,7 +73,6 @@ const Index = ({imageSrc, userData,setAlertVisible}) => {
     };
     const handleJoinRoom = () => {
         setRoom(true)
-        console.log(roomId,userData);
         socket.current.emit('joinRoom', {roomId,userData});
     };
 

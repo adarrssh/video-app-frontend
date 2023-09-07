@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const updateUserDetails = async (setAlertVisible, setUserData,userData,setLoading) => {
-    console.log(userData);
     if (localStorage.token) {
         setLoading(true)
       try {
