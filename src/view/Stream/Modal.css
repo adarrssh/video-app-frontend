@@ -146,6 +146,10 @@
   font-size: 0.87rem;
 }
 
+.join-room-btn:hover{
+  color: white;
+}
+
 .descp2{
   height: 50px;
   text-align: center;

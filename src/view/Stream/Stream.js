@@ -8,8 +8,9 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 import PauseIcon from '@mui/icons-material/Pause';
 import NotificationAddIcon from '@mui/icons-material/NotificationAdd';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-function Stream({ socket, roomId, imageSrc, userData, senderProfileImage, senderUsername, totalUserInRoom }) {
+function Stream({ socket, roomId, imageSrc, userData, senderProfileImage,isHostRef, setAlertVisible }) {
   const fileInputRef = useRef(null);
   const videoRef = useRef(null);
   const [currentTime, setCurrentTime] = useState(0);
@@ -19,7 +20,6 @@ function Stream({ socket, roomId, imageSrc, userData, senderProfileImage, sender
   const [notifyMsgInFullScreen, setNotifyMsgInFulScreen] = useState(false)
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
-
   const navigate = useNavigate();
 
   const handleFileChange = (event) => {
@@ -54,7 +54,8 @@ function Stream({ socket, roomId, imageSrc, userData, senderProfileImage, sender
     setIsPlaying(false)
   };
 
-  const leaveRoom = () => {
+  const leaveRoom = () => {  
+    socket.current.emit('userLeft',{userData,roomId})
     socket.current.disconnect();
     navigate('/');
   };
@@ -129,7 +130,6 @@ function Stream({ socket, roomId, imageSrc, userData, senderProfileImage, sender
 
     return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
   };
-
 
 
   return (
@@ -209,8 +209,8 @@ function Stream({ socket, roomId, imageSrc, userData, senderProfileImage, sender
           notifyMsgInFullScreen={notifyMsgInFullScreen}
           setNotifyMsgInFulScreen={setNotifyMsgInFulScreen}
           fullScreen={fullScreen}
-          senderUsername={senderUsername}
-          totalUserInRoom={totalUserInRoom}
+          isHostRef={isHostRef}
+          setAlertVisible={setAlertVisible}
         />
       </main>
     </>

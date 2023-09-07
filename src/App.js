@@ -36,8 +36,11 @@ function App() {
         if (!imageSrc) {
           setLoading(true);
           try {
-            await fetchUserProfileImage(setAlertVisible, setImageSrc);
-            await fetchUserDetails(alertVisible, setAlertVisible, setUserData, setLoading);
+
+            await Promise.all([
+              fetchUserProfileImage(setAlertVisible, setImageSrc),
+              fetchUserDetails(alertVisible, setAlertVisible, setUserData, setLoading)
+            ])
             setLoading(false);
           } catch (error) {
             console.error("Error fetching user profile image", error);

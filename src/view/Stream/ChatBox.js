@@ -2,10 +2,17 @@ import React, { useEffect, useRef, useState } from 'react'
 import logo from '../../utils/img/logo.png'
 import './ChatBox.css'
 import PinSvg from '../../utils/svg/PinSvg'
-const ChatBox = ({ socket, roomId ,imageSrc,userData,senderProfileImage, setNotifyMsgInFulScreen,senderUsername, totalUserInRoom}) => {
+import fetchSenderImage from '../../services/fetchSenderImage'
+
+const ChatBox = ({ socket, roomId ,imageSrc,userData, setNotifyMsgInFulScreen, isHostRef,setAlertVisible}) => {
   const [message, setMessage] = useState("")
   const [chatMessage, setChatMessage] = useState([])
+  const [totalUserInRoom, setTotalUserInRoom] = useState(1)
+  const [senderUsername, setSenderUserName] = useState('user')
+  const [senderProfileImage, setSenderProfileImage] = useState(null)
+
   const messageEl = useRef(null)
+
   const sendMessage = (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
@@ -39,7 +46,27 @@ const ChatBox = ({ socket, roomId ,imageSrc,userData,senderProfileImage, setNoti
         { messgeRecieved: true, message }
       ]);
     };
+
+    const userJoined = ({users}) =>{
+      console.log(users)
+      setTotalUserInRoom(users.length)
+      if(isHostRef.current){
+          setSenderUserName(users[1].username)
+      }else{
+          setSenderUserName(users[0].username)
+      }
+
+      setAlertVisible({
+          show:true,
+          message:`${users[1].username} joined the room`,
+          severity:'success'
+        })
+
+        fetchSenderImage(users,isHostRef,setSenderProfileImage)
+    }
+
     socket.current.on('messageBroadcast', printMessage)
+    socket.current.on('userJoined', userJoined);
   },[])
 
   const AppendMessage = ({ item }) => {

@@ -4,7 +4,6 @@ import axios from "axios";
 const fetchSenderProfileImage = async (email,setSenderProfileImage) => {
 
     if (localStorage.token) {
-        console.log(localStorage.token);
       try {
         const response = await axios.post(`${process.env.REACT_APP_SOCKET}/user/download/sender/image`,
         {

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { io } from "socket.io-client";
 import Button from "../../components/button/button";
 import ChatBox from "../Stream/ChatBox";
 import { useNavigate } from "react-router-dom";
@@ -10,15 +9,11 @@ import PauseIcon from '@mui/icons-material/Pause';
 import NotificationAddIcon from '@mui/icons-material/NotificationAdd';
 
 
-// const socket = io(process.env.REACT_APP_SOCKET);
 
-function User({ socket, roomId, userData, imageSrc, senderProfileImage, senderUsername, totalUserInRoom }) {
+function User({ socket, roomId, userData, imageSrc, senderProfileImage,setAlertVisible,isHostRef }) {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
   const videoRef = useRef(null);
-  // const [message, setMessage] = useState("")
-  // const [chatMessage, setChatMessage] = useState([])
-  // const [roomId, setRoomId] = useState('');
   const [isPlaying, setIsPlaying] = useState(false);
   const [isValidRoomId, setIsValidRoomId] = useState(true);
   const [selectedVideo, setSelectedVideo] = useState(null);
@@ -57,10 +52,16 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage, senderUs
       }
     };
 
+    const userLeftRoom = (data)=>{
+      const {user} = data
+      alert(`${user} has left`)
+      console.log(user);
+    }
+
     socket.current.on("playBroadcast", handlePlayBroadcast);
     socket.current.on("pauseBroadcast", handlePauseBroadcast);
     socket.current.on("broadcastTime", handleBroadcastTime);
-
+    socket.current.on("userDisconnected",userLeftRoom)
     return () => {
       socket.current.off("invalidRoomId");
     };
@@ -68,11 +69,11 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage, senderUs
 
 
 
-  const handleJoinRoom = () => {
-    console.log(userData);
-    alert("hi");
-    socket.current.emit("joinRoom", roomId);
-  };
+  // const handleJoinRoom = () => {
+  //   console.log(userData);
+  //   alert("hi");
+  //   socket.current.emit("joinRoom", roomId);
+  // };
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -85,8 +86,9 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage, senderUs
 
   const leaveRoom = () => {
     // Disconnect from server
-    socket.current.current.disconnect();
-
+    console.log({userData});
+    socket.current.emit('userLeft',{userData,roomId})
+    socket.current.disconnect();
     // Navigate to home page or desired route
     navigate("/");
   };
@@ -177,7 +179,7 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage, senderUs
                 onClick={handleButtonClick}
                 text={"Choose your video"}
               />
-              <button onClick={handleJoinRoom}>Join Room</button>
+              {/* <button onClick={handleJoinRoom}>Join Room</button> */}
             </div>
           ) : (
             <>
@@ -240,8 +242,8 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage, senderUs
           showVideoControls={showVideoControls}
           setNotifyMsgInFulScreen={setNotifyMsgInFulScreen}
           fullScreen={fullScreen}
-          senderUsername={senderUsername}
-          totalUserInRoom={totalUserInRoom}
+          setAlertVisible={setAlertVisible}
+          isHostRef={isHostRef}
         />
       </main>
     </>
