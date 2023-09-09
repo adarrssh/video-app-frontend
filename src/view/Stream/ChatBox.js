@@ -4,9 +4,9 @@ import './ChatBox.css'
 import PinSvg from '../../utils/svg/PinSvg'
 import fetchSenderImage from '../../services/fetchSenderImage'
 
-const ChatBox = ({ socket, roomId ,imageSrc,userData, setNotifyMsgInFulScreen, isHostRef,setAlertVisible}) => {
+const ChatBox = ({ socket, roomId ,imageSrc,userData, setNotifyMsgInFulScreen, isHostRef,setAlertVisible, chatMessage ,setChatMessage}) => {
   const [message, setMessage] = useState("")
-  const [chatMessage, setChatMessage] = useState([])
+  // const [chatMessage, setChatMessage] = useState([])
   const [totalUserInRoom, setTotalUserInRoom] = useState(1)
   const [senderUsername, setSenderUserName] = useState('user')
   const [senderProfileImage, setSenderProfileImage] = useState(null)

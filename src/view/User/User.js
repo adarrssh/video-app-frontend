@@ -22,6 +22,7 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage,setAlertV
   const [showVideoControls, setShowVideoControls] = useState(false)
   const [fullScreen, setFullScreen] = useState(false)
   const [notifyMsgInFullScreen, setNotifyMsgInFulScreen] = useState(false)
+  const [chatMessage, setChatMessage] = useState([])
 
 
   useEffect(() => {
@@ -208,7 +209,7 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage,setAlertV
                     : ""}
 
                 </div>
-                {notifyMsgInFullScreen && fullScreen ? <NotificationAddIcon fontSize='large' className='notificaton-msg' /> : ''}
+                {notifyMsgInFullScreen && fullScreen ? <p  className='notificaton-msg'>{chatMessage[chatMessage.length-1].message}</p>: ''}
               </div>
               <div className="stream-end-div">
                 <Button
@@ -231,6 +232,8 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage,setAlertV
           fullScreen={fullScreen}
           setAlertVisible={setAlertVisible}
           isHostRef={isHostRef}
+          chatMessage={chatMessage}
+          setChatMessage={setChatMessage}
         />
       </main>
     </>

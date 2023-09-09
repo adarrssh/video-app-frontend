@@ -20,6 +20,8 @@ function Stream({ socket, roomId, imageSrc, userData, senderProfileImage,isHostR
   const [notifyMsgInFullScreen, setNotifyMsgInFulScreen] = useState(false)
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [chatMessage, setChatMessage] = useState([])
+
   const navigate = useNavigate();
 
   const handleFileChange = (event) => {
@@ -184,7 +186,7 @@ function Stream({ socket, roomId, imageSrc, userData, senderProfileImage,isHostR
                     : ""}
 
                 </div>
-                {notifyMsgInFullScreen && fullScreen ? <NotificationAddIcon fontSize='large' className='notificaton-msg' /> : ''}
+                {notifyMsgInFullScreen && fullScreen ? <p  className='notificaton-msg'>{chatMessage[chatMessage.length-1].message}</p>: ''}
               </div>
               <div className="stream-end-div">
                 <Button
@@ -208,6 +210,8 @@ function Stream({ socket, roomId, imageSrc, userData, senderProfileImage,isHostR
           fullScreen={fullScreen}
           isHostRef={isHostRef}
           setAlertVisible={setAlertVisible}
+          chatMessage={chatMessage}
+          setChatMessage={setChatMessage}
         />
       </main>
     </>
