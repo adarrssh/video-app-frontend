@@ -57,17 +57,36 @@ const ChatBox = ({ socket, roomId ,imageSrc,userData, setNotifyMsgInFulScreen, i
           show:true,
           message:`${users[1].username} joined the room`,
           severity:'success'
-        })
+      })
 
         fetchSenderImage(users,isHostRef,setSenderProfileImage)
     }
 
+    const userLeftRoom = (data)=>{
+      const {user} = data
+      alert(`${user} has left`)
+      setChatMessage(prevChatMessage => [
+        ...prevChatMessage,
+        { userLeft: true, message: `${user} has left` }
+      ]);
+  }
+
     socket.current.on('messageBroadcast', printMessage)
     socket.current.on('userJoined', userJoined);
+    socket.current.on("userDisconnected",userLeftRoom)
   },[])
 
   const AppendMessage = ({ item }) => {
-    if (item.messgeRecieved) {
+    if(item.userJoined || item.userLeft){
+      return (
+      <div className="chat-msg-left">
+        <div className='chat-msg'>
+          {item.message}
+        </div>
+      </div>
+      )
+    }
+    else if (item.messgeRecieved) {
 
       return (<div className="chat-msg-left">
         <div className='chat-profile-pic'>

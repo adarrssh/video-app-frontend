@@ -49,15 +49,15 @@ function User({ socket, roomId, userData, imageSrc, senderProfileImage,setAlertV
       }
     };
 
-    const userLeftRoom = (data)=>{
-      const {user} = data
-      alert(`${user} has left`)
-    }
+    // const userLeftRoom = (data)=>{
+    //   const {user} = data
+    //   alert(`${user} has left`)
+    // }
 
     socket.current.on("playBroadcast", handlePlayBroadcast);
     socket.current.on("pauseBroadcast", handlePauseBroadcast);
     socket.current.on("broadcastTime", handleBroadcastTime);
-    socket.current.on("userDisconnected",userLeftRoom)
+    // socket.current.on("userDisconnected",userLeftRoom)
     return () => {
       socket.current.off("invalidRoomId");
     };

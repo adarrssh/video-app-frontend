@@ -40,16 +40,17 @@ const Index = ({imageSrc, userData,setAlertVisible}) => {
         
 
         const handleDisconnect = () => {
+            
         };
 
-        const userLeftRoom = (data)=>{
-            const {user} = data
-            alert(`${user} has left`)
-        }
+        // const userLeftRoom = (data)=>{
+        //     const {user} = data
+        //     alert(`${user} has left`)
+        // }
 
         socket.current.on('connect', handleConnect);
         socket.current.on('disconnect', handleDisconnect);
-        socket.current.on("userDisconnected",userLeftRoom)
+        // socket.current.on("userDisconnected",userLeftRoom)
         
         
         
