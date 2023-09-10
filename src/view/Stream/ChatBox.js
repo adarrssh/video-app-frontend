@@ -49,8 +49,16 @@ const ChatBox = ({ socket, roomId ,imageSrc,userData, setNotifyMsgInFulScreen, i
 
       if(isHostRef.current){
           setSenderUserName(users[1].username)
+          setChatMessage(prevChatMessage => [
+            ...prevChatMessage,
+            { userJoined: true, message: `${users[1].username} has joined` }
+          ]);
       }else{
           setSenderUserName(users[0].username)
+          setChatMessage(prevChatMessage => [
+            ...prevChatMessage,
+            { userJoined: true, message: `${users[0].username} has joined` }
+          ]);
       }
 
       setAlertVisible({
